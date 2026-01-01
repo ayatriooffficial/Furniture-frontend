@@ -1,0 +1,972 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Create Product — Furnistør Admin</title>
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+          "Helvetica Neue", Arial, sans-serif;
+        padding: 24px 16px;
+        background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+        color: #1e293b;
+        min-height: 100vh;
+        line-height: 1.6;
+      }
+
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        background: #ffffff;
+        padding: 48px;
+        border-radius: 16px;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15), 0 0 1px rgba(0, 0, 0, 0.1);
+        animation: fadeInUp 0.6s ease-out;
+      }
+
+      @keyframes fadeInUp {
+        from {
+          opacity: 0;
+          transform: translateY(30px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      h1 {
+        margin: 0 0 12px;
+        font-size: 36px;
+        font-weight: 800;
+        letter-spacing: -1px;
+        color: #0f172a;
+      }
+
+      .subtitle {
+        color: #64748b;
+        font-size: 16px;
+        margin-bottom: 40px;
+        display: block;
+        font-weight: 400;
+      }
+
+      .form-section {
+        margin-bottom: 40px;
+        padding-bottom: 40px;
+        border-bottom: 1px solid #e2e8f0;
+      }
+
+      .form-section:last-of-type {
+        border-bottom: none;
+      }
+
+      .form-section h2 {
+        font-size: 18px;
+        font-weight: 700;
+        margin: 0 0 24px;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        color: #0f172a;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+
+      .form-section h2::before {
+        content: "";
+        display: inline-block;
+        width: 4px;
+        height: 24px;
+        background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+        border-radius: 2px;
+      }
+
+      label {
+        display: block;
+        margin: 20px 0 10px;
+        font-weight: 600;
+        font-size: 14px;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        color: #1e293b;
+        transition: color 0.2s ease;
+      }
+
+      label.required::after {
+        content: " *";
+        color: #ef4444;
+        font-weight: 700;
+      }
+
+      input[type="text"],
+      input[type="number"],
+      input[type="email"],
+      textarea,
+      select {
+        width: 100%;
+        padding: 14px 16px;
+        border: 2px solid #e2e8f0;
+        border-radius: 10px;
+        font-family: inherit;
+        font-size: 15px;
+        color: #1e293b;
+        background: #f8fafc;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+
+      input[type="text"]::placeholder,
+      input[type="number"]::placeholder,
+      input[type="email"]::placeholder,
+      textarea::placeholder {
+        color: #94a3b8;
+      }
+
+      input[type="text"]:focus,
+      input[type="number"]:focus,
+      input[type="email"]:focus,
+      textarea:focus,
+      select:focus {
+        outline: none;
+        border-color: #3b82f6;
+        background: #ffffff;
+        box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.1),
+          inset 0 1px 2px rgba(0, 0, 0, 0.05);
+        transform: translateY(-2px);
+      }
+
+      input[type="text"]:hover:not(:focus),
+      input[type="number"]:hover:not(:focus),
+      input[type="email"]:hover:not(:focus),
+      textarea:hover:not(:focus),
+      select:hover:not(:focus) {
+        border-color: #cbd5e1;
+        background: #ffffff;
+      }
+
+      textarea {
+        min-height: 140px;
+        resize: vertical;
+        font-family: inherit;
+      }
+
+      .row {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 24px;
+        margin-bottom: 0;
+      }
+
+      .row > * {
+        min-width: 0;
+      }
+
+      .col {
+        flex: 1;
+      }
+
+      .col.small {
+        grid-column: span 1;
+      }
+
+      .col.full {
+        grid-column: 1 / -1;
+      }
+
+      .muted {
+        color: #64748b;
+        font-size: 13px;
+        display: block;
+        margin-top: 6px;
+        font-weight: 400;
+      }
+
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 14px 32px;
+        background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+        color: #fff;
+        border-radius: 10px;
+        border: 2px solid #3b82f6;
+        cursor: pointer;
+        font-weight: 700;
+        font-size: 14px;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .btn::before {
+        content: "";
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 0;
+        height: 0;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.25);
+        transform: translate(-50%, -50%);
+        transition: width 0.6s, height 0.6s;
+      }
+
+      .btn:hover::before {
+        width: 300px;
+        height: 300px;
+      }
+
+      .btn:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 16px 32px rgba(59, 130, 246, 0.3);
+      }
+
+      .btn:active {
+        transform: translateY(-1px);
+      }
+
+      .btn.secondary {
+        background: transparent;
+        color: #3b82f6;
+        border-color: #bfdbfe;
+      }
+
+      .btn.secondary:hover {
+        background: #eff6ff;
+        border-color: #3b82f6;
+      }
+
+      .btn.secondary:hover::before {
+        background: rgba(59, 130, 246, 0.05);
+      }
+
+      .list-section {
+        margin-top: 16px;
+      }
+
+      .list-item {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+        gap: 12px;
+        align-items: flex-end;
+        margin-top: 14px;
+        padding: 18px;
+        background: #f8fafc;
+        border-radius: 10px;
+        border: 2px solid #e2e8f0;
+        animation: slideInLeft 0.3s ease-out;
+        transition: all 0.2s ease;
+      }
+
+      @keyframes slideInLeft {
+        from {
+          opacity: 0;
+          transform: translateX(-20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateX(0);
+        }
+      }
+
+      .list-item:hover {
+        border-color: #3b82f6;
+        background: #ffffff;
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.06);
+      }
+
+      .list-item input {
+        margin: 0;
+        padding: 11px 14px;
+        font-size: 14px;
+        border: 2px solid #e2e8f0;
+        border-radius: 8px;
+        background: #ffffff;
+      }
+
+      .list-item input:focus {
+        border-color: #3b82f6;
+        box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+      }
+
+      .list-item .btn {
+        padding: 10px 16px;
+        font-size: 13px;
+        min-width: 100px;
+        flex-shrink: 0;
+        align-self: flex-end;
+      }
+
+      .notice {
+        padding: 18px 20px;
+        border-radius: 10px;
+        margin-top: 20px;
+        font-size: 15px;
+        font-weight: 500;
+        border-left: 5px solid transparent;
+        animation: slideDown 0.4s ease-out;
+        display: flex;
+        align-items: center;
+        gap: 14px;
+      }
+
+      @keyframes slideDown {
+        from {
+          opacity: 0;
+          transform: translateY(-10px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .notice.success {
+        background: #f0fdf4;
+        color: #166534;
+        border-left-color: #22c55e;
+      }
+
+      .notice.success::before {
+        content: "✓";
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 24px;
+        height: 24px;
+        background: #22c55e;
+        color: white;
+        border-radius: 50%;
+        font-weight: bold;
+        font-size: 14px;
+        flex-shrink: 0;
+      }
+
+      .notice.error {
+        background: #fef2f2;
+        color: #991b1b;
+        border-left-color: #ef4444;
+      }
+
+      .notice.error::before {
+        content: "✕";
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 24px;
+        height: 24px;
+        background: #ef4444;
+        color: white;
+        border-radius: 50%;
+        font-weight: bold;
+        font-size: 14px;
+        flex-shrink: 0;
+      }
+
+      .notice:is(.success, .error)::before {
+        flex-shrink: 0;
+      }
+
+      .actions {
+        margin-top: 40px;
+        display: flex;
+        gap: 16px;
+        justify-content: flex-start;
+      }
+
+      .actions .btn {
+        min-width: 180px;
+      }
+
+      .add-btn {
+        margin-top: 16px;
+        width: auto;
+      }
+
+      hr {
+        margin: 32px 0;
+        border: none;
+        border-top: 2px solid #e2e8f0;
+      }
+
+      h3 {
+        font-size: 16px;
+        font-weight: 700;
+        margin: 28px 0 18px;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        color: #0f172a;
+      }
+
+      .loading {
+        animation: pulse 1.5s ease-in-out infinite;
+      }
+
+      @keyframes pulse {
+        0%,
+        100% {
+          opacity: 1;
+        }
+        50% {
+          opacity: 0.6;
+        }
+      }
+
+      @media (max-width: 768px) {
+        .container {
+          padding: 32px 24px;
+        }
+
+        h1 {
+          font-size: 28px;
+        }
+
+        .row {
+          grid-template-columns: 1fr;
+          gap: 16px;
+        }
+
+        .col,
+        .col.small {
+          grid-column: span 1;
+        }
+
+        .list-item {
+          grid-template-columns: 1fr;
+          gap: 10px;
+        }
+
+        .list-item input,
+        .list-item .btn {
+          width: 100%;
+        }
+
+        .actions {
+          flex-direction: column;
+        }
+
+        .actions .btn {
+          width: 100%;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Create Product</h1>
+      <span class="subtitle"
+        >Add a new product to your catalog with pricing, details, reviews, and
+        FAQs.</span
+      >
+
+      <form id="product-form">
+        <div class="form-section">
+          <h2>Basic Information</h2>
+          <div class="row">
+            <div class="col">
+              <label for="name" class="required">Product Name</label>
+              <input
+                id="name"
+                name="name"
+                placeholder="Enter product name"
+                required
+              />
+            </div>
+            <div class="col small">
+              <label for="slug">URL Slug</label>
+              <input id="slug" name="slug" placeholder="auto-generated" />
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col small">
+              <label for="price" class="required">Price</label>
+              <input
+                id="price"
+                name="price"
+                type="number"
+                step="0.01"
+                placeholder="0.00"
+                required
+              />
+            </div>
+            <div class="col small">
+              <label for="originalPrice">Original Price</label>
+              <input
+                id="originalPrice"
+                name="originalPrice"
+                type="number"
+                step="0.01"
+                placeholder="0.00"
+              />
+            </div>
+            <div class="col small">
+              <label for="articleNumber">Article Number</label>
+              <input
+                id="articleNumber"
+                name="articleNumber"
+                placeholder="e.g. ARM-001"
+              />
+            </div>
+            <div class="col small">
+              <label for="isActive">Status</label>
+              <select id="isActive" name="isActive">
+                <option value="true">Active</option>
+                <option value="false">Inactive</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col">
+              <label for="features" class="required">Features</label>
+              <input
+                id="features"
+                name="features"
+                placeholder="e.g. solid wood, hand-finished, eco-friendly"
+              />
+              <span class="muted"
+                >Comma-separated list of key product features</span
+              >
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col full">
+              <label for="description" class="required">Description</label>
+              <textarea
+                id="description"
+                name="description"
+                required
+                placeholder="Detailed product description..."
+              ></textarea>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col full">
+              <label for="headerDescription">Header Description</label>
+              <textarea
+                id="headerDescription"
+                name="headerDescription"
+                placeholder="Short intro below H1 on product page"
+              ></textarea>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-section">
+          <h2>SEO & Meta Information</h2>
+          <div class="row">
+            <div class="col full">
+              <label for="metaTitle">Meta Title</label>
+              <input
+                id="metaTitle"
+                name="metaTitle"
+                placeholder="SEO title (50-60 chars recommended)"
+              />
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col full">
+              <label for="metaDescription">Meta Description</label>
+              <textarea
+                id="metaDescription"
+                name="metaDescription"
+                placeholder="SEO description (150-160 chars)"
+              ></textarea>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col">
+              <label for="h1Tag">H1 Tag</label>
+              <input
+                id="h1Tag"
+                name="h1Tag"
+                placeholder="Main heading for the product"
+              />
+            </div>
+          </div>
+        </div>
+
+        <div class="form-section">
+          <h2>Product Details</h2>
+
+          <div class="row">
+            <div class="col">
+              <label for="dimensions">Dimensions</label>
+              <input
+                id="dimensions"
+                name="dimensions"
+                placeholder="e.g. 120 × 80 × 40 cm"
+              />
+            </div>
+            <div class="col">
+              <label for="materials">Materials</label>
+              <input
+                id="materials"
+                name="materials"
+                placeholder="e.g. oak, walnut, leather"
+              />
+            </div>
+            <div class="col">
+              <label for="finish">Finish</label>
+              <input
+                id="finish"
+                name="finish"
+                placeholder="e.g. Matte oak legs"
+              />
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col">
+              <label for="designer">Designer</label>
+              <input id="designer" name="designer" />
+            </div>
+            <div class="col">
+              <label for="countryOfOrigin">Country of Origin</label>
+              <input id="countryOfOrigin" name="countryOfOrigin" />
+            </div>
+            <div class="col">
+              <label for="importerPackerMarketer"
+                >Importer / Packer / Marketer</label
+              >
+              <input
+                id="importerPackerMarketer"
+                name="importerPackerMarketer"
+                placeholder="e.g. Furnistør Inc."
+              />
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col">
+              <label for="colors">Colors</label>
+              <input
+                id="colors"
+                name="colors"
+                placeholder="e.g. oak, walnut, black, white"
+              />
+              <span class="muted">Comma-separated color options</span>
+            </div>
+            <div class="col">
+              <label for="category">Category</label>
+              <input
+                id="category"
+                name="category"
+                placeholder="Category ID or slug"
+              />
+            </div>
+            <div class="col">
+              <label for="subcategorySlug" class="required"
+                >Subcategory Slug</label
+              >
+              <input
+                id="subcategorySlug"
+                name="subcategorySlug"
+                placeholder="e.g. armchairs"
+                required
+              />
+            </div>
+          </div>
+        </div>
+
+        <div class="form-section">
+          <h2>Product Images</h2>
+          <div class="list-section" id="images-list"></div>
+          <button type="button" id="add-image" class="btn secondary add-btn">
+            + Add Image
+          </button>
+        </div>
+
+        <div class="form-section">
+          <h2>Customer Reviews</h2>
+          <div class="list-section" id="reviews-list"></div>
+          <button type="button" id="add-review" class="btn secondary add-btn">
+            + Add Review
+          </button>
+        </div>
+
+        <div class="form-section">
+          <h2>Frequently Asked Questions</h2>
+          <div class="list-section" id="faq-list"></div>
+          <button type="button" id="add-faq" class="btn secondary add-btn">
+            + Add FAQ
+          </button>
+        </div>
+
+        <div class="actions">
+          <button type="submit" class="btn" id="submit-btn">
+            Create Product
+          </button>
+          <button type="button" id="reset" class="btn secondary">
+            Clear Form
+          </button>
+        </div>
+
+        <div id="result"></div>
+      </form>
+    </div>
+
+    <script>
+      // Basic dynamic list helpers
+      const reviewsList = document.getElementById("reviews-list");
+      const faqList = document.getElementById("faq-list");
+      const imagesList = document.getElementById("images-list");
+      const addReviewBtn = document.getElementById("add-review");
+      const addFaqBtn = document.getElementById("add-faq");
+      const addImageBtn = document.getElementById("add-image");
+      const submitBtn = document.getElementById("submit-btn");
+
+      function createReviewRow() {
+        const wrap = document.createElement("div");
+        wrap.className = "list-item";
+        wrap.innerHTML = `
+        <input placeholder="Reviewer name" class="rev-author">
+        <input placeholder="Rating (1-5)" class="rev-rating" type="number" min="1" max="5">
+        <input placeholder="Review comment" class="rev-comment">
+        <button type="button" class="btn secondary remove">Remove</button>
+      `;
+        wrap.querySelector(".remove").addEventListener("click", (e) => {
+          e.preventDefault();
+          wrap.style.animation = "slideInLeft 0.3s ease-out reverse";
+          setTimeout(() => wrap.remove(), 300);
+        });
+        reviewsList.appendChild(wrap);
+      }
+
+      function createFaqRow() {
+        const wrap = document.createElement("div");
+        wrap.className = "list-item";
+        wrap.innerHTML = `
+        <input placeholder="Question" class="faq-question">
+        <input placeholder="Answer" class="faq-answer">
+        <button type="button" class="btn secondary remove">Remove</button>
+      `;
+        wrap.querySelector(".remove").addEventListener("click", (e) => {
+          e.preventDefault();
+          wrap.style.animation = "slideInLeft 0.3s ease-out reverse";
+          setTimeout(() => wrap.remove(), 300);
+        });
+        faqList.appendChild(wrap);
+      }
+
+      function createImageRow() {
+        const wrap = document.createElement("div");
+        wrap.className = "list-item";
+        wrap.innerHTML = `
+        <input placeholder="Image src URL" class="img-src">
+        <input placeholder="Thumbnail URL" class="img-thumb">
+        <input placeholder="Alt text" class="img-alt">
+        <button type="button" class="btn secondary remove">Remove</button>
+      `;
+        wrap.querySelector(".remove").addEventListener("click", (e) => {
+          e.preventDefault();
+          wrap.style.animation = "slideInLeft 0.3s ease-out reverse";
+          setTimeout(() => wrap.remove(), 300);
+        });
+        imagesList.appendChild(wrap);
+      }
+
+      addReviewBtn.addEventListener("click", (e) => {
+        e.preventDefault();
+        createReviewRow();
+      });
+      addFaqBtn.addEventListener("click", (e) => {
+        e.preventDefault();
+        createFaqRow();
+      });
+      addImageBtn.addEventListener("click", (e) => {
+        e.preventDefault();
+        createImageRow();
+      });
+
+      // Start with one FAQ row and one image row for convenience
+      createFaqRow();
+      createImageRow();
+
+      document
+        .getElementById("product-form")
+        .addEventListener("submit", async (e) => {
+          e.preventDefault();
+          const resultEl = document.getElementById("result");
+          resultEl.innerHTML = "";
+          submitBtn.disabled = true;
+          submitBtn.classList.add("loading");
+
+          const form = e.target;
+
+          // Auto-generate slug from name if not provided
+          const slug =
+            form.slug.value.trim() ||
+            form.name.value
+              .toLowerCase()
+              .replace(/[^a-z0-9]+/g, "-")
+              .replace(/(^-|-$)/g, "");
+
+          const data = {
+            name: form.name.value.trim(),
+            slug: slug,
+            price: form.price.value ? Number(form.price.value) : undefined,
+            originalPrice: form.originalPrice.value
+              ? Number(form.originalPrice.value)
+              : undefined,
+            articleNumber: form.articleNumber.value.trim() || undefined,
+            h1Tag: form.h1Tag?.value.trim() || undefined,
+            headerDescription:
+              form.headerDescription?.value.trim() || undefined,
+            features: form.features.value
+              ? form.features.value
+                  .split(",")
+                  .map((s) => s.trim())
+                  .filter(Boolean)
+              : [],
+            description: form.description.value.trim(),
+            metaTitle: form.metaTitle.value.trim() || undefined,
+            metaDescription: form.metaDescription.value.trim() || undefined,
+            dimensions: form.dimensions.value.trim() || undefined,
+            materials: form.materials.value.trim() || undefined,
+            finish: form.finish?.value.trim() || undefined,
+            designer: form.designer.value.trim() || undefined,
+            countryOfOrigin: form.countryOfOrigin.value.trim() || undefined,
+            importerPackerMarketer:
+              form.importerPackerMarketer?.value.trim() || undefined,
+            colors: form.colors.value
+              ? form.colors.value
+                  .split(",")
+                  .map((s) => s.trim())
+                  .filter(Boolean)
+              : [],
+            category: form.category.value.trim() || undefined,
+            subcategorySlug: form.subcategorySlug.value.trim(),
+            isActive: form.isActive.value === "true",
+          };
+
+          // Collect structured images
+          data.images = [];
+          document
+            .querySelectorAll("#images-list .list-item")
+            .forEach((row) => {
+              const src = row.querySelector(".img-src").value.trim();
+              if (!src) return;
+              data.images.push({
+                src,
+                thumb: row.querySelector(".img-thumb").value.trim() || src,
+                alt: row.querySelector(".img-alt").value.trim() || data.name,
+              });
+            });
+
+          // Collect reviews
+          const reviews = [];
+          document
+            .querySelectorAll("#reviews-list .list-item")
+            .forEach((node) => {
+              const author = node.querySelector(".rev-author")?.value.trim();
+              const rating = node.querySelector(".rev-rating")?.value;
+              const comment = node.querySelector(".rev-comment")?.value.trim();
+              if (author || comment || rating) {
+                reviews.push({
+                  author,
+                  comment,
+                  rating: rating ? Number(rating) : undefined,
+                });
+              }
+            });
+          if (reviews.length) data.reviews = reviews;
+
+          // Collect faq
+          const faq = [];
+          document.querySelectorAll("#faq-list .list-item").forEach((node) => {
+            const question = node.querySelector(".faq-question")?.value.trim();
+            const answer = node.querySelector(".faq-answer")?.value.trim();
+            if (question || answer) faq.push({ question, answer });
+          });
+          if (faq.length) data.faq = faq;
+
+          // Client validation
+          const validationErrors = [];
+          if (!data.name) validationErrors.push("Product name is required");
+          if (data.price === undefined)
+            validationErrors.push("Price is required");
+          if (!data.description)
+            validationErrors.push("Description is required");
+          if (!data.features || data.features.length === 0)
+            validationErrors.push("At least one feature is required");
+          if (!data.subcategorySlug)
+            validationErrors.push("Subcategory slug is required");
+
+          if (validationErrors.length > 0) {
+            resultEl.innerHTML =
+              '<div class="notice error"><strong>Validation Error:</strong> ' +
+              validationErrors.join(", ") +
+              "</div>";
+            submitBtn.disabled = false;
+            submitBtn.classList.remove("loading");
+            return;
+          }
+
+          try {
+            resultEl.innerHTML =
+              '<div class="notice">Processing your request...</div>';
+            const res = await fetch("/api/products", {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify(data),
+            });
+
+            if (!res.ok) {
+              const err = await res
+                .json()
+                .catch(() => ({ error: res.statusText }));
+              throw new Error(err.error || JSON.stringify(err));
+            }
+
+            const created = await res.json();
+            const productId =
+              created._id || created.id || created.slug || "new product";
+            resultEl.innerHTML = `<div class="notice success"><strong>Success!</strong> Product created: ${productId}</div>`;
+
+            // Reset after 2 seconds
+            setTimeout(() => {
+              form.reset();
+              reviewsList.innerHTML = "";
+              faqList.innerHTML = "";
+              imagesList.innerHTML = "";
+              createFaqRow();
+              createImageRow();
+            }, 1500);
+          } catch (err) {
+            console.error("Create product error", err);
+            resultEl.innerHTML =
+              '<div class="notice error"><strong>Error:</strong> ' +
+              (err.message || err) +
+              "</div>";
+          } finally {
+            submitBtn.disabled = false;
+            submitBtn.classList.remove("loading");
+          }
+        });
+
+      document.getElementById("reset").addEventListener("click", (e) => {
+        e.preventDefault();
+        document.getElementById("product-form").reset();
+        reviewsList.innerHTML = "";
+        faqList.innerHTML = "";
+        imagesList.innerHTML = "";
+        createFaqRow();
+        createImageRow();
+        document.getElementById("result").innerHTML = "";
+      });
+    </script>
+  </body>
+</html>

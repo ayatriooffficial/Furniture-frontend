@@ -1,0 +1,36 @@
+{
+  "version": 2,
+  "rewrites": [
+    {
+      "source": "/product/:slug",
+      "destination": "/index_tact-mirror.html"
+    },
+    {
+      "source": "/category/:slug",
+      "destination": "/index_decor.html"
+    },
+    {
+      "source": "/index_decor/category/:slug",
+      "destination": "/index_decor.html"
+    },
+    {
+      "source": "/api/(.*)",
+      "destination": "https://ayatrio-web-backend.onrender.com/api/$1"
+    },
+    {
+      "source": "/sitemap.xml",
+      "destination": "https://ayatrio-web-backend.onrender.com/sitemap.xml"
+    }
+  ],
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=0, must-revalidate"
+        }
+      ]
+    }
+  ]
+}
