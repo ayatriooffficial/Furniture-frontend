@@ -15,11 +15,11 @@
     },
     {
       "source": "/api/(.*)",
-      "destination": "https://ayatrio-web-backend.onrender.com/api/$1"
+      "destination": "https://furniture-backend-1-nvv3.onrender.com/api/$1"
     },
     {
       "source": "/sitemap.xml",
-      "destination": "https://ayatrio-web-backend.onrender.com/sitemap.xml"
+      "destination": "https://furniture-backend-1-nvv3.onrender.com/sitemap.xml"
     }
   ],
   "headers": [
