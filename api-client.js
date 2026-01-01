@@ -9,7 +9,7 @@ let API_BASE_URL;
 // Check if running on Go Live (port 5500/5501) or backend server (5000)
 if (window.location.port === "5500" || window.location.port === "5501") {
   // Go Live frontend - connect to backend on Render
-  API_BASE_URL = `https://ayatrio-web-backend.onrender.com/api`;
+  API_BASE_URL = `https://furniture-backend-1-nvv3.onrender.com/api`;
 } else if (
   window.location.hostname === "localhost" ||
   window.location.hostname === "127.0.0.1"
@@ -18,7 +18,7 @@ if (window.location.port === "5500" || window.location.port === "5501") {
   API_BASE_URL = `http://localhost:5000/api`;
 } else {
   // Production: Use Render backend
-  API_BASE_URL = `https://ayatrio-web-backend.onrender.com/api`;
+  API_BASE_URL = `https://furniture-backend-1-nvv3.onrender.com/api`;
 }
 
 console.log("[API] Base URL:", API_BASE_URL);
