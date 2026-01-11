@@ -136,10 +136,54 @@ async function fetchProducts(category = null) {
     throw error;
   }
 }
+async function fetchCategories(options = {}) {
+  const {
+    isActive = true,
+    search = "",
+    sort = "-createdAt",
+    limit = 100,
+  } = options;
 
-/**
- * Fetch category by slug
- */
+  let url = `${API_BASE_URL}/categories?`;
+  if (isActive !== null) {
+    url += `isActive=${isActive}&`;
+  }
+  if (search.trim()) {
+    url += `search=${encodeURIComponent(search)}&`;
+  }
+  url += `sort=${sort}`;
+
+  console.log("[API] fetchCategories:", url);
+
+  try {
+    const response = await fetch(url, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+    });
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+
+    const data = await response.json();
+    console.log("[API] fetchCategories result:", data);
+    let categories = [];
+    if (data.success && data.data) {
+      categories = Array.isArray(data.data) ? data.data : [data.data];
+    } else if (Array.isArray(data)) {
+      categories = data;
+    }
+
+    console.log(`[API] ✓ Fetched ${categories.length} categories from backend`);
+    return categories;
+  } catch (error) {
+    console.error("[API] ✗ Error fetching categories:", error);
+    throw error;
+  }
+}
 async function fetchCategoryBySlug(slug) {
   const url = `${API_BASE_URL}/categories/${slug}`;
   console.log("[API] fetchCategoryBySlug:", url);
@@ -155,10 +199,6 @@ async function fetchCategoryBySlug(slug) {
     throw error;
   }
 }
-
-/**
- * Fetch subcategory by slug
- */
 async function fetchSubcategoryBySlug(slug) {
   const url = `${API_BASE_URL}/subcategories/${slug}`;
   console.log("[API] fetchSubcategoryBySlug:", url);
@@ -174,10 +214,6 @@ async function fetchSubcategoryBySlug(slug) {
     throw error;
   }
 }
-
-/**
- * Fetch FAQ items for a product by ID
- */
 async function fetchProductFAQById(productId) {
   const url = `${API_BASE_URL}/products/${productId}/faq`;
   console.log("[API] fetchProductFAQById:", url);
@@ -193,10 +229,6 @@ async function fetchProductFAQById(productId) {
     throw error;
   }
 }
-
-/**
- * Fetch FAQ items for a product by slug
- */
 async function fetchProductFAQBySlug(slug) {
   const url = `${API_BASE_URL}/products/slug/${slug}/faq`;
   console.log("[API] fetchProductFAQBySlug:", url);
@@ -212,10 +244,6 @@ async function fetchProductFAQBySlug(slug) {
     throw error;
   }
 }
-
-/**
- * Get URL parameter
- */
 function getURLParameter(name) {
   if (window.URLSearchParams) {
     const urlParams = new URLSearchParams(window.location.search);

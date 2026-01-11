@@ -1976,7 +1976,6 @@
     /* ---------- SCHEMA GRAPH ---------- */
     const graph = [];
 
-    /* ========== ORGANIZATION ========== */
     graph.push({
       "@type": "Organization",
       "@id": `${ORIGIN}/#organization`,
@@ -1999,8 +1998,6 @@
         "availableLanguage": ["English", "Hindi"]
       }
     });
-
-    /* ========== WEBSITE ========== */
     graph.push({
       "@type": "WebSite",
       "@id": `${ORIGIN}/#website`,
@@ -2013,8 +2010,6 @@
         "query-input": "required name=search_term_string"
       }
     });
-
-    /* ========== WEBPAGE (HOME) ========== */
     graph.push({
       "@type": "WebPage",
       "@id": `${ORIGIN}/#webpage`,
@@ -2025,8 +2020,6 @@
       "isPartOf": { "@id": `${ORIGIN}/#website` },
       "about": { "@id": `${ORIGIN}/#organization` }
     });
-
-    /* ========== CATEGORY ITEM LIST (OPTIONAL BUT POWERFUL) ========== */
     if (Array.isArray(categories) && categories.length > 0) {
       graph.push({
         "@type": "ItemList",
@@ -2042,8 +2035,6 @@
         }))
       });
     }
-
-    /* ---------- INJECT ---------- */
     const SCRIPT_ID = "home-schema-graph";
     const old = document.getElementById(SCRIPT_ID);
     if (old) old.remove();
@@ -2058,9 +2049,9 @@
 
     document.head.appendChild(script);
 
-    console.log("✅ Home page schema injected (production-ready)");
+    console.log("Home page schema injected (production-ready)");
   } catch (err) {
-    console.error("❌ Home schema error:", err);
+    console.error("Home schema error:", err);
   }
 })();
 </script>
@@ -2109,8 +2100,8 @@
                                     <ul class="sub-menu">
                                         <li id="menu-item-2615"
                                             class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-has-children menu-item-2615">
-                                            <a href="/index_decor/category/bedroom"><span
-                                                    class="link">Bedroom</span><span class="dropdown-toggle"><span
+                                            <a href="/index_decor/category/wallpaper"><span
+                                                    class="link">Wallpaper</span><span class="dropdown-toggle"><span
                                                         class="inline-svg-icon kalium-svg-icon-arrow-down"><svg
                                                             xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">
                                                             <path fill-rule="evenodd" clip-rule="evenodd"
@@ -2119,25 +2110,30 @@
                                             <ul class="sub-menu">
                                                 <li id="menu-item-2616"
                                                     class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-2616">
-                                                    <a href="/index_decor/category/beds"><span
-                                                            class="link">Beds</span></a>
+                                                    <a href="/index_decor/category/wallpaper-abstract"><span
+                                                            class="link">Abstract</span></a>
                                                 </li>
                                                 <li id="menu-item-2617"
                                                     class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-2617">
-                                                    <a href="/index_decor/category/nightstands"><span
-                                                            class="link">Nightstands</span></a>
+                                                    <a href="/index_decor/category/wallpaper-floral"><span
+                                                            class="link">Floral</span></a>
                                                 </li>
                                                 <li id="menu-item-2618"
                                                     class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-2618">
-                                                    <a href="/index_decor/category/wardrobes"><span
-                                                            class="link">Wardrobes</span></a>
+                                                    <a href="/index_decor/category/wallpaper-geometric"><span
+                                                            class="link">Geometric</span></a>
+                                                </li>
+                                                <li id="menu-item-2619"
+                                                    class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-2619">
+                                                    <a href="/index_decor/category/wallpaper-tropical"><span
+                                                            class="link">Tropical</span></a>
                                                 </li>
                                             </ul>
                                         </li>
                                         <li id="menu-item-2629"
                                             class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-has-children menu-item-2629">
-                                            <a href="/index_decor/category/lighting"><span
-                                                    class="link">Lighting</span><span class="dropdown-toggle"><span
+                                            <a href="/index_decor/category/curtains"><span
+                                                    class="link">Curtains</span><span class="dropdown-toggle"><span
                                                         class="inline-svg-icon kalium-svg-icon-arrow-down"><svg
                                                             xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">
                                                             <path fill-rule="evenodd" clip-rule="evenodd"
@@ -2146,30 +2142,18 @@
                                             <ul class="sub-menu">
                                                 <li id="menu-item-2630"
                                                     class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-2630">
-                                                    <a href="/index_decor/category/ceiling"><span
-                                                            class="link">Ceiling</span></a>
+                                                    <a href="/index_decor/category/curtains-animals"><span
+                                                            class="link">Animals</span></a>
                                                 </li>
                                                 <li id="menu-item-2631"
                                                     class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-2631">
-                                                    <a href="/index_decor/category/floor-lamps"><span class="link">Floor
-                                                            Lamps</span></a>
-                                                </li>
-                                                <li id="menu-item-2632"
-                                                    class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-2632">
-                                                    <a href="/index_decor/category/table-lamps"><span class="link">Table
-                                                            Lamps</span></a>
-                                                </li>
-                                                <li id="menu-item-2633"
-                                                    class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-2633">
-                                                    <a href="/index_decor/category/wall-lamps"><span class="link">Wall
-                                                            Lamps</span></a>
+                                                    <a href="/index_decor/category/curtains-floral"><span class="link">Floral</span></a>
                                                 </li>
                                             </ul>
                                         </li>
                                         <li id="menu-item-2634"
                                             class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-has-children menu-item-2634">
-                                            <a href="/index_decor/category/living"><span class="link">Living
-                                                    Room</span><span class="dropdown-toggle"><span
+                                            <a href="/index_decor/category/blinds"><span class="link">Blinds</span><span class="dropdown-toggle"><span
                                                         class="inline-svg-icon kalium-svg-icon-arrow-down"><svg
                                                             xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">
                                                             <path fill-rule="evenodd" clip-rule="evenodd"
@@ -2178,31 +2162,24 @@
                                             <ul class="sub-menu">
                                                 <li id="menu-item-2635"
                                                     class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-2635">
-                                                    <a href="/index_decor/category/armchairs"><span
-                                                            class="link">Armchairs</span></a>
+                                                    <a href="/index_decor/category/roller-blinds"><span
+                                                            class="link">Roller Blinds</span></a>
                                                 </li>
                                                 <li id="menu-item-2636"
                                                     class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-2636">
-                                                    <a href="/index_decor/category/coffee-tables"><span
-                                                            class="link">Coffee
-                                                            Tables</span></a>
+                                                    <a href="/index_decor/category/roman-blinds"><span
+                                                            class="link">Roman Blinds</span></a>
                                                 </li>
                                                 <li id="menu-item-2637"
                                                     class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-2637">
-                                                    <a href="/index_decor/category/sideboards"><span
-                                                            class="link">Sideboards</span></a>
-                                                </li>
-                                                <li id="menu-item-2638"
-                                                    class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-2638">
-                                                    <a href="/index_decor/category/sofas"><span
-                                                            class="link">Sofas</span></a>
+                                                    <a href="/index_decor/category/wooden-blinds"><span
+                                                            class="link">Wooden Blinds</span></a>
                                                 </li>
                                             </ul>
                                         </li>
                                         <li id="menu-item-2660"
                                             class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-has-children menu-item-2660">
-                                            <a href="/index_decor/category/decor"><span class="link">Home
-                                                    Decor</span><span class="dropdown-toggle"><span
+                                            <a href="/index_decor/category/flooring"><span class="link">Flooring</span><span class="dropdown-toggle"><span
                                                         class="inline-svg-icon kalium-svg-icon-arrow-down"><svg
                                                             xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">
                                                             <path fill-rule="evenodd" clip-rule="evenodd"
@@ -2211,20 +2188,19 @@
                                             <ul class="sub-menu">
                                                 <li id="menu-item-2661"
                                                     class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-2661">
-                                                    <a href="/index_decor/category/mirrors"><span
-                                                            class="link">Mirrors</span></a>
+                                                    <a href="/index_decor/category/vinyl-flooring"><span
+                                                            class="link">Vinyl Flooring</span></a>
                                                 </li>
                                                 <li id="menu-item-2662"
                                                     class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-2662">
-                                                    <a href="/index_decor/category/rugs"><span
-                                                            class="link">Rugs</span></a>
+                                                    <a href="/index_decor/category/laminate-flooring"><span
+                                                            class="link">Laminate Flooring</span></a>
                                                 </li>
                                             </ul>
                                         </li>
                                         <li id="menu-item-2657"
                                             class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-has-children menu-item-2657">
-                                            <a href="/index_decor/category/dining"><span class="link">Dining
-                                                    Room</span><span class="dropdown-toggle"><span
+                                            <a href="/index_decor/category/rugs"><span class="link">Rugs</span><span class="dropdown-toggle"><span
                                                         class="inline-svg-icon kalium-svg-icon-arrow-down"><svg
                                                             xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">
                                                             <path fill-rule="evenodd" clip-rule="evenodd"
@@ -2233,51 +2209,23 @@
                                             <ul class="sub-menu">
                                                 <li id="menu-item-2658"
                                                     class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-2658">
-                                                    <a href="/index_decor/category/benches"><span
-                                                            class="link">Benches</span></a>
+                                                    <a href="/index_decor/category/rugs-abstract"><span
+                                                            class="link">Abstract</span></a>
                                                 </li>
                                                 <li id="menu-item-2659"
                                                     class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-2659">
-                                                    <a href="/index_decor/category/dining-chairs"><span
-                                                            class="link">Dining
-                                                            Chairs</span></a>
+                                                    <a href="/index_decor/category/rugs-floral"><span
+                                                            class="link">Floral</span></a>
                                                 </li>
-                                            </ul>
-                                        </li>
-                                        <li id="menu-item-2663"
-                                            class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-has-children menu-item-2663">
-                                            <a href="/index_decor/category/outdoor"><span
-                                                    class="link">Outdoor</span><span class="dropdown-toggle"><span
-                                                        class="inline-svg-icon kalium-svg-icon-arrow-down"><svg
-                                                            xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">
-                                                            <path fill-rule="evenodd" clip-rule="evenodd"
-                                                                d="M.468 3.512a1 1 0 0 1 1.413.063L8 10.268l6.12-6.693a1 1 0 1 1 1.475 1.35L9.107 12.02a1.5 1.5 0 0 1-2.214 0L.405 4.925a1 1 0 0 1 .063-1.413Z" />
-                                                        </svg></span></span></a>
-                                            <ul class="sub-menu">
-                                                <li id="menu-item-2664"
-                                                    class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-2664">
-                                                    <a href="/index_decor/category/accessories"><span
-                                                            class="link">Accessories</span></a>
+                                                <li id="menu-item-2670"
+                                                    class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-2670">
+                                                    <a href="/index_decor/category/rugs-geometric"><span
+                                                            class="link">Geometric</span></a>
                                                 </li>
-                                                <li id="menu-item-2665"
-                                                    class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-2665">
-                                                    <a href="/index_decor/category/outdoor-chairs"><span
-                                                            class="link">Chairs</span></a>
-                                                </li>
-                                                <li id="menu-item-2666"
-                                                    class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-2666">
-                                                    <a href="/index_decor/category/benches-outdoor"><span
-                                                            class="link">Benches</span></a>
-                                                </li>
-                                                <li id="menu-item-2667"
-                                                    class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-2667">
-                                                    <a href="/index_decor/category/lounge"><span
-                                                            class="link">Lounge</span></a>
-                                                </li>
-                                                <li id="menu-item-2668"
-                                                    class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-2668">
-                                                    <a href="/index_decor/category/tables"><span
-                                                            class="link">Tables</span></a>
+                                                <li id="menu-item-2671"
+                                                    class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-2671">
+                                                    <a href="/index_decor/category/rugs-tropical"><span
+                                                            class="link">Tropical</span></a>
                                                 </li>
                                             </ul>
                                         </li>
@@ -2529,49 +2477,45 @@
                                                                         <li class="mega-menu-item mega-menu-item-type-taxonomy mega-menu-item-object-product_cat mega-menu-item-has-children mega-menu-item-2634"
                                                                             id="mega-menu-item-2634"><a
                                                                                 class="mega-menu-link"
-                                                                                href="/index_decor/category/living">Living
-                                                                                Room<span class="mega-indicator"
+                                                                                    href="/index_decor/category/wallpaper">Wallpaper<span class="mega-indicator"
                                                                                     aria-hidden="true"></span></a>
                                                                             <ul class="mega-sub-menu">
                                                                                 <li class="mega-menu-item mega-menu-item-type-taxonomy mega-menu-item-object-product_cat mega-menu-item-2635"
                                                                                     id="mega-menu-item-2635"><a
                                                                                         class="mega-menu-link"
-                                                                                        href="/index_decor/category/armchairs">Armchairs</a>
+                                                                                        href="/index_decor/category/abstract">Abstract</a>
                                                                                 </li>
                                                                                 <li class="mega-menu-item mega-menu-item-type-taxonomy mega-menu-item-object-product_cat mega-menu-item-2636"
                                                                                     id="mega-menu-item-2636"><a
                                                                                         class="mega-menu-link"
-                                                                                        href="/index_decor/category/coffee-tables">Coffee
-                                                                                        Tables</a></li>
+                                                                                        href="/index_decor/category/floral">Floral</a></li>
                                                                                 <li class="mega-menu-item mega-menu-item-type-taxonomy mega-menu-item-object-product_cat mega-menu-item-2637"
                                                                                     id="mega-menu-item-2637"><a
                                                                                         class="mega-menu-link"
-                                                                                        href="/index_decor/category/sideboards">Sideboards</a>
+                                                                                        href="/index_decor/category/geometric">Geometric</a>
                                                                                 </li>
                                                                                 <li class="mega-menu-item mega-menu-item-type-taxonomy mega-menu-item-object-product_cat mega-menu-item-2638"
                                                                                     id="mega-menu-item-2638"><a
                                                                                         class="mega-menu-link"
-                                                                                        href="/index_decor/category/sofas">Sofas</a>
+                                                                                        href="/index_decor/category/tropical">Tropical</a>
                                                                                 </li>
                                                                             </ul>
                                                                         </li>
                                                                         <li class="mega-menu-item mega-menu-item-type-taxonomy mega-menu-item-object-product_cat mega-menu-item-has-children mega-menu-item-2657"
                                                                             id="mega-menu-item-2657"><a
                                                                                 class="mega-menu-link"
-                                                                                href="/index_decor/category/dining">Dining
-                                                                                Room<span class="mega-indicator"
+                                                                                href="/index_decor/category/curtains">Curtains<span class="mega-indicator"
                                                                                     aria-hidden="true"></span></a>
                                                                             <ul class="mega-sub-menu">
                                                                                 <li class="mega-menu-item mega-menu-item-type-taxonomy mega-menu-item-object-product_cat mega-menu-item-2658"
                                                                                     id="mega-menu-item-2658"><a
                                                                                         class="mega-menu-link"
-                                                                                        href="/index_decor/category/benches">Benches</a>
+                                                                                        href="/index_decor/category/animals">Animals</a>
                                                                                 </li>
                                                                                 <li class="mega-menu-item mega-menu-item-type-taxonomy mega-menu-item-object-product_cat mega-menu-item-2659"
                                                                                     id="mega-menu-item-2659"><a
                                                                                         class="mega-menu-link"
-                                                                                        href="/index_decor/category/dining-chairs">Dining
-                                                                                        Chairs</a></li>
+                                                                                        href="/index_decor/category/floral">Floral</a></li>
                                                                             </ul>
                                                                         </li>
                                                                     </ul>
@@ -2583,43 +2527,47 @@
                                                                         <li class="mega-menu-item mega-menu-item-type-taxonomy mega-menu-item-object-product_cat mega-menu-item-has-children mega-menu-item-2615"
                                                                             id="mega-menu-item-2615"><a
                                                                                 class="mega-menu-link"
-                                                                                href="/index_decor/category/bedroom">Bedroom<span
+                                                                                href="/index_decor/category/blinds">Blinds<span
                                                                                     class="mega-indicator"
                                                                                     aria-hidden="true"></span></a>
                                                                             <ul class="mega-sub-menu">
                                                                                 <li class="mega-menu-item mega-menu-item-type-taxonomy mega-menu-item-object-product_cat mega-menu-item-2616"
                                                                                     id="mega-menu-item-2616"><a
                                                                                         class="mega-menu-link"
-                                                                                        href="/index_decor/category/beds">Beds</a>
+                                                                                        href="/index_decor/category/roller-blinds">Roller Blinds</a>
                                                                                 </li>
                                                                                 <li class="mega-menu-item mega-menu-item-type-taxonomy mega-menu-item-object-product_cat mega-menu-item-2617"
                                                                                     id="mega-menu-item-2617"><a
                                                                                         class="mega-menu-link"
-                                                                                        href="/index_decor/category/nightstands">Nightstands</a>
+                                                                                        href="/index_decor/category/roman-blinds">Roman Blinds</a>
                                                                                 </li>
                                                                                 <li class="mega-menu-item mega-menu-item-type-taxonomy mega-menu-item-object-product_cat mega-menu-item-2618"
                                                                                     id="mega-menu-item-2618"><a
                                                                                         class="mega-menu-link"
-                                                                                        href="/index_decor/category/wardrobes">Wardrobes</a>
+                                                                                        href="/index_decor/category/wooden-blinds">Wooden Blinds</a>
                                                                                 </li>
                                                                             </ul>
                                                                         </li>
                                                                         <li class="mega-menu-item mega-menu-item-type-taxonomy mega-menu-item-object-product_cat mega-menu-item-has-children mega-menu-item-2660"
                                                                             id="mega-menu-item-2660"><a
                                                                                 class="mega-menu-link"
-                                                                                href="/index_decor/category/decor">Home
-                                                                                Decor<span class="mega-indicator"
+                                                                                href="/index_decor/category/flooring">Flooring<span
+                                                                                    class="mega-indicator"
                                                                                     aria-hidden="true"></span></a>
                                                                             <ul class="mega-sub-menu">
                                                                                 <li class="mega-menu-item mega-menu-item-type-taxonomy mega-menu-item-object-product_cat mega-menu-item-2661"
                                                                                     id="mega-menu-item-2661"><a
                                                                                         class="mega-menu-link"
-                                                                                        href="/index_decor/category/mirrors">Mirrors</a>
+                                                                                        href="/index_decor/category/vinyl-flooring"
+                                                                                        target="_self"
+                                                                                        onclick="window.location.href=this.href; return false;">Vinyl Flooring</a>
                                                                                 </li>
                                                                                 <li class="mega-menu-item mega-menu-item-type-taxonomy mega-menu-item-object-product_cat mega-menu-item-2662"
                                                                                     id="mega-menu-item-2662"><a
                                                                                         class="mega-menu-link"
-                                                                                        href="/index_decor/category/rugs">Rugs</a>
+                                                                                        href="/index_decor/category/laminate-flooring"
+                                                                                        target="_self"
+                                                                                        onclick="window.location.href=this.href; return false;">Laminate Flooring</a>
                                                                                 </li>
                                                                             </ul>
                                                                         </li>
@@ -2632,69 +2580,27 @@
                                                                         <li class="mega-menu-item mega-menu-item-type-taxonomy mega-menu-item-object-product_cat mega-menu-item-has-children mega-menu-item-2629"
                                                                             id="mega-menu-item-2629"><a
                                                                                 class="mega-menu-link"
-                                                                                href="/index_decor/category/lighting">Lighting<span
+                                                                                href="/index_decor/category/rugs">Rugs<span
                                                                                     class="mega-indicator"
                                                                                     aria-hidden="true"></span></a>
                                                                             <ul class="mega-sub-menu">
                                                                                 <li class="mega-menu-item mega-menu-item-type-taxonomy mega-menu-item-object-product_cat mega-menu-item-2630"
                                                                                     id="mega-menu-item-2630"><a
                                                                                         class="mega-menu-link"
-                                                                                        href="/index_decor/category/ceiling">Ceiling</a>
+                                                                                        href="/index_decor/category/abstract">Abstract</a>
                                                                                 </li>
                                                                                 <li class="mega-menu-item mega-menu-item-type-taxonomy mega-menu-item-object-product_cat mega-menu-item-2631"
                                                                                     id="mega-menu-item-2631"><a
                                                                                         class="mega-menu-link"
-                                                                                        href="/index_decor/category/floor-lamps">Floor
-                                                                                        Lamps</a></li>
+                                                                                        href="/index_decor/category/floral">Floral</a></li>
                                                                                 <li class="mega-menu-item mega-menu-item-type-taxonomy mega-menu-item-object-product_cat mega-menu-item-2632"
                                                                                     id="mega-menu-item-2632"><a
                                                                                         class="mega-menu-link"
-                                                                                        href="/index_decor/category/table-lamps">Table
-                                                                                        Lamps</a></li>
+                                                                                        href="/index_decor/category/geometric">Geometric</a></li>
                                                                                 <li class="mega-menu-item mega-menu-item-type-taxonomy mega-menu-item-object-product_cat mega-menu-item-2633"
                                                                                     id="mega-menu-item-2633"><a
                                                                                         class="mega-menu-link"
-                                                                                        href="/index_decor/category/wall-lamps">Wall
-                                                                                        Lamps</a></li>
-                                                                            </ul>
-                                                                        </li>
-                                                                    </ul>
-                                                                </li>
-                                                                <li class="mega-menu-column mega-menu-columns-2-of-12"
-                                                                    style="--columns:12; --span:2"
-                                                                    id="mega-menu-2614-0-3">
-                                                                    <ul class="mega-sub-menu">
-                                                                        <li class="mega-menu-item mega-menu-item-type-taxonomy mega-menu-item-object-product_cat mega-menu-item-has-children mega-menu-item-2663"
-                                                                            id="mega-menu-item-2663"><a
-                                                                                class="mega-menu-link"
-                                                                                href="/index_decor/category/outdoor">Outdoor<span
-                                                                                    class="mega-indicator"
-                                                                                    aria-hidden="true"></span></a>
-                                                                            <ul class="mega-sub-menu">
-                                                                                <li class="mega-menu-item mega-menu-item-type-taxonomy mega-menu-item-object-product_cat mega-menu-item-2664"
-                                                                                    id="mega-menu-item-2664"><a
-                                                                                        class="mega-menu-link"
-                                                                                        href="/index_decor/category/accessories">Accessories</a>
-                                                                                </li>
-                                                                                <li class="mega-menu-item mega-menu-item-type-taxonomy mega-menu-item-object-product_cat mega-menu-item-2665"
-                                                                                    id="mega-menu-item-2665"><a
-                                                                                        class="mega-menu-link"
-                                                                                        href="/index_decor/category/outdoor-chairs">Chairs</a>
-                                                                                </li>
-                                                                                <li class="mega-menu-item mega-menu-item-type-taxonomy mega-menu-item-object-product_cat mega-menu-item-2666"
-                                                                                    id="mega-menu-item-2666"><a
-                                                                                        class="mega-menu-link"
-                                                                                        href="/index_decor/category/benches-outdoor">Benches</a>
-                                                                                </li>
-                                                                                <li class="mega-menu-item mega-menu-item-type-taxonomy mega-menu-item-object-product_cat mega-menu-item-2667"
-                                                                                    id="mega-menu-item-2667"><a
-                                                                                        class="mega-menu-link"
-                                                                                        href="/index_decor/category/lounge">Lounge</a>
-                                                                                </li>
-                                                                                <li class="mega-menu-item mega-menu-item-type-taxonomy mega-menu-item-object-product_cat mega-menu-item-2668"
-                                                                                    id="mega-menu-item-2668"><a
-                                                                                        class="mega-menu-link"
-                                                                                        href="/index_decor/category/tables">Tables</a>
+                                                                                        href="/index_decor/category/tropical">Tropical</a>
                                                                                 </li>
                                                                             </ul>
                                                                         </li>
@@ -2719,6 +2625,7 @@
                                                                                                     style="--k-ratio:0.750751"><span
                                                                                                         class="loader"><span
                                                                                                             class="loader-el semi-circle-spin"><span></span></span></span><img
+                                                                                                        loading="lazy"
                                                                                                         width="500"
                                                                                                         height="666"
                                                                                                         src="https://sites.kaliumtheme.com/elementor/furniture/wp-content/uploads/2025/05/pet-rug-1-500x666.jpeg"
@@ -2729,13 +2636,13 @@
                                                                                                     class="category-box__title link-plain">
                                                                                                     <h2>
                                                                                                         <a aria-label="Visit product category Just In"
-                                                                                                            href="https://sites.kaliumtheme.com/elementor/furniture/product-category/other/just-in/">Just
+                                                                                                            href="/index_decor/category/just-in">Just
                                                                                                             In</a>
                                                                                                     </h2>
                                                                                                 </div>
 
                                                                                                 <a aria-label="Visit product category Just In"
-                                                                                                    href="https://sites.kaliumtheme.com/elementor/furniture/product-category/other/just-in/"></a>
+                                                                                                    href="/index_decor/category/just-in"></a>
                                                                                             </div>
                                                                                         </li>
                                                                                     </ul>
@@ -2763,6 +2670,7 @@
                                                                                                     style="--k-ratio:0.750751"><span
                                                                                                         class="loader"><span
                                                                                                             class="loader-el semi-circle-spin"><span></span></span></span><img
+                                                                                                        loading="lazy"
                                                                                                         width="500"
                                                                                                         height="666"
                                                                                                         src="https://sites.kaliumtheme.com/elementor/furniture/wp-content/uploads/2025/05/aluminium-lounge-chair-2-500x666.jpeg"
@@ -2773,12 +2681,12 @@
                                                                                                     class="category-box__title link-plain">
                                                                                                     <h2>
                                                                                                         <a aria-label="Visit product category Outlet"
-                                                                                                            href="https://sites.kaliumtheme.com/elementor/furniture/product-category/other/outlet/">Outlet</a>
+                                                                                                            href="/index_decor/category/outlet">Outlet</a>
                                                                                                     </h2>
                                                                                                 </div>
 
                                                                                                 <a aria-label="Visit product category Outlet"
-                                                                                                    href="https://sites.kaliumtheme.com/elementor/furniture/product-category/other/outlet/"></a>
+                                                                                                    href="/index_decor/category/outlet"></a>
                                                                                             </div>
                                                                                         </li>
                                                                                     </ul>
@@ -2857,8 +2765,7 @@
                         data-id="9ae5ea0" data-element_type="container">
                         <div class="e-con-inner" style="width: 100%; padding: 0; margin: 0;">
                             <style>
-                                /* CLEAN ISOLATED SLIDER - New CSS Classes */
-                                
+                            
                                 .ayatrio-slider-wrapper {
                                     width: 100%;
                                     margin: 0;
@@ -3067,7 +2974,7 @@
 }
                                 
 
-                            </style>
+</style>
                             <div class="ayatrio-slider-wrapper">
                                 <div class="ayatrio-slider">
                                     <div class="ayatrio-slides-container" id="ayatrio-slides">
@@ -3200,153 +3107,138 @@
                                                     <div class="elementor-widget-container">
                                                         <div class="elementor-shortcode">
                                                             <div class="woocommerce columns-6">
-                                                                <ul
+                                                                <ul id="shop-categories-list"
                                                                     class="shop-categories products grid columns-2 columns-md-3 columns-xl-6">
-                                                                    <li class="product-category product first">
-                                                                        <div
-                                                                            class="category-box category-box--type-3 category-box--title-overlay category-box--title-top">
-                                                                            <span class="image-placeholder"
-                                                                                style="--k-ratio:0.750751"><span
-                                                                                    class="loader"><span
-                                                                                        class="loader-el semi-circle-spin"><span></span></span></span><img
-                                                                                    fetchpriority="high"
-                                                                                    decoding="async" width="500"
-                                                                                    height="666"
-                                                                                    src="https://sites.kaliumtheme.com/elementor/furniture/wp-content/uploads/2025/05/high-back-lounge-armchair-4-500x666.jpg"
-                                                                                    class="attachment-500x666 size-500x666"
-                                                                                    alt="" /></span>
-                                                                            <div class="category-box__title link-plain">
-                                                                                <h2>
-                                                                                    <a aria-label="Visit product category Living Room"
-                                                                                        href="/index_decor/category/living">Living
-                                                                                        Room</a>
-                                                                                </h2>
-                                                                            </div>
-
-                                                                            <a aria-label="Visit product category Living Room"
-                                                                                href="/index_decor/category/living"></a>
-                                                                        </div>
-                                                                    </li>
-                                                                    <li class="product-category product">
-                                                                        <div
-                                                                            class="category-box category-box--type-3 category-box--title-overlay category-box--title-top">
-                                                                            <span class="image-placeholder"
-                                                                                style="--k-ratio:0.750751"><span
-                                                                                    class="loader"><span
-                                                                                        class="loader-el semi-circle-spin"><span></span></span></span><img
-                                                                                    decoding="async" width="500"
-                                                                                    height="666"
-                                                                                    src="https://sites.kaliumtheme.com/elementor/furniture/wp-content/uploads/2025/05/double-fabric-bed-3-500x666.jpg"
-                                                                                    class="attachment-500x666 size-500x666"
-                                                                                    alt="" /></span>
-                                                                            <div class="category-box__title link-plain">
-                                                                                <h2>
-                                                                                    <a aria-label="Visit product category Bedroom"
-                                                                                        href="/index_decor/category/bedroom">Bedroom</a>
-                                                                                </h2>
-                                                                            </div>
-
-                                                                            <a aria-label="Visit product category Bedroom"
-                                                                                href="/index_decor/category/bedroom"></a>
-                                                                        </div>
-                                                                    </li>
-                                                                    <li class="product-category product">
-                                                                        <div
-                                                                            class="category-box category-box--type-3 category-box--title-overlay category-box--title-top">
-                                                                            <span class="image-placeholder"
-                                                                                style="--k-ratio:0.750751"><span
-                                                                                    class="loader"><span
-                                                                                        class="loader-el semi-circle-spin"><span></span></span></span><img
-                                                                                    decoding="async" width="500"
-                                                                                    height="666"
-                                                                                    src="https://sites.kaliumtheme.com/elementor/furniture/wp-content/uploads/2025/05/stackist-12-500x666.jpg"
-                                                                                    class="attachment-500x666 size-500x666"
-                                                                                    alt="" /></span>
-                                                                            <div class="category-box__title link-plain">
-                                                                                <h2>
-                                                                                    <a aria-label="Visit product category Dining Room"
-                                                                                        href="/index_decor/category/dining">Dining
-                                                                                        Room</a>
-                                                                                </h2>
-                                                                            </div>
-
-                                                                            <a aria-label="Visit product category Dining Room"
-                                                                                href="/index_decor/category/dining"></a>
-                                                                        </div>
-                                                                    </li>
-                                                                    <li class="product-category product">
-                                                                        <div
-                                                                            class="category-box category-box--type-3 category-box--title-overlay category-box--title-top">
-                                                                            <span class="image-placeholder"
-                                                                                style="--k-ratio:0.750751"><span
-                                                                                    class="loader"><span
-                                                                                        class="loader-el semi-circle-spin"><span></span></span></span><img
-                                                                                    loading="lazy" decoding="async"
-                                                                                    width="500" height="666"
-                                                                                    src="https://sites.kaliumtheme.com/elementor/furniture/wp-content/uploads/2025/05/check-wool-5-500x666.jpeg"
-                                                                                    class="attachment-500x666 size-500x666"
-                                                                                    alt="" /></span>
-                                                                            <div class="category-box__title link-plain">
-                                                                                <h2>
-                                                                                    <a aria-label="Visit product category Home Decor"
-                                                                                        href="/index_decor/category/decor">Home
-                                                                                        Decor</a>
-                                                                                </h2>
-                                                                            </div>
-
-                                                                            <a aria-label="Visit product category Home Decor"
-                                                                                href="/index_decor/category/decor"></a>
-                                                                        </div>
-                                                                    </li>
-                                                                    <li class="product-category product">
-                                                                        <div
-                                                                            class="category-box category-box--type-3 category-box--title-overlay category-box--title-top">
-                                                                            <span class="image-placeholder"
-                                                                                style="--k-ratio:0.750751"><span
-                                                                                    class="loader"><span
-                                                                                        class="loader-el semi-circle-spin"><span></span></span></span><img
-                                                                                    loading="lazy" decoding="async"
-                                                                                    width="500" height="666"
-                                                                                    src="https://sites.kaliumtheme.com/elementor/furniture/wp-content/uploads/2025/04/luna-floor-lamp-2-500x666.jpg"
-                                                                                    class="attachment-500x666 size-500x666"
-                                                                                    alt="" /></span>
-                                                                            <div class="category-box__title link-plain">
-                                                                                <h2>
-                                                                                    <a aria-label="Visit product category Lighting"
-                                                                                        href="/index_decor/category/lighting">Lighting</a>
-                                                                                </h2>
-                                                                            </div>
-
-                                                                            <a aria-label="Visit product category Lighting"
-                                                                                href="/index_decor/category/lighting"></a>
-                                                                        </div>
-                                                                    </li>
-                                                                    <li class="product-category product last">
-                                                                        <div
-                                                                            class="category-box category-box--type-3 category-box--title-overlay category-box--title-top">
-                                                                            <span class="image-placeholder"
-                                                                                style="--k-ratio:0.750751"><span
-                                                                                    class="loader"><span
-                                                                                        class="loader-el semi-circle-spin"><span></span></span></span><img
-                                                                                    loading="lazy" decoding="async"
-                                                                                    width="500" height="666"
-                                                                                    src="https://sites.kaliumtheme.com/elementor/furniture/wp-content/uploads/2025/05/round-steel-garden-table-13-500x666.jpg"
-                                                                                    class="attachment-500x666 size-500x666"
-                                                                                    alt="" /></span>
-                                                                            <div class="category-box__title link-plain">
-                                                                                <h2>
-                                                                                    <a aria-label="Visit product category Outdoor"
-                                                                                        href="/index_decor/category/outdoor">Outdoor</a>
-                                                                                </h2>
-                                                                            </div>
-
-                                                                            <a aria-label="Visit product category Outdoor"
-                                                                                href="/index_decor/category/outdoor"></a>
-                                                                        </div>
-                                                                    </li>
                                                                 </ul>
                                                             </div>
                                                         </div>
+                                                        <script>
+                                                        (function(){
+                                                       
+                                                          let API_BASE_URL;
+                                                          if (window.location.port === "5500" || window.location.port === "5501") {
+                                                            API_BASE_URL = `https://furniture-backend-1-nvv3.onrender.com/api`;
+                                                          } else if (window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1") {
+                                                            API_BASE_URL = `http://localhost:5000/api`;
+                                                          } else {
+                                                            API_BASE_URL = `https://furniture-backend-1-nvv3.onrender.com/api`;
+                                                          }
+                                                          
+                                                          console.log('[Categories] API_BASE_URL:', API_BASE_URL);
+                                                        
+                                                          function createCategoryElement(cat, i, total){
+                                                            const li = document.createElement('li');
+                                                            li.className = 'product-category product' + (i===0 ? ' first' : '') + (i===total-1 ? ' last' : '');
+                                                            
+                                                            const div = document.createElement('div');
+                                                            div.className = 'category-box category-box--type-3 category-box--title-overlay category-box--title-top';
+                                                            
+                                                            const span = document.createElement('span');
+                                                            span.className = 'image-placeholder';
+                                                            span.style.cssText = '--k-ratio:0.750751';
+                                                            
+                                                            const loader = document.createElement('span');
+                                                            loader.className = 'loader';
+                                                            loader.innerHTML = '<span class="loader-el semi-circle-spin"><span></span></span>';
+                                                            span.appendChild(loader);
+                                                            
+                                                            const img = document.createElement('img');
+                                                            img.decoding = 'async';
+                                                            img.width = 500;
+                                                            img.height = 666;
+                                                            img.className = 'attachment-500x666 size-500x666';
+                                                            img.alt = cat.name || '';
+                                                            img.src = (cat.images && cat.images[0] && (cat.images[0].thumb || cat.images[0].src)) || 'data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22500%22 height=%22666%22%3E%3Crect fill=%22%23ccc%22 width=%22500%22 height=%22666%22/%3E%3C/svg%3E';
+                                                            span.appendChild(img);
+                                                            
+                                                            const titleDiv = document.createElement('div');
+                                                            titleDiv.className = 'category-box__title link-plain';
+                                                            
+                                                            const h2 = document.createElement('h2');
+                                                            const a = document.createElement('a');
+                                                            a.setAttribute('aria-label', 'Visit product category ' + cat.name);
+                                                            a.href = '/index_decor/category/' + (cat.slug || encodeURIComponent(cat.name));
+                                                            a.textContent = cat.name;
+                                                            h2.appendChild(a);
+                                                            titleDiv.appendChild(h2);
+                                                            
+                                                            const linkOverlay = document.createElement('a');
+                                                            linkOverlay.setAttribute('aria-label', 'Visit product category ' + cat.name);
+                                                            linkOverlay.href = '/index_decor/category/' + (cat.slug || encodeURIComponent(cat.name));
+                                                            
+                                                            div.appendChild(span);
+                                                            div.appendChild(titleDiv);
+                                                            div.appendChild(linkOverlay);
+                                                            
+                                                            li.appendChild(div);
+                                                            return li;
+                                                          }
+                                                          
+                                                          function renderCategories(categories, source = 'unknown'){
+                                                            const list = document.getElementById('shop-categories-list');
+                                                            if(!list) {
+                                                              console.error('[Categories] #shop-categories-list element not found');
+                                                              return;
+                                                            }
+                                                            
+                                                            list.innerHTML = '';
+                                                            const limit = Math.min(categories.length, 6);
+                                                            
+                                                            console.log(`[Categories] Rendering ${limit} categories (${source})`);
+                                                            
+                                                            for(let i = 0; i < limit; i++){
+                                                              list.appendChild(createCategoryElement(categories[i], i, limit));
+                                                            }
+                                                          }
+                                                          async function loadCategories(){
+                                                            try {
+                                                              const url = `${API_BASE_URL}/categories?isActive=true`;
+                                                              console.log('[Categories] Fetching from:', url);
+                                                              
+                                                              const response = await fetch(url, {
+                                                                method: 'GET',
+                                                                headers: {
+                                                                  'Content-Type': 'application/json',
+                                                                  'Accept': 'application/json'
+                                                                }
+                                                              });
+                                                              
+                                                              if (!response.ok) {
+                                                                throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+                                                              }
+                                                              
+                                                              const result = await response.json();
+                                                              console.log('[Categories] API Response:', result);
+                                                              
+                                                              let categories = [];
+                                                              if (result.success && result.data) {
+                                                                categories = Array.isArray(result.data) ? result.data : [result.data];
+                                                              } else if (Array.isArray(result)) {
+                                                                categories = result;
+                                                              }
+                                                              
+                                                              if (categories.length > 0) {
+                                                                console.log(`[Categories] ✓ Loaded ${categories.length} categories from API`);
+                                                                renderCategories(categories, 'API');
+                                                              } else {
+                                                                console.warn('[Categories] API returned empty, using fallback');
+                                                                renderCategories(fallbackCategories, 'fallback');
+                                                              }
+                                                            } catch (error) {
+                                                              console.error('[Categories] ✗ API fetch failed:', error.message);
+                                                              console.warn('[Categories] Using fallback categories (6 rooms)');
+                                                              console.info('[Categories] To fix: Ensure backend is running at ' + API_BASE_URL);
+                                                              renderCategories(fallbackCategories, 'fallback');
+                                                            }
+                                                          }
+                                                          
+                                                          if(document.readyState === 'loading'){
+                                                            document.addEventListener('DOMContentLoaded', loadCategories);
+                                                          } else {
+                                                            loadCategories();
+                                                          }
+                                                        })();
+                                                        </script>
                                                     </div>
                                                 </div>
                                             </div>
@@ -3450,7 +3342,6 @@
                                         <div class="woocommerce columns-4 ">
                                             <ul id="explore-products-grid"
                                                 class="products grid columns-2 columns-md-3 columns-xl-4">
-                                                <!-- Dynamic Content will be injected here by api-client.js -->
                                             </ul>
                                         </div>
                                     </div>
@@ -3531,133 +3422,136 @@
                                 <div class="elementor-widget-container">
                                     <div class="elementor-shortcode">
                                         <div class="woocommerce columns-3">
-                                            <ul
+                                            <ul id="shop-category-list"
                                                 class="shop-categories products grid columns-1 columns-md-2 columns-xl-3">
-                                                <li class="product-category product first">
-                                                    <div
-                                                        class="category-box category-box--type-3 category-box--title-overlay category-box--title-top">
-                                                        <span class="image-placeholder" style="--k-ratio:0.750751"><span
-                                                                class="loader"><span
-                                                                    class="loader-el semi-circle-spin"><span></span></span></span><img
-                                                                loading="lazy" decoding="async" width="500" height="666"
-                                                                src="https://sites.kaliumtheme.com/elementor/furniture/wp-content/uploads/2025/05/untitled-throw-1-500x666.jpg"
-                                                                class="attachment-500x666 size-500x666" alt="" /></span>
-                                                        <div class="category-box__title link-plain">
-                                                            <h2>
-                                                                <a aria-label="Visit product category Textiles"
-                                                                    href="https://sites.kaliumtheme.com/elementor/furniture/product-category/decor/textiles/">Textiles</a>
-                                                            </h2>
-                                                        </div>
-
-                                                        <a aria-label="Visit product category Textiles"
-                                                            href="https://sites.kaliumtheme.com/elementor/furniture/product-category/decor/textiles/"></a>
-                                                    </div>
-                                                </li>
-                                                <li class="product-category product">
-                                                    <div
-                                                        class="category-box category-box--type-3 category-box--title-overlay category-box--title-top">
-                                                        <span class="image-placeholder" style="--k-ratio:0.750751"><span
-                                                                class="loader"><span
-                                                                    class="loader-el semi-circle-spin"><span></span></span></span><img
-                                                                loading="lazy" decoding="async" width="500" height="666"
-                                                                src="https://sites.kaliumtheme.com/elementor/furniture/wp-content/uploads/2025/05/cement-garden-table-10-500x666.jpeg"
-                                                                class="attachment-500x666 size-500x666" alt="" /></span>
-                                                        <div class="category-box__title link-plain">
-                                                            <h2>
-                                                                <a aria-label="Visit product category Tables"
-                                                                    href="https://sites.kaliumtheme.com/elementor/furniture/product-category/outdoor/tables/">Tables</a>
-                                                            </h2>
-                                                        </div>
-
-                                                        <a aria-label="Visit product category Tables"
-                                                            href="https://sites.kaliumtheme.com/elementor/furniture/product-category/outdoor/tables/"></a>
-                                                    </div>
-                                                </li>
-                                                <li class="product-category product last">
-                                                    <div
-                                                        class="category-box category-box--type-3 category-box--title-overlay category-box--title-top">
-                                                        <span class="image-placeholder" style="--k-ratio:0.750751"><span
-                                                                class="loader"><span
-                                                                    class="loader-el semi-circle-spin"><span></span></span></span><img
-                                                                loading="lazy" decoding="async" width="500" height="666"
-                                                                src="https://sites.kaliumtheme.com/elementor/furniture/wp-content/uploads/2025/05/apollo-17-500x666.jpg"
-                                                                class="attachment-500x666 size-500x666" alt="" /></span>
-                                                        <div class="category-box__title link-plain">
-                                                            <h2>
-                                                                <a aria-label="Visit product category Table Lamps"
-                                                                    href="https://sites.kaliumtheme.com/elementor/furniture/product-category/lighting/table-lamps/">Table
-                                                                    Lamps</a>
-                                                            </h2>
-                                                        </div>
-
-                                                        <a aria-label="Visit product category Table Lamps"
-                                                            href="https://sites.kaliumtheme.com/elementor/furniture/product-category/lighting/table-lamps/"></a>
-                                                    </div>
-                                                </li>
-                                                <li class="product-category product first">
-                                                    <div
-                                                        class="category-box category-box--type-3 category-box--title-overlay category-box--title-top">
-                                                        <span class="image-placeholder" style="--k-ratio:0.750751"><span
-                                                                class="loader"><span
-                                                                    class="loader-el semi-circle-spin"><span></span></span></span><img
-                                                                loading="lazy" decoding="async" width="500" height="666"
-                                                                src="https://sites.kaliumtheme.com/elementor/furniture/wp-content/uploads/2025/05/compact-boucle-sofa-11-500x666.jpeg"
-                                                                class="attachment-500x666 size-500x666" alt="" /></span>
-                                                        <div class="category-box__title link-plain">
-                                                            <h2>
-                                                                <a aria-label="Visit product category Sofas"
-                                                                    href="https://sites.kaliumtheme.com/elementor/furniture/product-category/living/sofas/">Sofas</a>
-                                                            </h2>
-                                                        </div>
-
-                                                        <a aria-label="Visit product category Sofas"
-                                                            href="https://sites.kaliumtheme.com/elementor/furniture/product-category/living/sofas/"></a>
-                                                    </div>
-                                                </li>
-                                                <li class="product-category product">
-                                                    <div
-                                                        class="category-box category-box--type-3 category-box--title-overlay category-box--title-top">
-                                                        <span class="image-placeholder" style="--k-ratio:0.750751"><span
-                                                                class="loader"><span
-                                                                    class="loader-el semi-circle-spin"><span></span></span></span><img
-                                                                loading="lazy" decoding="async" width="500" height="666"
-                                                                src="https://sites.kaliumtheme.com/elementor/furniture/wp-content/uploads/2025/05/high-back-lounge-armchair-5-500x666.jpg"
-                                                                class="attachment-500x666 size-500x666" alt="" /></span>
-                                                        <div class="category-box__title link-plain">
-                                                            <h2>
-                                                                <a aria-label="Visit product category Dining Chairs"
-                                                                    href="https://sites.kaliumtheme.com/elementor/furniture/product-category/dining/dining-chairs/">Dining
-                                                                    Chairs</a>
-                                                            </h2>
-                                                        </div>
-
-                                                        <a aria-label="Visit product category Dining Chairs"
-                                                            href="https://sites.kaliumtheme.com/elementor/furniture/product-category/dining/dining-chairs/"></a>
-                                                    </div>
-                                                </li>
-                                                <li class="product-category product last">
-                                                    <div
-                                                        class="category-box category-box--type-3 category-box--title-overlay category-box--title-top">
-                                                        <span class="image-placeholder" style="--k-ratio:0.750751"><span
-                                                                class="loader"><span
-                                                                    class="loader-el semi-circle-spin"><span></span></span></span><img
-                                                                loading="lazy" decoding="async" width="500" height="666"
-                                                                src="https://sites.kaliumtheme.com/elementor/furniture/wp-content/uploads/2025/05/upholstered-storage-bed-4-500x666.jpg"
-                                                                class="attachment-500x666 size-500x666" alt="" /></span>
-                                                        <div class="category-box__title link-plain">
-                                                            <h2>
-                                                                <a aria-label="Visit product category Beds"
-                                                                    href="https://sites.kaliumtheme.com/elementor/furniture/product-category/sleep/beds/">Beds</a>
-                                                            </h2>
-                                                        </div>
-
-                                                        <a aria-label="Visit product category Beds"
-                                                            href="https://sites.kaliumtheme.com/elementor/furniture/product-category/sleep/beds/"></a>
-                                                    </div>
-                                                </li>
                                             </ul>
                                         </div>
                                     </div>
+                                    <script>
+                                    (function(){
+                                      let API_BASE_URL;
+                                      if (window.location.port === "5500" || window.location.port === "5501") {
+                                        API_BASE_URL = `https://furniture-backend-1-nvv3.onrender.com/api`;
+                                      } else if (window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1") {
+                                        API_BASE_URL = `http://localhost:5000/api`;
+                                      } else {
+                                        API_BASE_URL = `https://furniture-backend-1-nvv3.onrender.com/api`;
+                                      }
+                                      
+                                      console.log('[Shop Categories] API_BASE_URL:', API_BASE_URL);
+                                      
+                                      function createCategoryElement(cat, i, total){
+                                        const li = document.createElement('li');
+                                        li.className = 'product-category product' + (i===0 ? ' first' : '') + (i===total-1 ? ' last' : '');
+                                        
+                                        const div = document.createElement('div');
+                                        div.className = 'category-box category-box--type-3 category-box--title-overlay category-box--title-top';
+                                        
+                                        const span = document.createElement('span');
+                                        span.className = 'image-placeholder';
+                                        span.style.cssText = '--k-ratio:0.750751';
+                                        
+                                        const loader = document.createElement('span');
+                                        loader.className = 'loader';
+                                        loader.innerHTML = '<span class="loader-el semi-circle-spin"><span></span></span>';
+                                        span.appendChild(loader);
+                                        
+                                        const img = document.createElement('img');
+                                        img.decoding = 'async';
+                                        img.width = 500;
+                                        img.height = 666;
+                                        img.className = 'attachment-500x666 size-500x666';
+                                        img.alt = cat.name || '';
+                                        img.src = (cat.images && cat.images[0] && (cat.images[0].thumb || cat.images[0].src)) || 'data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22500%22 height=%22666%22%3E%3Crect fill=%22%23ccc%22 width=%22500%22 height=%22666%22/%3E%3C/svg%3E';
+                                        span.appendChild(img);
+                                        
+                                        const titleDiv = document.createElement('div');
+                                        titleDiv.className = 'category-box__title link-plain';
+                                        
+                                        const h2 = document.createElement('h2');
+                                        const a = document.createElement('a');
+                                        a.setAttribute('aria-label', 'Visit product category ' + cat.name);
+                                        a.href = '/index_decor/category/' + (cat.slug || encodeURIComponent(cat.name));
+                                        a.textContent = cat.name;
+                                        h2.appendChild(a);
+                                        titleDiv.appendChild(h2);
+                                        
+                                        const linkOverlay = document.createElement('a');
+                                        linkOverlay.setAttribute('aria-label', 'Visit product category ' + cat.name);
+                                        linkOverlay.href = '/index_decor/category/' + (cat.slug || encodeURIComponent(cat.name));
+                                        
+                                        div.appendChild(span);
+                                        div.appendChild(titleDiv);
+                                        div.appendChild(linkOverlay);
+                                        
+                                        li.appendChild(div);
+                                        return li;
+                                      }
+                                      
+                                      function renderCategories(categories, source = 'unknown'){
+                                        const list = document.getElementById('shop-category-list');
+                                        if(!list) {
+                                          console.error('[Shop Categories] #shop-category-list element not found');
+                                          return;
+                                        }
+                                        
+                                        list.innerHTML = '';
+                                        const limit = Math.min(categories.length, 6);
+                                        
+                                        console.log(`[Shop Categories] Rendering ${limit} categories (${source})`);
+                                        
+                                        for(let i = 0; i < limit; i++){
+                                          list.appendChild(createCategoryElement(categories[i], i, limit));
+                                        }
+                                      }
+                                      
+                                      async function loadCategories(){
+                                        try {
+                                          const url = `${API_BASE_URL}/categories?isActive=true`;
+                                          console.log('[Shop Categories] Fetching from:', url);
+                                          
+                                          const response = await fetch(url, {
+                                            method: 'GET',
+                                            headers: {
+                                              'Content-Type': 'application/json',
+                                              'Accept': 'application/json'
+                                            }
+                                          });
+                                          
+                                          if (!response.ok) {
+                                            throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+                                          }
+                                          
+                                          const result = await response.json();
+                                          console.log('[Shop Categories] API Response:', result);
+                                          
+                                          let categories = [];
+                                          if (result.success && result.data) {
+                                            categories = Array.isArray(result.data) ? result.data : [result.data];
+                                          } else if (Array.isArray(result)) {
+                                            categories = result;
+                                          }
+                                          
+                                          if (categories.length > 0) {
+                                            console.log(`[Shop Categories] ✓ Loaded ${categories.length} categories from API`);
+                                            renderCategories(categories, 'API');
+                                          } else {
+                                            console.warn('[Shop Categories] API returned empty, using fallback');
+                                            renderCategories(fallbackCategories, 'fallback');
+                                          }
+                                        } catch (error) {
+                                          console.error('[Shop Categories] ✗ API fetch failed:', error.message);
+                                          console.warn('[Shop Categories] Using fallback categories');
+                                          renderCategories(fallbackCategories, 'fallback');
+                                        }
+                                      }
+                                      if(document.readyState === 'loading'){
+                                        document.addEventListener('DOMContentLoaded', loadCategories);
+                                      } else {
+                                        loadCategories();
+                                      }
+                                    })();
+                                    </script>
                                 </div>
                             </div>
                             <div class="elementor-element elementor-element-2ae8e4f e-grid e-con-full e-con e-child"

@@ -28,6 +28,198 @@
 	}
 </style>
 
+<style>
+	.specifications-section {
+		padding: 2rem 0;
+		border-top: 1px solid #e0e0e0;
+		border-bottom: 1px solid #e0e0e0;
+	}
+
+	.specs-container {
+		max-width: 1200px;
+		margin: 0 auto;
+		padding: 0 20px;
+	}
+
+	.specs-title {
+		font-size: 26px;
+		font-weight: 600;
+		margin: 0 0 1.5rem 0;
+		color: #1a1a1a;
+		font-family: "Fraunces", serif;
+	}
+
+	.specs-items {
+		display: grid;
+		gap: 0.75rem;
+	}
+
+	.specs-item {
+		display: grid;
+		grid-template-columns: 180px 1fr;
+		gap: 2rem;
+		padding: 0.875rem 0;
+		border-bottom: 2px solid #f0f0f0;
+		align-items: start;
+		transition: border-color 0.3s ease;
+		position: relative;
+	}
+
+	.specs-item::after {
+		content: '';
+		position: absolute;
+		bottom: -2px;
+		left: 0;
+		width: 100%;
+		height: 2px;
+		background: #ff9800;
+		transform: scaleX(0);
+		transform-origin: left;
+		transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+	}
+
+	.specs-item:hover::after {
+		transform: scaleX(1);
+	}
+
+	.specs-item:last-child {
+		border-bottom: none;
+	}
+
+	.specs-item-label {
+		font-weight: 600;
+		color: #1a1a1a;
+		font-size: 14px;
+		text-transform: capitalize;
+		letter-spacing: 0.3px;
+	}
+
+	.specs-item-value {
+		color: #555;
+		line-height: 1.5;
+		flex: 1;
+		font-size: 14px;
+	}
+
+	.specs-placeholder {
+		text-align: center;
+		padding: 1.5rem;
+		color: #999;
+		font-style: italic;
+		font-size: 14px;
+	}
+	.faq-section {
+		padding: 2rem 0;
+		border-bottom: 1px solid #e0e0e0;
+	}
+
+	.faq-container {
+		max-width: 1200px;
+		margin: 0 auto;
+		padding: 0 20px;
+	}
+
+	.faq-title {
+		font-size: 26px;
+		font-weight: 600;
+		margin: 0 0 1.5rem 0;
+		color: #1a1a1a;
+		font-family: "Fraunces", serif;
+	}
+
+	.faq-items {
+		display: grid;
+		gap: 1rem;
+	}
+
+	.faq-item {
+		padding: 1rem;
+		border-radius: 3px;
+		border: 1px solid #e8e8e8;
+		border-bottom: 2px solid #e8e8e8;
+		transition: all 0.2s ease;
+		position: relative;
+	}
+
+	.faq-item::after {
+		content: '';
+		position: absolute;
+		bottom: -2px;
+		left: 0;
+		width: 100%;
+		height: 2px;
+		background: #ff9800;
+		transform: scaleX(0);
+		transform-origin: left;
+		transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+	}
+
+
+
+	.faq-item:hover::after {
+		transform: scaleX(1);
+	}
+
+	.faq-item-question {
+		font-weight: 600;
+		color: #1a1a1a;
+		margin: 0 0 0.5rem 0;
+		font-size: 15px;
+		letter-spacing: 0.2px;
+	}
+
+	.faq-item-answer {
+		color: #555;
+		line-height: 1.5;
+		font-size: 14px;
+		margin: 0;
+	}
+
+	.faq-placeholder {
+		text-align: center;
+		padding: 1.5rem;
+		color: #999;
+		font-style: italic;
+		font-size: 14px;
+	}
+
+	@media (max-width: 768px) {
+		.specifications-section,
+		.faq-section {
+			padding: 1.5rem 0;
+		}
+
+		.specs-title,
+		.faq-title {
+			font-size: 22px;
+			margin: 0 0 1rem 0;
+		}
+
+		.specs-item {
+			grid-template-columns: 1fr;
+			gap: 0.5rem;
+			padding: 0.75rem 0;
+		}
+
+		.specs-item-label {
+			font-size: 13px;
+			font-weight: 700;
+		}
+
+		.specs-item-value,
+		.faq-item-answer {
+			font-size: 13px;
+		}
+
+		.faq-item-question {
+			font-size: 14px;
+		}
+
+		.faq-item {
+			padding: 0.875rem;
+		}
+	}
+</style>
 
 
 <head>
@@ -1957,38 +2149,44 @@
 	</script>
 <!-- Production-Ready Dynamic Category Page Schema -->
 <script>
-(async function generateCategorySchemas() {
+(function generateCategorySchemas() {
   try {
     const ORIGIN = window.location.origin;
     const URL = window.location.href;
-    const API_BASE = ORIGIN + "/api";
 
-    /* ================= CATEGORY SLUG ================= */
-    const CATEGORY_SLUG = window.location.pathname.split("/").pop();
+    // Hardcoded Decor category with actual subcategories and items from your structure
+    const category = {
+      name: "Decor",
+      slug: "decor",
+      description: "Browse our collection of decorative furniture and home decor items"
+    };
 
-    /* ================= FETCH CATEGORY ================= */
-    const categoryRes = await fetch(`${API_BASE}/categories/slug/${CATEGORY_SLUG}`);
-    if (!categoryRes.ok) return;
-    const category = await categoryRes.json();
+    // Subcategories with their items based on your navigation
+    const subcategories = [
+      { name: "Wallpaper", slug: "wallpaper", items: ["Abstract", "Floral", "Geometric", "Tropical"] },
+      { name: "Blinds", slug: "blinds", items: ["Roller Blinds", "Roman Blinds", "Wooden Blinds"] },
+      { name: "Rugs", slug: "rugs", items: ["Abstract", "Floral", "Geometric", "Tropical"] },
+      { name: "Flooring", slug: "flooring", items: ["Vinyl Flooring", "Laminate Flooring"] },
+      { name: "Curtains", slug: "curtains", items: ["Animals", "Floral"] }
+    ];
 
-    if (!category || !category.name) return;
-
-    /* ================= FETCH SUBCATEGORIES ================= */
-    let subcategories = [];
-    try {
-      const subRes = await fetch(`${API_BASE}/subcategories?category=${category._id}`);
-      if (subRes.ok) subcategories = await subRes.json();
-    } catch {}
-
-    /* ================= SCHEMA GRAPH ================= */
+    console.log("📍 Category:", category.name);
+    console.log("📚 Subcategories:", subcategories.length);
+    
     const graph = [];
 
     /* ---------- WebSite ---------- */
     graph.push({
+      "@context": "https://schema.org",
       "@type": "WebSite",
       "@id": `${ORIGIN}/#website`,
       "name": "Furnistør",
-      "url": ORIGIN
+      "url": ORIGIN,
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": `${ORIGIN}/search?q={search_term_string}`,
+        "query-input": "required name=search_term_string"
+      }
     });
 
     /* ---------- WebPage ---------- */
@@ -1997,8 +2195,9 @@
       "@id": `${URL}#webpage`,
       "url": URL,
       "name": category.name,
-      "description": category.description || `Browse ${category.name} products`,
-      "isPartOf": { "@id": `${ORIGIN}/#website` }
+      "description": category.description,
+      "isPartOf": { "@id": `${ORIGIN}/#website` },
+      "datePublished": new Date().toISOString().split('T')[0]
     });
 
     /* ---------- CollectionPage ---------- */
@@ -2006,17 +2205,18 @@
       "@type": "CollectionPage",
       "@id": `${URL}#collection`,
       "name": category.name,
-      "description": category.description || `Explore ${category.name} collection`,
+      "description": category.description,
       "url": URL,
-      "mainEntityOfPage": { "@id": `${URL}#webpage` }
+      "mainEntityOfPage": { "@id": `${URL}#webpage` },
+      "numberOfItems": subcategories.reduce((sum, s) => sum + s.items.length, 0)
     });
 
-    /* ---------- ItemList (Subcategories or Products) ---------- */
+    /* ---------- ItemList (Subcategories) ---------- */
     if (Array.isArray(subcategories) && subcategories.length > 0) {
       graph.push({
         "@type": "ItemList",
-        "@id": `${URL}#itemlist`,
-        "name": `${category.name} Categories`,
+        "@id": `${URL}#subcategorylist`,
+        "name": `${category.name} Subcategories`,
         "itemListOrder": "https://schema.org/ItemListOrderAscending",
         "numberOfItems": subcategories.length,
         "itemListElement": subcategories.map((sub, index) => ({
@@ -2024,7 +2224,7 @@
           "position": index + 1,
           "name": sub.name,
           "url": `${ORIGIN}/subcategory/${sub.slug}`,
-          ...(sub.image && { "image": sub.image })
+          "description": `Shop ${sub.name} in ${category.name}`
         }))
       });
     }
@@ -2043,8 +2243,8 @@
         {
           "@type": "ListItem",
           "position": 2,
-          "name": "Shop",
-          "item": `${ORIGIN}/shop`
+          "name": "Products",
+          "item": `${ORIGIN}/products`
         },
         {
           "@type": "ListItem",
@@ -2055,7 +2255,7 @@
       ]
     });
 
-    /* ================= INJECT ================= */
+    /* ================= INJECT SCHEMA ================= */
     const SCRIPT_ID = "category-schema-graph";
     const oldScript = document.getElementById(SCRIPT_ID);
     if (oldScript) oldScript.remove();
@@ -2063,16 +2263,16 @@
     const script = document.createElement("script");
     script.type = "application/ld+json";
     script.id = SCRIPT_ID;
-    script.textContent = JSON.stringify({
-      "@context": "https://schema.org",
-      "@graph": graph
-    });
+    script.textContent = JSON.stringify(graph);
 
     document.head.appendChild(script);
 
-    console.log("✅ Production Category Page Schema Injected");
+    console.log("✅ Schema Injected Successfully - " + graph.length + " elements");
+    console.log("📊 BreadcrumbList: Home > Products > " + category.name);
+    console.log("📊 ItemList: " + subcategories.length + " subcategories");
+    
   } catch (err) {
-    console.error("❌ Category schema error:", err);
+    console.error("❌ Schema error:", err);
   }
 })();
 </script>
@@ -2554,49 +2754,45 @@
 																		<li class="mega-menu-item mega-menu-item-type-taxonomy mega-menu-item-object-product_cat mega-menu-item-has-children mega-menu-item-2634"
 																			id="mega-menu-item-2634"><a
 																				class="mega-menu-link"
-																				href="/index_decor/category/living">Living
-																				Room<span class="mega-indicator"
+																					href="/index_decor/category/wallpaper">Wallpaper<span class="mega-indicator"
 																					aria-hidden="true"></span></a>
 																			<ul class="mega-sub-menu">
 																				<li class="mega-menu-item mega-menu-item-type-taxonomy mega-menu-item-object-product_cat mega-menu-item-2635"
 																					id="mega-menu-item-2635"><a
 																						class="mega-menu-link"
-																						href="/index_decor/category/armchairs">Armchairs</a>
+																						href="/index_decor/category/abstract">Abstract</a>
 																				</li>
 																				<li class="mega-menu-item mega-menu-item-type-taxonomy mega-menu-item-object-product_cat mega-menu-item-2636"
 																					id="mega-menu-item-2636"><a
 																						class="mega-menu-link"
-																						href="/index_decor/category/coffee-tables">Coffee
-																						Tables</a></li>
+																						href="/index_decor/category/floral">Floral</a></li>
 																				<li class="mega-menu-item mega-menu-item-type-taxonomy mega-menu-item-object-product_cat mega-menu-item-2637"
 																					id="mega-menu-item-2637"><a
 																						class="mega-menu-link"
-																						href="/index_decor/category/sideboards">Sideboards</a>
+																						href="/index_decor/category/geometric">Geometric</a>
 																				</li>
 																				<li class="mega-menu-item mega-menu-item-type-taxonomy mega-menu-item-object-product_cat mega-menu-item-2638"
 																					id="mega-menu-item-2638"><a
 																						class="mega-menu-link"
-																						href="/index_decor/category/sofas">Sofas</a>
+																						href="/index_decor/category/tropical">Tropical</a>
 																				</li>
 																			</ul>
 																		</li>
 																		<li class="mega-menu-item mega-menu-item-type-taxonomy mega-menu-item-object-product_cat mega-menu-item-has-children mega-menu-item-2657"
 																			id="mega-menu-item-2657"><a
 																				class="mega-menu-link"
-																				href="/index_decor/category/dining">Dining
-																				Room<span class="mega-indicator"
+																				href="/index_decor/category/curtains">Curtains<span class="mega-indicator"
 																					aria-hidden="true"></span></a>
 																			<ul class="mega-sub-menu">
 																				<li class="mega-menu-item mega-menu-item-type-taxonomy mega-menu-item-object-product_cat mega-menu-item-2658"
 																					id="mega-menu-item-2658"><a
 																						class="mega-menu-link"
-																						href="/index_decor/category/benches">Benches</a>
+																						href="/index_decor/category/animals">Animals</a>
 																				</li>
 																				<li class="mega-menu-item mega-menu-item-type-taxonomy mega-menu-item-object-product_cat mega-menu-item-2659"
 																					id="mega-menu-item-2659"><a
 																						class="mega-menu-link"
-																						href="/index_decor/category/dining-chairs">Dining
-																						Chairs</a></li>
+																						href="/index_decor/category/floral">Floral</a></li>
 																			</ul>
 																		</li>
 																	</ul>
@@ -2608,48 +2804,48 @@
 																		<li class="mega-menu-item mega-menu-item-type-taxonomy mega-menu-item-object-product_cat mega-menu-item-has-children mega-menu-item-2615"
 																			id="mega-menu-item-2615"><a
 																				class="mega-menu-link"
-																				href="/index_decor/category/bedroom">Bedroom<span
+																				href="/index_decor/category/blinds">Blinds<span
 																					class="mega-indicator"
 																					aria-hidden="true"></span></a>
 																			<ul class="mega-sub-menu">
 																				<li class="mega-menu-item mega-menu-item-type-taxonomy mega-menu-item-object-product_cat mega-menu-item-2616"
 																					id="mega-menu-item-2616"><a
 																						class="mega-menu-link"
-																						href="/index_decor/category/beds">Beds</a>
+																						href="/index_decor/category/roller-blinds">Roller Blinds</a>
 																				</li>
 																				<li class="mega-menu-item mega-menu-item-type-taxonomy mega-menu-item-object-product_cat mega-menu-item-2617"
 																					id="mega-menu-item-2617"><a
 																						class="mega-menu-link"
-																						href="/index_decor/category/nightstands">Nightstands</a>
+																						href="/index_decor/category/roman-blinds">Roman Blinds</a>
 																				</li>
 																				<li class="mega-menu-item mega-menu-item-type-taxonomy mega-menu-item-object-product_cat mega-menu-item-2618"
 																					id="mega-menu-item-2618"><a
 																						class="mega-menu-link"
-																						href="/index_decor/category/wardrobes">Wardrobes</a>
+																						href="/index_decor/category/wooden-blinds">Wooden Blinds</a>
 																				</li>
 																			</ul>
 																		</li>
-																		<li class="mega-menu-item mega-menu-item-type-taxonomy mega-menu-item-object-product_cat mega-current-menu-item mega-menu-item-has-children mega-menu-item-2660"
+																		<li class="mega-menu-item mega-menu-item-type-taxonomy mega-menu-item-object-product_cat mega-menu-item-has-children mega-menu-item-2660"
 																			id="mega-menu-item-2660"><a
 																				class="mega-menu-link"
-																				href="/index_decor/category/decor"
-																				aria-current="page">Home Decor<span
+																				href="/index_decor/category/flooring"
+																				aria-current="page">Flooring<span
 																					class="mega-indicator"
 																					aria-hidden="true"></span></a>
 																			<ul class="mega-sub-menu">
 																				<li class="mega-menu-item mega-menu-item-type-taxonomy mega-menu-item-object-product_cat mega-menu-item-2661"
 																					id="mega-menu-item-2661"><a
 																						class="mega-menu-link"
-																						href="/index_decor/category/mirrors"
+																						href="/index_decor/category/vinyl-flooring"
 																						target="_self"
-																						onclick="window.location.href=this.href; return false;">Mirrors</a>
+																						onclick="window.location.href=this.href; return false;">Vinyl Flooring</a>
 																				</li>
 																				<li class="mega-menu-item mega-menu-item-type-taxonomy mega-menu-item-object-product_cat mega-menu-item-2662"
 																					id="mega-menu-item-2662"><a
 																						class="mega-menu-link"
-																						href="/index_decor/category/rugs"
+																						href="/index_decor/category/laminate-flooring"
 																						target="_self"
-																						onclick="window.location.href=this.href; return false;">Rugs</a>
+																						onclick="window.location.href=this.href; return false;">Laminate Flooring</a>
 																				</li>
 																			</ul>
 																		</li>
@@ -2662,69 +2858,27 @@
 																		<li class="mega-menu-item mega-menu-item-type-taxonomy mega-menu-item-object-product_cat mega-menu-item-has-children mega-menu-item-2629"
 																			id="mega-menu-item-2629"><a
 																				class="mega-menu-link"
-																				href="/index_decor/category/lighting">Lighting<span
+																				href="/index_decor/category/rugs">Rugs<span
 																					class="mega-indicator"
 																					aria-hidden="true"></span></a>
 																			<ul class="mega-sub-menu">
 																				<li class="mega-menu-item mega-menu-item-type-taxonomy mega-menu-item-object-product_cat mega-menu-item-2630"
 																					id="mega-menu-item-2630"><a
 																						class="mega-menu-link"
-																						href="/index_decor/category/ceiling">Ceiling</a>
+																						href="/index_decor/category/abstract">Abstract</a>
 																				</li>
 																				<li class="mega-menu-item mega-menu-item-type-taxonomy mega-menu-item-object-product_cat mega-menu-item-2631"
 																					id="mega-menu-item-2631"><a
 																						class="mega-menu-link"
-																						href="/index_decor/category/floor-lamps">Floor
-																						Lamps</a></li>
+																						href="/index_decor/category/floral">Floral</a></li>
 																				<li class="mega-menu-item mega-menu-item-type-taxonomy mega-menu-item-object-product_cat mega-menu-item-2632"
 																					id="mega-menu-item-2632"><a
 																						class="mega-menu-link"
-																						href="/index_decor/category/table-lamps">Table
-																						Lamps</a></li>
+																						href="/index_decor/category/geometric">Geometric</a></li>
 																				<li class="mega-menu-item mega-menu-item-type-taxonomy mega-menu-item-object-product_cat mega-menu-item-2633"
 																					id="mega-menu-item-2633"><a
 																						class="mega-menu-link"
-																						href="/index_decor/category/wall-lamps">Wall
-																						Lamps</a></li>
-																			</ul>
-																		</li>
-																	</ul>
-																</li>
-																<li class="mega-menu-column mega-menu-columns-2-of-12"
-																	style="--columns:12; --span:2"
-																	id="mega-menu-2614-0-3">
-																	<ul class="mega-sub-menu">
-																		<li class="mega-menu-item mega-menu-item-type-taxonomy mega-menu-item-object-product_cat mega-menu-item-has-children mega-menu-item-2663"
-																			id="mega-menu-item-2663"><a
-																				class="mega-menu-link"
-																				href="/index_decor/category/outdoor">Outdoor<span
-																					class="mega-indicator"
-																					aria-hidden="true"></span></a>
-																			<ul class="mega-sub-menu">
-																				<li class="mega-menu-item mega-menu-item-type-taxonomy mega-menu-item-object-product_cat mega-menu-item-2664"
-																					id="mega-menu-item-2664"><a
-																						class="mega-menu-link"
-																						href="/index_decor/category/accessories">Accessories</a>
-																				</li>
-																				<li class="mega-menu-item mega-menu-item-type-taxonomy mega-menu-item-object-product_cat mega-menu-item-2665"
-																					id="mega-menu-item-2665"><a
-																						class="mega-menu-link"
-																						href="/index_decor/category/chairs">Chairs</a>
-																				</li>
-																				<li class="mega-menu-item mega-menu-item-type-taxonomy mega-menu-item-object-product_cat mega-menu-item-2666"
-																					id="mega-menu-item-2666"><a
-																						class="mega-menu-link"
-																						href="/index_decor/category/benches-outdoor">Benches</a>
-																				</li>
-																				<li class="mega-menu-item mega-menu-item-type-taxonomy mega-menu-item-object-product_cat mega-menu-item-2667"
-																					id="mega-menu-item-2667"><a
-																						class="mega-menu-link"
-																						href="/index_decor/category/lounge">Lounge</a>
-																				</li>
-																				<li class="mega-menu-item mega-menu-item-type-taxonomy mega-menu-item-object-product_cat mega-menu-item-2668"
-																					id="mega-menu-item-2668"><a
-																						class="mega-menu-link"
-																						href="/index_decor/category/tables">Tables</a>
+																						href="/index_decor/category/tropical">Tropical</a>
 																				</li>
 																			</ul>
 																		</li>
@@ -2867,16 +3021,84 @@
 		</header>
 		<div class="shop-heading">
 			<div class="container">
-				<h1 class="woocommerce-products-header__title page-title" id="dynamic-category-title"
-					style="text-align: left; --k-font-size: 4.0em;"></h1>
-				<div class="category-image" style="margin-bottom: 2em; text-align: left;">
-					<img src="https://images.unsplash.com/photo-1631679706909-1844bbd07221?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8bGl2aW5nJTIwcm9vbXxlbnwwfHwwfHx8MA%3D%3D"
-						alt="Products" style="max-width: 50%; max-height: 250px; height: auto; border-radius: 8px;" />
-
+				<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 3em; align-items: flex-start; margin-bottom: 2em;">
+					<div class="category-image" style="text-align: left;">
+						<img src="./images/images.png"
+							alt="Products" style="width: 100%; height: auto; max-height: 300px; border-radius: 8px;" />
+					</div>
+					
+					<div style="text-align: left;">
+						<h1 class="woocommerce-products-header__title page-title" id="dynamic-category-title"
+							style="text-align: left; --k-font-size: 3.0em; margin-bottom: 0.5em;"></h1>
+						<div class="category-description">
+							<p id="dynamic-category-description" style="font-size: 1.0em; line-height: 1.5; color: #646360; margin: 0;">
+							</p>
+						</div>
+					</div>
 				</div>
-				<div class="category-description" style="margin-bottom: 2em; max-width: 800px; text-align: left;">
-					<p id="dynamic-category-description" style="font-size: 1.1em; line-height: 1.6; color: #646360;">
-					</p>
+				<style>
+					.subcategories-horizontal-slider {
+						display: flex;
+						gap: 15px;
+						overflow-x: auto;
+						padding: 15px 0;
+						margin-bottom: 2em;
+						scroll-behavior: smooth;
+					}
+					.subcategories-horizontal-slider::-webkit-scrollbar {
+						height: 6px;
+					}
+					.subcategories-horizontal-slider::-webkit-scrollbar-track {
+						background: #f1f1f1;
+						border-radius: 10px;
+					}
+					.subcategories-horizontal-slider::-webkit-scrollbar-thumb {
+						background: #888;
+						border-radius: 10px;
+					}
+					.subcategories-horizontal-slider::-webkit-scrollbar-thumb:hover {
+						background: #555;
+					}
+					.subcategory-card {
+						flex: 0 0 auto;
+						width: 160px;
+						text-align: center;
+						cursor: pointer;
+						transition: transform 0.3s ease, box-shadow 0.3s ease;
+						padding: 10px;
+						border-radius: 8px;
+					}
+					.subcategory-card:hover {
+						box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+					}
+					.subcategory-card-image {
+						width: 140px;
+						height: 140px;
+						object-fit: cover;
+						border-radius: 0;
+						margin-bottom: 8px;
+					}
+					.subcategory-card-title {
+						font-size: 0.9em;
+						font-weight: 600;
+						color: #333;
+						white-space: nowrap;
+						overflow: hidden;
+						text-overflow: ellipsis;
+					}
+					@media (max-width: 768px) {
+						.subcategory-card {
+							width: 130px;
+						}
+						.subcategory-card-image {
+							width: 110px;
+							height: 110px;
+						}
+					}
+				</style>
+				<div id="subcategories-horizontal-section" style="display: none;">
+					<h3 style="font-size: 1.1em; font-weight: 600; margin-bottom: 1em; color: #333;">Browse by Subcategory</h3>
+					<div id="subcategories-horizontal-slider" class="subcategories-horizontal-slider"></div>
 				</div>
 
 				<div class="shop-toolbar row align-items-center">
@@ -2994,1394 +3216,7 @@
 									color: var(--k-color-4);
 								}
 							</style>
-							<div
-								class="lb-element lb-element-woocommerce-product-row lb-element-woocommerce-product-row-53a2a62b8b visible-always visible-md-always visible-xl-always row">
-								<div
-									class="lb-element lb-element-woocommerce-product-column lb-element-woocommerce-product-column-fb57d1a6ea visible-always visible-md-always visible-xl-always col col-auto-grow col-md-auto-grow col-xl-auto-grow">
-									<div
-										class="lb-element lb-element-woocommerce-product-images lb-element-woocommerce-product-images-496bcb030c visible-always visible-md-always visible-xl-always">
-										<div class="image-set image-set--hover-transition-fade">
-											<div class="image-set__entry image-set__entry--hover-invisible">
-												<a href="/index_tact-mirror.html?slug=tact-mirror"
-													aria-label="Tact Mirror"><span
-														class="image-placeholder loop-product-image"
-														style="--k-ratio:0.715137"><span class="loader"><span
-																class="loader-el semi-circle-spin"><span></span></span></span><img
-															loading="lazy" width="600" height="839"
-															src="https://sites.kaliumtheme.com/elementor/furniture/wp-content/uploads/2025/05/tact-mirror-5-600x839.jpeg"
-															class="attachment-woocommerce_thumbnail size-woocommerce_thumbnail"
-															alt="" decoding="async"
-															srcset="https://sites.kaliumtheme.com/elementor/furniture/wp-content/uploads/2025/05/tact-mirror-5-600x839.jpeg 600w, /wp-content/uploads/2025/05/tact-mirror-5-215x300.jpeg 215w, /wp-content/uploads/2025/05/tact-mirror-5-732x1024.jpeg 732w, /wp-content/uploads/2025/05/tact-mirror-5-768x1074.jpeg 768w, /wp-content/uploads/2025/05/tact-mirror-5.jpeg 858w"
-															sizes="(max-width: 600px) 100vw, 600px" /></span></a>
-											</div>
-											<div
-												class="image-set__entry image-set__entry--overlay image-set__entry--hover-visible">
-												<a href="/index_tact-mirror.html?slug=tact-mirror"
-													aria-label="Tact Mirror"><span
-														class="image-placeholder loop-product-image"
-														style="--k-ratio:0.714286"><span class="loader"><span
-																class="loader-el semi-circle-spin"><span></span></span></span><img
-															loading="lazy" width="600" height="840"
-															src="https://sites.kaliumtheme.com/elementor/furniture/wp-content/uploads/2025/05/tact-mirror-2-600x840.jpeg"
-															class="attachment-woocommerce_thumbnail size-woocommerce_thumbnail"
-															alt="" decoding="async"
-															srcset="https://sites.kaliumtheme.com/elementor/furniture/wp-content/uploads/2025/05/tact-mirror-2-600x840.jpeg 600w, /wp-content/uploads/2025/05/tact-mirror-2-214x300.jpeg 214w, /wp-content/uploads/2025/05/tact-mirror-2-731x1024.jpeg 731w, /wp-content/uploads/2025/05/tact-mirror-2-768x1075.jpeg 768w, /wp-content/uploads/2025/05/tact-mirror-2.jpeg 857w"
-															sizes="(max-width: 600px) 100vw, 600px" /></span></a>
-											</div>
-										</div>
-										<div
-											class="lb-element lb-element-woocommerce-product-sale-badge lb-element-woocommerce-product-sale-badge-3c3275c3b0 visible-always visible-md-always visible-xl-always placement-inside placement-inside--top-left">
-											<div
-												class="product-badge product-badge--style-badge badge badge-outline product-badge--type-sale badge-primary text-uppercase">
-												<div class="product-badge__text">-19%</div>
-											</div>
-										</div>
-									</div>
-									<div
-										class="lb-element lb-element-woocommerce-product-row lb-element-woocommerce-product-row-3068b4958c visible-always visible-md-always visible-xl-always row">
-										<div
-											class="lb-element lb-element-woocommerce-product-column lb-element-woocommerce-product-column-a715305e66 visible-always visible-md-always visible-xl-always col col-10 col-md-10 col-xl-10">
-											<h3
-												class="lb-element lb-element-woocommerce-product-title lb-element-woocommerce-product-title-6e814bb413 visible-always visible-md-always visible-xl-always link-plain">
-												<a href="/index_tact-mirror.html?slug=tact-mirror"
-													class="woocommerce-LoopProduct-link woocommerce-loop-product__link">Tact
-													Mirror</a>
-											</h3>
-											<div class="lb-element lb-element-woocommerce-product-swap-on-hover lb-element-woocommerce-product-swap-on-hover-9084dc5655 visible-always visible-md-always visible-xl-always swap-on-hover"
-												data-hover-attach="product-hover">
-												<div
-													class="lb-element lb-element-woocommerce-product-price lb-element-woocommerce-product-price-485f9e8dfb visible-always visible-md-always visible-xl-always">
-													<span class="price"><del aria-hidden="true"><span
-																class="woocommerce-Price-amount amount"><bdi><span
-																		class="woocommerce-Price-currencySymbol">&#36;</span>245.00</bdi></span></del>
-														<span class="screen-reader-text">Original price was:
-															&#036;245.00.</span><ins aria-hidden="true"><span
-																class="woocommerce-Price-amount amount"><bdi><span
-																		class="woocommerce-Price-currencySymbol">&#36;</span>199.00</bdi></span></ins><span
-															class="screen-reader-text">Current price is:
-															&#036;199.00.</span></span>
-												</div>
-												<div
-													class="lb-element lb-element-woocommerce-product-add-to-cart lb-element-woocommerce-product-add-to-cart-7b2c999c7c visible-always visible-md-hover visible-xl-hover visible-hover--animate visible-hover--animate-fast visible-hover--fade">
-													<a href="/index_decor.html?category=?add-to-cart=675"
-														data-quantity="1"
-														class="add-to-cart link-button product_type_simple add_to_cart_button ajax_add_to_cart"
-														data-product_id="675" data-product_sku="TAC-MIR-001"
-														aria-label="Add to cart: &ldquo;Tact Mirror&rdquo;"
-														rel="nofollow"><span
-															class="link-button__content link-button__content--icon"><span
-																class="button-icon"><i
-																	class="kalium-icon-plus"></i></span><span
-																class="link-button__loading"></span></span><span
-															class="link-button__content link-button__content--text">Add
-															to cart</span></a>
-												</div>
-											</div>
-										</div>
-										<div
-											class="lb-element lb-element-woocommerce-product-column lb-element-woocommerce-product-column-71d730a90d d-flex justify-content-end justify-content-md-end justify-content-xl-end visible-always visible-md-always visible-xl-always col col-auto-grow col-md-auto-grow col-xl-auto-grow">
-											<div
-												class="lb-element lb-element-woocommerce-product-wishlist lb-element-woocommerce-product-wishlist-ad1269863e visible-hover visible-md-hover visible-xl-hover visible-hover--animate visible-hover--animate-fast visible-hover--fade">
-												<a href="/index_decor.html?category=?add_to_wishlist=675&amp;_wpnonce=eafaab3ca0"
-													class="add-to-wishlist link-button" data-product-id="675"
-													data-product-type="simple" data-original-product-id="675"
-													rel="nofollow" data-tooltip="Add to wishlist"
-													data-tooltip-placement="top"><span
-														class="link-button__content link-button__content--icon"><span
-															class="button-icon"><i
-																class="kalium-icon-add-to-wishlist"></i><i
-																class="kalium-icon-added-to-wishlist"></i></span><span
-															class="link-button__loading"></span></span></a>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-						</li>
-						<li
-							class="product type-product post-601 status-publish instock product_cat-vases product_tag-handmade product_tag-minimalist product_tag-terracotta has-post-thumbnail shipping-taxable purchasable product-type-simple">
 
-							<div
-								class="lb-element lb-element-woocommerce-product-row lb-element-woocommerce-product-row-53a2a62b8b visible-always visible-md-always visible-xl-always row">
-								<div
-									class="lb-element lb-element-woocommerce-product-column lb-element-woocommerce-product-column-fb57d1a6ea visible-always visible-md-always visible-xl-always col col-auto-grow col-md-auto-grow col-xl-auto-grow">
-									<div
-										class="lb-element lb-element-woocommerce-product-images lb-element-woocommerce-product-images-496bcb030c visible-always visible-md-always visible-xl-always">
-										<div class="image-set image-set--hover-transition-fade">
-											<div class="image-set__entry image-set__entry--hover-invisible">
-												<a href="/index_tact-mirror.html?slug=handmade-terracotta-vase"
-													aria-label="Handmade Terracotta Vase"><span
-														class="image-placeholder loop-product-image"
-														style="--k-ratio:0.811667"><span class="loader"><span
-																class="loader-el semi-circle-spin"><span></span></span></span><img
-															loading="lazy" width="974" height="1200"
-															src="https://sites.kaliumtheme.com/elementor/furniture/wp-content/uploads/2025/05/terracotta-vase-2.jpg"
-															class="attachment-woocommerce_thumbnail size-woocommerce_thumbnail"
-															alt="" decoding="async" /></span></a>
-											</div>
-											<div
-												class="image-set__entry image-set__entry--overlay image-set__entry--hover-visible">
-												<a href="/index_tact-mirror.html?slug=handmade-terracotta-vase"
-													aria-label="Handmade Terracotta Vase"><span
-														class="image-placeholder loop-product-image"
-														style="--k-ratio:0.933333"><span class="loader"><span
-																class="loader-el semi-circle-spin"><span></span></span></span><img
-															loading="lazy" width="1120" height="1200"
-															src="https://sites.kaliumtheme.com/elementor/furniture/wp-content/uploads/2025/05/terracotta-vase-8.jpg"
-															class="attachment-woocommerce_thumbnail size-woocommerce_thumbnail"
-															alt="" decoding="async" /></span></a>
-											</div>
-										</div>
-									</div>
-									<div
-										class="lb-element lb-element-woocommerce-product-row lb-element-woocommerce-product-row-3068b4958c visible-always visible-md-always visible-xl-always row">
-										<div
-											class="lb-element lb-element-woocommerce-product-column lb-element-woocommerce-product-column-a715305e66 visible-always visible-md-always visible-xl-always col col-10 col-md-10 col-xl-10">
-											<h3
-												class="lb-element lb-element-woocommerce-product-title lb-element-woocommerce-product-title-6e814bb413 visible-always visible-md-always visible-xl-always link-plain">
-												<a href="/index_tact-mirror.html?slug=handmade-terracotta-vase"
-													class="woocommerce-LoopProduct-link woocommerce-loop-product__link">Handmade
-													Terracotta Vase</a>
-											</h3>
-											<div class="lb-element lb-element-woocommerce-product-swap-on-hover lb-element-woocommerce-product-swap-on-hover-9084dc5655 visible-always visible-md-always visible-xl-always swap-on-hover"
-												data-hover-attach="product-hover">
-												<div
-													class="lb-element lb-element-woocommerce-product-price lb-element-woocommerce-product-price-485f9e8dfb visible-always visible-md-always visible-xl-always">
-													<span class="price"><span
-															class="woocommerce-Price-amount amount"><bdi><span
-																	class="woocommerce-Price-currencySymbol">&#36;</span>129.00</bdi></span></span>
-												</div>
-												<div
-													class="lb-element lb-element-woocommerce-product-add-to-cart lb-element-woocommerce-product-add-to-cart-7b2c999c7c visible-always visible-md-hover visible-xl-hover visible-hover--animate visible-hover--animate-fast visible-hover--fade">
-													<a href="/index_decor.html?category=?add-to-cart=601"
-														data-quantity="1"
-														class="add-to-cart link-button product_type_simple add_to_cart_button ajax_add_to_cart"
-														data-product_id="601" data-product_sku="ALK-VAS-001"
-														aria-label="Add to cart: &ldquo;Handmade Terracotta Vase&rdquo;"
-														rel="nofollow"><span
-															class="link-button__content link-button__content--icon"><span
-																class="button-icon"><i
-																	class="kalium-icon-plus"></i></span><span
-																class="link-button__loading"></span></span><span
-															class="link-button__content link-button__content--text">Add
-															to cart</span></a>
-												</div>
-											</div>
-										</div>
-										<div
-											class="lb-element lb-element-woocommerce-product-column lb-element-woocommerce-product-column-71d730a90d d-flex justify-content-end justify-content-md-end justify-content-xl-end visible-always visible-md-always visible-xl-always col col-auto-grow col-md-auto-grow col-xl-auto-grow">
-											<div
-												class="lb-element lb-element-woocommerce-product-wishlist lb-element-woocommerce-product-wishlist-ad1269863e visible-hover visible-md-hover visible-xl-hover visible-hover--animate visible-hover--animate-fast visible-hover--fade">
-												<a href="/index_decor.html?category=?add_to_wishlist=601&amp;_wpnonce=eafaab3ca0"
-													class="add-to-wishlist link-button" data-product-id="601"
-													data-product-type="simple" data-original-product-id="601"
-													rel="nofollow" data-tooltip="Add to wishlist"
-													data-tooltip-placement="top"><span
-														class="link-button__content link-button__content--icon"><span
-															class="button-icon"><i
-																class="kalium-icon-add-to-wishlist"></i><i
-																class="kalium-icon-added-to-wishlist"></i></span><span
-															class="link-button__loading"></span></span></a>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-						</li>
-						<li
-							class="product type-product post-599 status-publish instock product_cat-textiles product_tag-check-pattern product_tag-lap-robe product_tag-wool has-post-thumbnail shipping-taxable purchasable product-type-variable">
-
-							<div
-								class="lb-element lb-element-woocommerce-product-row lb-element-woocommerce-product-row-53a2a62b8b visible-always visible-md-always visible-xl-always row">
-								<div
-									class="lb-element lb-element-woocommerce-product-column lb-element-woocommerce-product-column-fb57d1a6ea visible-always visible-md-always visible-xl-always col col-auto-grow col-md-auto-grow col-xl-auto-grow">
-									<div
-										class="lb-element lb-element-woocommerce-product-images lb-element-woocommerce-product-images-496bcb030c visible-always visible-md-always visible-xl-always">
-										<div class="image-set image-set--hover-transition-fade">
-											<div class="image-set__entry image-set__entry--hover-invisible">
-												<a href="/index_tact-mirror.html?slug=check-wool-lap-robe"
-													aria-label="Check Wool Lap Robe"><span
-														class="image-placeholder loop-product-image"
-														style="--k-ratio:1.333333"><span class="loader"><span
-																class="loader-el semi-circle-spin"><span></span></span></span><img
-															loading="lazy" width="1200" height="900"
-															src="https://sites.kaliumtheme.com/elementor/furniture/wp-content/uploads/2025/05/check-wool-4.jpeg"
-															class="attachment-woocommerce_thumbnail size-woocommerce_thumbnail"
-															alt="" decoding="async" /></span></a>
-											</div>
-											<div
-												class="image-set__entry image-set__entry--overlay image-set__entry--hover-visible">
-												<a href="/index_tact-mirror.html?slug=check-wool-lap-robe"
-													aria-label="Check Wool Lap Robe"><span
-														class="image-placeholder loop-product-image"
-														style="--k-ratio:1.333333"><span class="loader"><span
-																class="loader-el semi-circle-spin"><span></span></span></span><img
-															loading="lazy" width="1200" height="900"
-															src="https://sites.kaliumtheme.com/elementor/furniture/wp-content/uploads/2025/05/check-wool-2.jpeg"
-															class="attachment-woocommerce_thumbnail size-woocommerce_thumbnail"
-															alt="" decoding="async" /></span></a>
-											</div>
-										</div>
-									</div>
-									<div
-										class="lb-element lb-element-woocommerce-product-row lb-element-woocommerce-product-row-3068b4958c visible-always visible-md-always visible-xl-always row">
-										<div
-											class="lb-element lb-element-woocommerce-product-column lb-element-woocommerce-product-column-a715305e66 visible-always visible-md-always visible-xl-always col col-10 col-md-10 col-xl-10">
-											<h3
-												class="lb-element lb-element-woocommerce-product-title lb-element-woocommerce-product-title-6e814bb413 visible-always visible-md-always visible-xl-always link-plain">
-												<a href="/index_tact-mirror.html?slug=check-wool-lap-robe"
-													class="woocommerce-LoopProduct-link woocommerce-loop-product__link">Check
-													Wool Lap Robe</a>
-											</h3>
-											<div class="lb-element lb-element-woocommerce-product-swap-on-hover lb-element-woocommerce-product-swap-on-hover-9084dc5655 visible-always visible-md-always visible-xl-always swap-on-hover"
-												data-hover-attach="product-hover">
-												<div
-													class="lb-element lb-element-woocommerce-product-price lb-element-woocommerce-product-price-485f9e8dfb visible-always visible-md-always visible-xl-always">
-													<span class="price"><span
-															class="woocommerce-Price-amount amount"><bdi><span
-																	class="woocommerce-Price-currencySymbol">&#36;</span>620.00</bdi></span></span>
-												</div>
-												<div
-													class="lb-element lb-element-woocommerce-product-add-to-cart lb-element-woocommerce-product-add-to-cart-7b2c999c7c visible-always visible-md-hover visible-xl-hover visible-hover--animate visible-hover--animate-fast visible-hover--fade">
-													<a href="/index_tact-mirror.html?slug=check-wool-lap-robe"
-														data-quantity="1"
-														class="add-to-cart link-button product_type_variable add_to_cart_button"
-														data-product_id="599" data-product_sku="ELT-TXT-002"
-														aria-label="Select options for &ldquo;Check Wool Lap Robe&rdquo;"
-														rel="nofollow"><span
-															class="link-button__content link-button__content--icon"><span
-																class="button-icon"><i
-																	class="kalium-icon-plus"></i></span><span
-																class="link-button__loading"></span></span><span
-															class="link-button__content link-button__content--text">Select
-															options</span></a>
-												</div>
-											</div>
-										</div>
-										<div
-											class="lb-element lb-element-woocommerce-product-column lb-element-woocommerce-product-column-71d730a90d d-flex justify-content-end justify-content-md-end justify-content-xl-end visible-always visible-md-always visible-xl-always col col-auto-grow col-md-auto-grow col-xl-auto-grow">
-											<div
-												class="lb-element lb-element-woocommerce-product-wishlist lb-element-woocommerce-product-wishlist-ad1269863e visible-hover visible-md-hover visible-xl-hover visible-hover--animate visible-hover--animate-fast visible-hover--fade">
-												<a href="/index_decor.html?category=?add_to_wishlist=599&amp;_wpnonce=eafaab3ca0"
-													class="add-to-wishlist link-button" data-product-id="599"
-													data-product-type="variable" data-original-product-id="599"
-													rel="nofollow" data-tooltip="Add to wishlist"
-													data-tooltip-placement="top"><span
-														class="link-button__content link-button__content--icon"><span
-															class="button-icon"><i
-																class="kalium-icon-add-to-wishlist"></i><i
-																class="kalium-icon-added-to-wishlist"></i></span><span
-															class="link-button__loading"></span></span></a>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-						</li>
-						<li
-							class="product type-product post-554 status-publish instock product_cat-textiles product_tag-alpaca product_tag-bolivian-craftsmanship product_tag-knitted product_tag-nordic-design has-post-thumbnail featured shipping-taxable purchasable product-type-simple">
-
-							<div
-								class="lb-element lb-element-woocommerce-product-row lb-element-woocommerce-product-row-53a2a62b8b visible-always visible-md-always visible-xl-always row">
-								<div
-									class="lb-element lb-element-woocommerce-product-column lb-element-woocommerce-product-column-fb57d1a6ea visible-always visible-md-always visible-xl-always col col-auto-grow col-md-auto-grow col-xl-auto-grow">
-									<div
-										class="lb-element lb-element-woocommerce-product-images lb-element-woocommerce-product-images-496bcb030c visible-always visible-md-always visible-xl-always">
-										<div class="image-set image-set--hover-transition-fade">
-											<div class="image-set__entry image-set__entry--hover-invisible">
-												<a href="/index_tact-mirror.html?slug=alpaca-lap-robe-with-graphic-pattern"
-													aria-label="Alpaca Lap Robe with Graphic Pattern"><span
-														class="image-placeholder loop-product-image"
-														style="--k-ratio:1.331853"><span class="loader"><span
-																class="loader-el semi-circle-spin"><span></span></span></span><img
-															loading="lazy" width="1200" height="901"
-															src="https://sites.kaliumtheme.com/elementor/furniture/wp-content/uploads/2025/05/alpaca-lap-robe-7.jpg"
-															class="attachment-woocommerce_thumbnail size-woocommerce_thumbnail"
-															alt="" decoding="async" /></span></a>
-											</div>
-											<div
-												class="image-set__entry image-set__entry--overlay image-set__entry--hover-visible">
-												<a href="/index_tact-mirror.html?slug=alpaca-lap-robe-with-graphic-pattern"
-													aria-label="Alpaca Lap Robe with Graphic Pattern"><span
-														class="image-placeholder loop-product-image"
-														style="--k-ratio:1.643836"><span class="loader"><span
-																class="loader-el semi-circle-spin"><span></span></span></span><img
-															loading="lazy" width="1200" height="730"
-															src="https://sites.kaliumtheme.com/elementor/furniture/wp-content/uploads/2025/05/alpaca-lap-robe-8.jpg"
-															class="attachment-woocommerce_thumbnail size-woocommerce_thumbnail"
-															alt="" decoding="async" /></span></a>
-											</div>
-										</div>
-										<div
-											class="lb-element lb-element-woocommerce-product-sale-badge lb-element-woocommerce-product-sale-badge-3c3275c3b0 visible-always visible-md-always visible-xl-always placement-inside placement-inside--top-left">
-											<div
-												class="product-badge product-badge--style-badge badge badge-outline product-badge--type-featured badge-primary text-uppercase">
-												<div class="product-badge__text">Featured</div>
-											</div>
-										</div>
-									</div>
-									<div
-										class="lb-element lb-element-woocommerce-product-row lb-element-woocommerce-product-row-3068b4958c visible-always visible-md-always visible-xl-always row">
-										<div
-											class="lb-element lb-element-woocommerce-product-column lb-element-woocommerce-product-column-a715305e66 visible-always visible-md-always visible-xl-always col col-10 col-md-10 col-xl-10">
-											<h3
-												class="lb-element lb-element-woocommerce-product-title lb-element-woocommerce-product-title-6e814bb413 visible-always visible-md-always visible-xl-always link-plain">
-												<a href="/index_tact-mirror.html?slug=alpaca-lap-robe-with-graphic-pattern"
-													class="woocommerce-LoopProduct-link woocommerce-loop-product__link">Alpaca
-													Lap Robe with Graphic Pattern</a>
-											</h3>
-											<div class="lb-element lb-element-woocommerce-product-swap-on-hover lb-element-woocommerce-product-swap-on-hover-9084dc5655 visible-always visible-md-always visible-xl-always swap-on-hover"
-												data-hover-attach="product-hover">
-												<div
-													class="lb-element lb-element-woocommerce-product-price lb-element-woocommerce-product-price-485f9e8dfb visible-always visible-md-always visible-xl-always">
-													<span class="price"><span
-															class="woocommerce-Price-amount amount"><bdi><span
-																	class="woocommerce-Price-currencySymbol">&#36;</span>283.32</bdi></span></span>
-												</div>
-												<div
-													class="lb-element lb-element-woocommerce-product-add-to-cart lb-element-woocommerce-product-add-to-cart-7b2c999c7c visible-always visible-md-hover visible-xl-hover visible-hover--animate visible-hover--animate-fast visible-hover--fade">
-													<a href="/index_decor.html?category=?add-to-cart=554"
-														data-quantity="1"
-														class="add-to-cart link-button product_type_simple add_to_cart_button ajax_add_to_cart"
-														data-product_id="554" data-product_sku="FRM-TXT-001"
-														aria-label="Add to cart: &ldquo;Alpaca Lap Robe with Graphic Pattern&rdquo;"
-														rel="nofollow"><span
-															class="link-button__content link-button__content--icon"><span
-																class="button-icon"><i
-																	class="kalium-icon-plus"></i></span><span
-																class="link-button__loading"></span></span><span
-															class="link-button__content link-button__content--text">Add
-															to cart</span></a>
-												</div>
-											</div>
-										</div>
-										<div
-											class="lb-element lb-element-woocommerce-product-column lb-element-woocommerce-product-column-71d730a90d d-flex justify-content-end justify-content-md-end justify-content-xl-end visible-always visible-md-always visible-xl-always col col-auto-grow col-md-auto-grow col-xl-auto-grow">
-											<div
-												class="lb-element lb-element-woocommerce-product-wishlist lb-element-woocommerce-product-wishlist-ad1269863e visible-hover visible-md-hover visible-xl-hover visible-hover--animate visible-hover--animate-fast visible-hover--fade">
-												<a href="/index_decor.html?category=?add_to_wishlist=554&amp;_wpnonce=eafaab3ca0"
-													class="add-to-wishlist link-button" data-product-id="554"
-													data-product-type="simple" data-original-product-id="554"
-													rel="nofollow" data-tooltip="Add to wishlist"
-													data-tooltip-placement="top"><span
-														class="link-button__content link-button__content--icon"><span
-															class="button-icon"><i
-																class="kalium-icon-add-to-wishlist"></i><i
-																class="kalium-icon-added-to-wishlist"></i></span><span
-															class="link-button__loading"></span></span></a>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-						</li>
-						<li
-							class="product type-product post-577 status-publish last instock product_cat-mirrors product_tag-aluminium product_tag-freestanding product_tag-mediterranean-design product_tag-minimalist has-post-thumbnail shipping-taxable purchasable product-type-simple">
-
-							<div
-								class="lb-element lb-element-woocommerce-product-row lb-element-woocommerce-product-row-53a2a62b8b visible-always visible-md-always visible-xl-always row">
-								<div
-									class="lb-element lb-element-woocommerce-product-column lb-element-woocommerce-product-column-fb57d1a6ea visible-always visible-md-always visible-xl-always col col-auto-grow col-md-auto-grow col-xl-auto-grow">
-									<div
-										class="lb-element lb-element-woocommerce-product-images lb-element-woocommerce-product-images-496bcb030c visible-always visible-md-always visible-xl-always">
-										<div class="image-set image-set--hover-transition-fade">
-											<div class="image-set__entry image-set__entry--hover-invisible">
-												<a href="/index_tact-mirror.html?slug=freestanding-aluminium-mirror"
-													aria-label="Freestanding Aluminium Mirror"><span
-														class="image-placeholder loop-product-image"
-														style="--k-ratio:1.333333"><span class="loader"><span
-																class="loader-el semi-circle-spin"><span></span></span></span><img
-															loading="lazy" width="1200" height="900"
-															src="https://sites.kaliumtheme.com/elementor/furniture/wp-content/uploads/2025/05/freestanding-mirror-3.jpeg"
-															class="attachment-woocommerce_thumbnail size-woocommerce_thumbnail"
-															alt="" decoding="async" /></span></a>
-											</div>
-											<div
-												class="image-set__entry image-set__entry--overlay image-set__entry--hover-visible">
-												<a href="/index_tact-mirror.html?slug=freestanding-aluminium-mirror"
-													aria-label="Freestanding Aluminium Mirror"><span
-														class="image-placeholder loop-product-image"
-														style="--k-ratio:0.714167"><span class="loader"><span
-																class="loader-el semi-circle-spin"><span></span></span></span><img
-															loading="lazy" width="857" height="1200"
-															src="https://sites.kaliumtheme.com/elementor/furniture/wp-content/uploads/2025/05/freestanding-mirror-5.jpeg"
-															class="attachment-woocommerce_thumbnail size-woocommerce_thumbnail"
-															alt="" decoding="async" /></span></a>
-											</div>
-										</div>
-									</div>
-									<div
-										class="lb-element lb-element-woocommerce-product-row lb-element-woocommerce-product-row-3068b4958c visible-always visible-md-always visible-xl-always row">
-										<div
-											class="lb-element lb-element-woocommerce-product-column lb-element-woocommerce-product-column-a715305e66 visible-always visible-md-always visible-xl-always col col-10 col-md-10 col-xl-10">
-											<h3
-												class="lb-element lb-element-woocommerce-product-title lb-element-woocommerce-product-title-6e814bb413 visible-always visible-md-always visible-xl-always link-plain">
-												<a href="/index_tact-mirror.html?slug=freestanding-aluminium-mirror"
-													class="woocommerce-LoopProduct-link woocommerce-loop-product__link">Freestanding
-													Aluminium Mirror</a>
-											</h3>
-											<div class="lb-element lb-element-woocommerce-product-swap-on-hover lb-element-woocommerce-product-swap-on-hover-9084dc5655 visible-always visible-md-always visible-xl-always swap-on-hover"
-												data-hover-attach="product-hover">
-												<div
-													class="lb-element lb-element-woocommerce-product-price lb-element-woocommerce-product-price-485f9e8dfb visible-always visible-md-always visible-xl-always">
-													<span class="price"><span
-															class="woocommerce-Price-amount amount"><bdi><span
-																	class="woocommerce-Price-currencySymbol">&#36;</span>980.00</bdi></span></span>
-												</div>
-												<div
-													class="lb-element lb-element-woocommerce-product-add-to-cart lb-element-woocommerce-product-add-to-cart-7b2c999c7c visible-always visible-md-hover visible-xl-hover visible-hover--animate visible-hover--animate-fast visible-hover--fade">
-													<a href="/index_decor.html?category=?add-to-cart=577"
-														data-quantity="1"
-														class="add-to-cart link-button product_type_simple add_to_cart_button ajax_add_to_cart"
-														data-product_id="577" data-product_sku="STM-MIR-001"
-														aria-label="Add to cart: &ldquo;Freestanding Aluminium Mirror&rdquo;"
-														rel="nofollow"><span
-															class="link-button__content link-button__content--icon"><span
-																class="button-icon"><i
-																	class="kalium-icon-plus"></i></span><span
-																class="link-button__loading"></span></span><span
-															class="link-button__content link-button__content--text">Add
-															to cart</span></a>
-												</div>
-											</div>
-										</div>
-										<div
-											class="lb-element lb-element-woocommerce-product-column lb-element-woocommerce-product-column-71d730a90d d-flex justify-content-end justify-content-md-end justify-content-xl-end visible-always visible-md-always visible-xl-always col col-auto-grow col-md-auto-grow col-xl-auto-grow">
-											<div
-												class="lb-element lb-element-woocommerce-product-wishlist lb-element-woocommerce-product-wishlist-ad1269863e visible-hover visible-md-hover visible-xl-hover visible-hover--animate visible-hover--animate-fast visible-hover--fade">
-												<a href="/index_decor.html?category=?add_to_wishlist=577&amp;_wpnonce=eafaab3ca0"
-													class="add-to-wishlist link-button" data-product-id="577"
-													data-product-type="simple" data-original-product-id="577"
-													rel="nofollow" data-tooltip="Add to wishlist"
-													data-tooltip-placement="top"><span
-														class="link-button__content link-button__content--icon"><span
-															class="button-icon"><i
-																class="kalium-icon-add-to-wishlist"></i><i
-																class="kalium-icon-added-to-wishlist"></i></span><span
-															class="link-button__loading"></span></span></a>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-						</li>
-						<li
-							class="product type-product post-676 status-publish first instock product_cat-vases product_tag-blown-glass product_tag-handmade product_tag-pleated has-post-thumbnail shipping-taxable purchasable product-type-simple">
-
-							<div
-								class="lb-element lb-element-woocommerce-product-row lb-element-woocommerce-product-row-53a2a62b8b visible-always visible-md-always visible-xl-always row">
-								<div
-									class="lb-element lb-element-woocommerce-product-column lb-element-woocommerce-product-column-fb57d1a6ea visible-always visible-md-always visible-xl-always col col-auto-grow col-md-auto-grow col-xl-auto-grow">
-									<div
-										class="lb-element lb-element-woocommerce-product-images lb-element-woocommerce-product-images-496bcb030c visible-always visible-md-always visible-xl-always">
-										<div class="image-set image-set--hover-transition-fade">
-											<div class="image-set__entry image-set__entry--hover-invisible">
-												<a href="/index_tact-mirror.html?slug=glass-vase"
-													aria-label="Glass Vase"><span
-														class="image-placeholder loop-product-image"
-														style="--k-ratio:1.333333"><span class="loader"><span
-																class="loader-el semi-circle-spin"><span></span></span></span><img
-															loading="lazy" width="1200" height="900"
-															src="https://sites.kaliumtheme.com/elementor/furniture/wp-content/uploads/2025/05/glass-vase-2.jpg"
-															class="attachment-woocommerce_thumbnail size-woocommerce_thumbnail"
-															alt="" decoding="async" /></span></a>
-											</div>
-											<div
-												class="image-set__entry image-set__entry--overlay image-set__entry--hover-visible">
-												<a href="/index_tact-mirror.html?slug=glass-vase"
-													aria-label="Glass Vase"><span
-														class="image-placeholder loop-product-image"
-														style="--k-ratio:0.666667"><span class="loader"><span
-																class="loader-el semi-circle-spin"><span></span></span></span><img
-															loading="lazy" width="600" height="900"
-															src="https://sites.kaliumtheme.com/elementor/furniture/wp-content/uploads/2025/05/glass-vase-1-600x900.jpg"
-															class="attachment-woocommerce_thumbnail size-woocommerce_thumbnail"
-															alt="" decoding="async"
-															srcset="https://sites.kaliumtheme.com/elementor/furniture/wp-content/uploads/2025/05/glass-vase-1-600x900.jpg 600w, /wp-content/uploads/2025/05/glass-vase-1-200x300.jpg 200w, /wp-content/uploads/2025/05/glass-vase-1-683x1024.jpg 683w, /wp-content/uploads/2025/05/glass-vase-1-768x1152.jpg 768w, /wp-content/uploads/2025/05/glass-vase-1.jpg 800w"
-															sizes="(max-width: 600px) 100vw, 600px" /></span></a>
-											</div>
-										</div>
-									</div>
-									<div
-										class="lb-element lb-element-woocommerce-product-row lb-element-woocommerce-product-row-3068b4958c visible-always visible-md-always visible-xl-always row">
-										<div
-											class="lb-element lb-element-woocommerce-product-column lb-element-woocommerce-product-column-a715305e66 visible-always visible-md-always visible-xl-always col col-10 col-md-10 col-xl-10">
-											<h3
-												class="lb-element lb-element-woocommerce-product-title lb-element-woocommerce-product-title-6e814bb413 visible-always visible-md-always visible-xl-always link-plain">
-												<a href="/index_tact-mirror.html?slug=glass-vase"
-													class="woocommerce-LoopProduct-link woocommerce-loop-product__link">Glass
-													Vase</a>
-											</h3>
-											<div class="lb-element lb-element-woocommerce-product-swap-on-hover lb-element-woocommerce-product-swap-on-hover-9084dc5655 visible-always visible-md-always visible-xl-always swap-on-hover"
-												data-hover-attach="product-hover">
-												<div
-													class="lb-element lb-element-woocommerce-product-price lb-element-woocommerce-product-price-485f9e8dfb visible-always visible-md-always visible-xl-always">
-													<span class="price"><span
-															class="woocommerce-Price-amount amount"><bdi><span
-																	class="woocommerce-Price-currencySymbol">&#36;</span>1,500.00</bdi></span></span>
-												</div>
-												<div
-													class="lb-element lb-element-woocommerce-product-add-to-cart lb-element-woocommerce-product-add-to-cart-7b2c999c7c visible-always visible-md-hover visible-xl-hover visible-hover--animate visible-hover--animate-fast visible-hover--fade">
-													<a href="/index_decor.html?category=?add-to-cart=676"
-														data-quantity="1"
-														class="add-to-cart link-button product_type_simple add_to_cart_button ajax_add_to_cart"
-														data-product_id="676" data-product_sku="VEN-VAS-001"
-														aria-label="Add to cart: &ldquo;Glass Vase&rdquo;"
-														rel="nofollow"><span
-															class="link-button__content link-button__content--icon"><span
-																class="button-icon"><i
-																	class="kalium-icon-plus"></i></span><span
-																class="link-button__loading"></span></span><span
-															class="link-button__content link-button__content--text">Add
-															to cart</span></a>
-												</div>
-											</div>
-										</div>
-										<div
-											class="lb-element lb-element-woocommerce-product-column lb-element-woocommerce-product-column-71d730a90d d-flex justify-content-end justify-content-md-end justify-content-xl-end visible-always visible-md-always visible-xl-always col col-auto-grow col-md-auto-grow col-xl-auto-grow">
-											<div
-												class="lb-element lb-element-woocommerce-product-wishlist lb-element-woocommerce-product-wishlist-ad1269863e visible-hover visible-md-hover visible-xl-hover visible-hover--animate visible-hover--animate-fast visible-hover--fade">
-												<a href="/index_decor.html?category=?add_to_wishlist=676&amp;_wpnonce=eafaab3ca0"
-													class="add-to-wishlist link-button" data-product-id="676"
-													data-product-type="simple" data-original-product-id="676"
-													rel="nofollow" data-tooltip="Add to wishlist"
-													data-tooltip-placement="top"><span
-														class="link-button__content link-button__content--icon"><span
-															class="button-icon"><i
-																class="kalium-icon-add-to-wishlist"></i><i
-																class="kalium-icon-added-to-wishlist"></i></span><span
-															class="link-button__loading"></span></span></a>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-						</li>
-						<li
-							class="product type-product post-566 status-publish instock product_cat-just-in product_cat-rugs product_tag-handwoven product_tag-monochrome product_tag-natural-materials product_tag-traditional-pattern has-post-thumbnail shipping-taxable purchasable product-type-simple">
-
-							<div
-								class="lb-element lb-element-woocommerce-product-row lb-element-woocommerce-product-row-53a2a62b8b visible-always visible-md-always visible-xl-always row">
-								<div
-									class="lb-element lb-element-woocommerce-product-column lb-element-woocommerce-product-column-fb57d1a6ea visible-always visible-md-always visible-xl-always col col-auto-grow col-md-auto-grow col-xl-auto-grow">
-									<div
-										class="lb-element lb-element-woocommerce-product-images lb-element-woocommerce-product-images-496bcb030c visible-always visible-md-always visible-xl-always">
-										<div class="image-set image-set--hover-transition-fade">
-											<div class="image-set__entry image-set__entry--hover-invisible">
-												<a href="/index_tact-mirror.html?slug=new-zealand-wool-runner"
-													aria-label="New Zealand Wool Runner"><span
-														class="image-placeholder loop-product-image"
-														style="--k-ratio:0.666667"><span class="loader"><span
-																class="loader-el semi-circle-spin"><span></span></span></span><img
-															loading="lazy" width="600" height="900"
-															src="https://sites.kaliumtheme.com/elementor/furniture/wp-content/uploads/2025/05/nz-rug-1-600x900.jpeg"
-															class="attachment-woocommerce_thumbnail size-woocommerce_thumbnail"
-															alt="" decoding="async"
-															srcset="https://sites.kaliumtheme.com/elementor/furniture/wp-content/uploads/2025/05/nz-rug-1-600x900.jpeg 600w, /wp-content/uploads/2025/05/nz-rug-1-200x300.jpeg 200w, /wp-content/uploads/2025/05/nz-rug-1-683x1024.jpeg 683w, /wp-content/uploads/2025/05/nz-rug-1-768x1152.jpeg 768w, /wp-content/uploads/2025/05/nz-rug-1.jpeg 800w"
-															sizes="(max-width: 600px) 100vw, 600px" /></span></a>
-											</div>
-											<div
-												class="image-set__entry image-set__entry--overlay image-set__entry--hover-visible">
-												<a href="/index_tact-mirror.html?slug=new-zealand-wool-runner"
-													aria-label="New Zealand Wool Runner"><span
-														class="image-placeholder loop-product-image"
-														style="--k-ratio:1.333333"><span class="loader"><span
-																class="loader-el semi-circle-spin"><span></span></span></span><img
-															loading="lazy" width="1200" height="900"
-															src="https://sites.kaliumtheme.com/elementor/furniture/wp-content/uploads/2025/05/nz-rug-2.jpeg"
-															class="attachment-woocommerce_thumbnail size-woocommerce_thumbnail"
-															alt="" decoding="async" /></span></a>
-											</div>
-										</div>
-									</div>
-									<div
-										class="lb-element lb-element-woocommerce-product-row lb-element-woocommerce-product-row-3068b4958c visible-always visible-md-always visible-xl-always row">
-										<div
-											class="lb-element lb-element-woocommerce-product-column lb-element-woocommerce-product-column-a715305e66 visible-always visible-md-always visible-xl-always col col-10 col-md-10 col-xl-10">
-											<h3
-												class="lb-element lb-element-woocommerce-product-title lb-element-woocommerce-product-title-6e814bb413 visible-always visible-md-always visible-xl-always link-plain">
-												<a href="/index_tact-mirror.html?slug=new-zealand-wool-runner"
-													class="woocommerce-LoopProduct-link woocommerce-loop-product__link">New
-													Zealand Wool Runner</a>
-											</h3>
-											<div class="lb-element lb-element-woocommerce-product-swap-on-hover lb-element-woocommerce-product-swap-on-hover-9084dc5655 visible-always visible-md-always visible-xl-always swap-on-hover"
-												data-hover-attach="product-hover">
-												<div
-													class="lb-element lb-element-woocommerce-product-price lb-element-woocommerce-product-price-485f9e8dfb visible-always visible-md-always visible-xl-always">
-													<span class="price"><span
-															class="woocommerce-Price-amount amount"><bdi><span
-																	class="woocommerce-Price-currencySymbol">&#36;</span>1,200.00</bdi></span></span>
-												</div>
-												<div
-													class="lb-element lb-element-woocommerce-product-add-to-cart lb-element-woocommerce-product-add-to-cart-7b2c999c7c visible-always visible-md-hover visible-xl-hover visible-hover--animate visible-hover--animate-fast visible-hover--fade">
-													<a href="/index_decor.html?category=?add-to-cart=566"
-														data-quantity="1"
-														class="add-to-cart link-button product_type_simple add_to_cart_button ajax_add_to_cart"
-														data-product_id="566" data-product_sku="BMT-RUG-001"
-														aria-label="Add to cart: &ldquo;New Zealand Wool Runner&rdquo;"
-														rel="nofollow"><span
-															class="link-button__content link-button__content--icon"><span
-																class="button-icon"><i
-																	class="kalium-icon-plus"></i></span><span
-																class="link-button__loading"></span></span><span
-															class="link-button__content link-button__content--text">Add
-															to cart</span></a>
-												</div>
-											</div>
-										</div>
-										<div
-											class="lb-element lb-element-woocommerce-product-column lb-element-woocommerce-product-column-71d730a90d d-flex justify-content-end justify-content-md-end justify-content-xl-end visible-always visible-md-always visible-xl-always col col-auto-grow col-md-auto-grow col-xl-auto-grow">
-											<div
-												class="lb-element lb-element-woocommerce-product-wishlist lb-element-woocommerce-product-wishlist-ad1269863e visible-hover visible-md-hover visible-xl-hover visible-hover--animate visible-hover--animate-fast visible-hover--fade">
-												<a href="/index_decor.html?category=?add_to_wishlist=566&amp;_wpnonce=eafaab3ca0"
-													class="add-to-wishlist link-button" data-product-id="566"
-													data-product-type="simple" data-original-product-id="566"
-													rel="nofollow" data-tooltip="Add to wishlist"
-													data-tooltip-placement="top"><span
-														class="link-button__content link-button__content--icon"><span
-															class="button-icon"><i
-																class="kalium-icon-add-to-wishlist"></i><i
-																class="kalium-icon-added-to-wishlist"></i></span><span
-															class="link-button__loading"></span></span></a>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-						</li>
-						<li
-							class="product type-product post-598 status-publish instock product_cat-rugs product_tag-handwoven product_tag-pet product_tag-recycled product_tag-sustainable has-post-thumbnail shipping-taxable purchasable product-type-simple">
-
-							<div
-								class="lb-element lb-element-woocommerce-product-row lb-element-woocommerce-product-row-53a2a62b8b visible-always visible-md-always visible-xl-always row">
-								<div
-									class="lb-element lb-element-woocommerce-product-column lb-element-woocommerce-product-column-fb57d1a6ea visible-always visible-md-always visible-xl-always col col-auto-grow col-md-auto-grow col-xl-auto-grow">
-									<div
-										class="lb-element lb-element-woocommerce-product-images lb-element-woocommerce-product-images-496bcb030c visible-always visible-md-always visible-xl-always">
-										<div class="image-set image-set--hover-transition-fade">
-											<div class="image-set__entry image-set__entry--hover-invisible">
-												<a href="/index_tact-mirror.html?slug=rectangular-pet-rug"
-													aria-label="Rectangular PET Rug"><span
-														class="image-placeholder loop-product-image"
-														style="--k-ratio:1.333333"><span class="loader"><span
-																class="loader-el semi-circle-spin"><span></span></span></span><img
-															loading="lazy" width="1200" height="900"
-															src="https://sites.kaliumtheme.com/elementor/furniture/wp-content/uploads/2025/05/pet-rug-5.jpeg"
-															class="attachment-woocommerce_thumbnail size-woocommerce_thumbnail"
-															alt="" decoding="async" /></span></a>
-											</div>
-											<div
-												class="image-set__entry image-set__entry--overlay image-set__entry--hover-visible">
-												<a href="/index_tact-mirror.html?slug=rectangular-pet-rug"
-													aria-label="Rectangular PET Rug"><span
-														class="image-placeholder loop-product-image"
-														style="--k-ratio:0.750000"><span class="loader"><span
-																class="loader-el semi-circle-spin"><span></span></span></span><img
-															loading="lazy" width="600" height="800"
-															src="https://sites.kaliumtheme.com/elementor/furniture/wp-content/uploads/2025/05/pet-rug-1-600x800.jpeg"
-															class="attachment-woocommerce_thumbnail size-woocommerce_thumbnail"
-															alt="" decoding="async"
-															srcset="https://sites.kaliumtheme.com/elementor/furniture/wp-content/uploads/2025/05/pet-rug-1-600x800.jpeg 600w, /wp-content/uploads/2025/05/pet-rug-1-225x300.jpeg 225w, /wp-content/uploads/2025/05/pet-rug-1-768x1024.jpeg 768w, /wp-content/uploads/2025/05/pet-rug-1-500x666.jpeg 500w, /wp-content/uploads/2025/05/pet-rug-1.jpeg 900w"
-															sizes="(max-width: 600px) 100vw, 600px" /></span></a>
-											</div>
-										</div>
-									</div>
-									<div
-										class="lb-element lb-element-woocommerce-product-row lb-element-woocommerce-product-row-3068b4958c visible-always visible-md-always visible-xl-always row">
-										<div
-											class="lb-element lb-element-woocommerce-product-column lb-element-woocommerce-product-column-a715305e66 visible-always visible-md-always visible-xl-always col col-10 col-md-10 col-xl-10">
-											<h3
-												class="lb-element lb-element-woocommerce-product-title lb-element-woocommerce-product-title-6e814bb413 visible-always visible-md-always visible-xl-always link-plain">
-												<a href="/index_tact-mirror.html?slug=rectangular-pet-rug"
-													class="woocommerce-LoopProduct-link woocommerce-loop-product__link">Rectangular
-													PET Rug</a>
-											</h3>
-											<div class="lb-element lb-element-woocommerce-product-swap-on-hover lb-element-woocommerce-product-swap-on-hover-9084dc5655 visible-always visible-md-always visible-xl-always swap-on-hover"
-												data-hover-attach="product-hover">
-												<div
-													class="lb-element lb-element-woocommerce-product-price lb-element-woocommerce-product-price-485f9e8dfb visible-always visible-md-always visible-xl-always">
-													<span class="price"><span
-															class="woocommerce-Price-amount amount"><bdi><span
-																	class="woocommerce-Price-currencySymbol">&#36;</span>450.00</bdi></span></span>
-												</div>
-												<div
-													class="lb-element lb-element-woocommerce-product-add-to-cart lb-element-woocommerce-product-add-to-cart-7b2c999c7c visible-always visible-md-hover visible-xl-hover visible-hover--animate visible-hover--animate-fast visible-hover--fade">
-													<a href="/index_decor.html?category=?add-to-cart=598"
-														data-quantity="1"
-														class="add-to-cart link-button product_type_simple add_to_cart_button ajax_add_to_cart"
-														data-product_id="598" data-product_sku="CRP-RUG-001"
-														aria-label="Add to cart: &ldquo;Rectangular PET Rug&rdquo;"
-														rel="nofollow"><span
-															class="link-button__content link-button__content--icon"><span
-																class="button-icon"><i
-																	class="kalium-icon-plus"></i></span><span
-																class="link-button__loading"></span></span><span
-															class="link-button__content link-button__content--text">Add
-															to cart</span></a>
-												</div>
-											</div>
-										</div>
-										<div
-											class="lb-element lb-element-woocommerce-product-column lb-element-woocommerce-product-column-71d730a90d d-flex justify-content-end justify-content-md-end justify-content-xl-end visible-always visible-md-always visible-xl-always col col-auto-grow col-md-auto-grow col-xl-auto-grow">
-											<div
-												class="lb-element lb-element-woocommerce-product-wishlist lb-element-woocommerce-product-wishlist-ad1269863e visible-hover visible-md-hover visible-xl-hover visible-hover--animate visible-hover--animate-fast visible-hover--fade">
-												<a href="/index_decor.html?category=?add_to_wishlist=598&amp;_wpnonce=eafaab3ca0"
-													class="add-to-wishlist link-button" data-product-id="598"
-													data-product-type="simple" data-original-product-id="598"
-													rel="nofollow" data-tooltip="Add to wishlist"
-													data-tooltip-placement="top"><span
-														class="link-button__content link-button__content--icon"><span
-															class="button-icon"><i
-																class="kalium-icon-add-to-wishlist"></i><i
-																class="kalium-icon-added-to-wishlist"></i></span><span
-															class="link-button__loading"></span></span></a>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-						</li>
-						<li
-							class="product type-product post-673 status-publish instock product_cat-just-in product_cat-vases product_tag-hand-painted product_tag-stoneware product_tag-striped has-post-thumbnail featured shipping-taxable purchasable product-type-simple">
-
-							<div
-								class="lb-element lb-element-woocommerce-product-row lb-element-woocommerce-product-row-53a2a62b8b visible-always visible-md-always visible-xl-always row">
-								<div
-									class="lb-element lb-element-woocommerce-product-column lb-element-woocommerce-product-column-fb57d1a6ea visible-always visible-md-always visible-xl-always col col-auto-grow col-md-auto-grow col-xl-auto-grow">
-									<div
-										class="lb-element lb-element-woocommerce-product-images lb-element-woocommerce-product-images-496bcb030c visible-always visible-md-always visible-xl-always">
-										<div class="image-set image-set--hover-transition-fade">
-											<div class="image-set__entry image-set__entry--hover-invisible">
-												<a href="/index_tact-mirror.html?slug=red-stripe-vase"
-													aria-label="Red Stripe Vase"><span
-														class="image-placeholder loop-product-image"
-														style="--k-ratio:1.333333"><span class="loader"><span
-																class="loader-el semi-circle-spin"><span></span></span></span><img
-															loading="lazy" width="1200" height="900"
-															src="https://sites.kaliumtheme.com/elementor/furniture/wp-content/uploads/2025/05/red-stripe-2.jpg"
-															class="attachment-woocommerce_thumbnail size-woocommerce_thumbnail"
-															alt="" decoding="async" /></span></a>
-											</div>
-											<div
-												class="image-set__entry image-set__entry--overlay image-set__entry--hover-visible">
-												<a href="/index_tact-mirror.html?slug=red-stripe-vase"
-													aria-label="Red Stripe Vase"><span
-														class="image-placeholder loop-product-image"
-														style="--k-ratio:1.331853"><span class="loader"><span
-																class="loader-el semi-circle-spin"><span></span></span></span><img
-															loading="lazy" width="1200" height="901"
-															src="https://sites.kaliumtheme.com/elementor/furniture/wp-content/uploads/2025/05/red-stripe-3.jpg"
-															class="attachment-woocommerce_thumbnail size-woocommerce_thumbnail"
-															alt="" decoding="async" /></span></a>
-											</div>
-										</div>
-										<div
-											class="lb-element lb-element-woocommerce-product-sale-badge lb-element-woocommerce-product-sale-badge-3c3275c3b0 visible-always visible-md-always visible-xl-always placement-inside placement-inside--top-left">
-											<div
-												class="product-badge product-badge--style-badge badge badge-outline product-badge--type-featured badge-primary text-uppercase">
-												<div class="product-badge__text">Featured</div>
-											</div>
-										</div>
-									</div>
-									<div
-										class="lb-element lb-element-woocommerce-product-row lb-element-woocommerce-product-row-3068b4958c visible-always visible-md-always visible-xl-always row">
-										<div
-											class="lb-element lb-element-woocommerce-product-column lb-element-woocommerce-product-column-a715305e66 visible-always visible-md-always visible-xl-always col col-10 col-md-10 col-xl-10">
-											<h3
-												class="lb-element lb-element-woocommerce-product-title lb-element-woocommerce-product-title-6e814bb413 visible-always visible-md-always visible-xl-always link-plain">
-												<a href="/index_tact-mirror.html?slug=red-stripe-vase"
-													class="woocommerce-LoopProduct-link woocommerce-loop-product__link">Red
-													Stripe Vase</a>
-											</h3>
-											<div class="lb-element lb-element-woocommerce-product-swap-on-hover lb-element-woocommerce-product-swap-on-hover-9084dc5655 visible-always visible-md-always visible-xl-always swap-on-hover"
-												data-hover-attach="product-hover">
-												<div
-													class="lb-element lb-element-woocommerce-product-price lb-element-woocommerce-product-price-485f9e8dfb visible-always visible-md-always visible-xl-always">
-													<span class="price"><span
-															class="woocommerce-Price-amount amount"><bdi><span
-																	class="woocommerce-Price-currencySymbol">&#36;</span>86.00</bdi></span></span>
-												</div>
-												<div
-													class="lb-element lb-element-woocommerce-product-add-to-cart lb-element-woocommerce-product-add-to-cart-7b2c999c7c visible-always visible-md-hover visible-xl-hover visible-hover--animate visible-hover--animate-fast visible-hover--fade">
-													<a href="/index_decor.html?category=?add-to-cart=673"
-														data-quantity="1"
-														class="add-to-cart link-button product_type_simple add_to_cart_button ajax_add_to_cart"
-														data-product_id="673" data-product_sku="HAY-VAS-001"
-														aria-label="Add to cart: &ldquo;Red Stripe Vase&rdquo;"
-														rel="nofollow"><span
-															class="link-button__content link-button__content--icon"><span
-																class="button-icon"><i
-																	class="kalium-icon-plus"></i></span><span
-																class="link-button__loading"></span></span><span
-															class="link-button__content link-button__content--text">Add
-															to cart</span></a>
-												</div>
-											</div>
-										</div>
-										<div
-											class="lb-element lb-element-woocommerce-product-column lb-element-woocommerce-product-column-71d730a90d d-flex justify-content-end justify-content-md-end justify-content-xl-end visible-always visible-md-always visible-xl-always col col-auto-grow col-md-auto-grow col-xl-auto-grow">
-											<div
-												class="lb-element lb-element-woocommerce-product-wishlist lb-element-woocommerce-product-wishlist-ad1269863e visible-hover visible-md-hover visible-xl-hover visible-hover--animate visible-hover--animate-fast visible-hover--fade">
-												<a href="/index_decor.html?category=?add_to_wishlist=673&amp;_wpnonce=eafaab3ca0"
-													class="add-to-wishlist link-button" data-product-id="673"
-													data-product-type="simple" data-original-product-id="673"
-													rel="nofollow" data-tooltip="Add to wishlist"
-													data-tooltip-placement="top"><span
-														class="link-button__content link-button__content--icon"><span
-															class="button-icon"><i
-																class="kalium-icon-add-to-wishlist"></i><i
-																class="kalium-icon-added-to-wishlist"></i></span><span
-															class="link-button__loading"></span></span></a>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-						</li>
-						<li
-							class="product type-product post-674 status-publish last instock product_cat-rugs product_tag-abstract product_tag-modern product_tag-polyamide has-post-thumbnail shipping-taxable purchasable product-type-simple">
-
-							<div
-								class="lb-element lb-element-woocommerce-product-row lb-element-woocommerce-product-row-53a2a62b8b visible-always visible-md-always visible-xl-always row">
-								<div
-									class="lb-element lb-element-woocommerce-product-column lb-element-woocommerce-product-column-fb57d1a6ea visible-always visible-md-always visible-xl-always col col-auto-grow col-md-auto-grow col-xl-auto-grow">
-									<div
-										class="lb-element lb-element-woocommerce-product-images lb-element-woocommerce-product-images-496bcb030c visible-always visible-md-always visible-xl-always">
-										<div class="image-set image-set--hover-transition-fade">
-											<div class="image-set__entry image-set__entry--hover-invisible">
-												<a href="/index_tact-mirror.html?slug=sticky-tape-rug"
-													aria-label="Sticky Tape Rug"><span
-														class="image-placeholder loop-product-image"
-														style="--k-ratio:1.333333"><span class="loader"><span
-																class="loader-el semi-circle-spin"><span></span></span></span><img
-															loading="lazy" width="1200" height="900"
-															src="https://sites.kaliumtheme.com/elementor/furniture/wp-content/uploads/2025/05/sticky-tape-rug-4.jpeg"
-															class="attachment-woocommerce_thumbnail size-woocommerce_thumbnail"
-															alt="" decoding="async" /></span></a>
-											</div>
-											<div
-												class="image-set__entry image-set__entry--overlay image-set__entry--hover-visible">
-												<a href="/index_tact-mirror.html?slug=sticky-tape-rug"
-													aria-label="Sticky Tape Rug"><span
-														class="image-placeholder loop-product-image"
-														style="--k-ratio:1.333333"><span class="loader"><span
-																class="loader-el semi-circle-spin"><span></span></span></span><img
-															loading="lazy" width="1200" height="900"
-															src="https://sites.kaliumtheme.com/elementor/furniture/wp-content/uploads/2025/05/sticky-tape-rug-2.jpeg"
-															class="attachment-woocommerce_thumbnail size-woocommerce_thumbnail"
-															alt="" decoding="async" /></span></a>
-											</div>
-										</div>
-									</div>
-									<div
-										class="lb-element lb-element-woocommerce-product-row lb-element-woocommerce-product-row-3068b4958c visible-always visible-md-always visible-xl-always row">
-										<div
-											class="lb-element lb-element-woocommerce-product-column lb-element-woocommerce-product-column-a715305e66 visible-always visible-md-always visible-xl-always col col-10 col-md-10 col-xl-10">
-											<h3
-												class="lb-element lb-element-woocommerce-product-title lb-element-woocommerce-product-title-6e814bb413 visible-always visible-md-always visible-xl-always link-plain">
-												<a href="/index_tact-mirror.html?slug=sticky-tape-rug"
-													class="woocommerce-LoopProduct-link woocommerce-loop-product__link">Sticky
-													Tape Rug</a>
-											</h3>
-											<div class="lb-element lb-element-woocommerce-product-swap-on-hover lb-element-woocommerce-product-swap-on-hover-9084dc5655 visible-always visible-md-always visible-xl-always swap-on-hover"
-												data-hover-attach="product-hover">
-												<div
-													class="lb-element lb-element-woocommerce-product-price lb-element-woocommerce-product-price-485f9e8dfb visible-always visible-md-always visible-xl-always">
-													<span class="price"><span
-															class="woocommerce-Price-amount amount"><bdi><span
-																	class="woocommerce-Price-currencySymbol">&#36;</span>1,200.00</bdi></span></span>
-												</div>
-												<div
-													class="lb-element lb-element-woocommerce-product-add-to-cart lb-element-woocommerce-product-add-to-cart-7b2c999c7c visible-always visible-md-hover visible-xl-hover visible-hover--animate visible-hover--animate-fast visible-hover--fade">
-													<a href="/index_decor.html?category=?add-to-cart=674"
-														data-quantity="1"
-														class="add-to-cart link-button product_type_simple add_to_cart_button ajax_add_to_cart"
-														data-product_id="674" data-product_sku="INK-RUG-001"
-														aria-label="Add to cart: &ldquo;Sticky Tape Rug&rdquo;"
-														rel="nofollow"><span
-															class="link-button__content link-button__content--icon"><span
-																class="button-icon"><i
-																	class="kalium-icon-plus"></i></span><span
-																class="link-button__loading"></span></span><span
-															class="link-button__content link-button__content--text">Add
-															to cart</span></a>
-												</div>
-											</div>
-										</div>
-										<div
-											class="lb-element lb-element-woocommerce-product-column lb-element-woocommerce-product-column-71d730a90d d-flex justify-content-end justify-content-md-end justify-content-xl-end visible-always visible-md-always visible-xl-always col col-auto-grow col-md-auto-grow col-xl-auto-grow">
-											<div
-												class="lb-element lb-element-woocommerce-product-wishlist lb-element-woocommerce-product-wishlist-ad1269863e visible-hover visible-md-hover visible-xl-hover visible-hover--animate visible-hover--animate-fast visible-hover--fade">
-												<a href="/index_decor.html?category=?add_to_wishlist=674&amp;_wpnonce=eafaab3ca0"
-													class="add-to-wishlist link-button" data-product-id="674"
-													data-product-type="simple" data-original-product-id="674"
-													rel="nofollow" data-tooltip="Add to wishlist"
-													data-tooltip-placement="top"><span
-														class="link-button__content link-button__content--icon"><span
-															class="button-icon"><i
-																class="kalium-icon-add-to-wishlist"></i><i
-																class="kalium-icon-added-to-wishlist"></i></span><span
-															class="link-button__loading"></span></span></a>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-						</li>
-						<li
-							class="product type-product post-576 status-publish first instock product_cat-textiles product_tag-embroidered product_tag-striped product_tag-throw product_tag-wool has-post-thumbnail shipping-taxable purchasable product-type-variable">
-
-							<div
-								class="lb-element lb-element-woocommerce-product-row lb-element-woocommerce-product-row-53a2a62b8b visible-always visible-md-always visible-xl-always row">
-								<div
-									class="lb-element lb-element-woocommerce-product-column lb-element-woocommerce-product-column-fb57d1a6ea visible-always visible-md-always visible-xl-always col col-auto-grow col-md-auto-grow col-xl-auto-grow">
-									<div
-										class="lb-element lb-element-woocommerce-product-images lb-element-woocommerce-product-images-496bcb030c visible-always visible-md-always visible-xl-always">
-										<div class="image-set image-set--hover-transition-fade">
-											<div class="image-set__entry image-set__entry--hover-invisible">
-												<a href="/index_tact-mirror.html?slug=striped-wool-lap-robe"
-													aria-label="Striped Wool Lap Robe"><span
-														class="image-placeholder loop-product-image"
-														style="--k-ratio:1.333333"><span class="loader"><span
-																class="loader-el semi-circle-spin"><span></span></span></span><img
-															loading="lazy" width="1200" height="900"
-															src="https://sites.kaliumtheme.com/elementor/furniture/wp-content/uploads/2025/05/striped-wool-2.jpeg"
-															class="attachment-woocommerce_thumbnail size-woocommerce_thumbnail"
-															alt="" decoding="async" /></span></a>
-											</div>
-											<div
-												class="image-set__entry image-set__entry--overlay image-set__entry--hover-visible">
-												<a href="/index_tact-mirror.html?slug=striped-wool-lap-robe"
-													aria-label="Striped Wool Lap Robe"><span
-														class="image-placeholder loop-product-image"
-														style="--k-ratio:1.333333"><span class="loader"><span
-																class="loader-el semi-circle-spin"><span></span></span></span><img
-															loading="lazy" width="1200" height="900"
-															src="https://sites.kaliumtheme.com/elementor/furniture/wp-content/uploads/2025/05/striped-wool-8.jpeg"
-															class="attachment-woocommerce_thumbnail size-woocommerce_thumbnail"
-															alt="" decoding="async" /></span></a>
-											</div>
-										</div>
-									</div>
-									<div
-										class="lb-element lb-element-woocommerce-product-row lb-element-woocommerce-product-row-3068b4958c visible-always visible-md-always visible-xl-always row">
-										<div
-											class="lb-element lb-element-woocommerce-product-column lb-element-woocommerce-product-column-a715305e66 visible-always visible-md-always visible-xl-always col col-10 col-md-10 col-xl-10">
-											<h3
-												class="lb-element lb-element-woocommerce-product-title lb-element-woocommerce-product-title-6e814bb413 visible-always visible-md-always visible-xl-always link-plain">
-												<a href="/index_tact-mirror.html?slug=striped-wool-lap-robe"
-													class="woocommerce-LoopProduct-link woocommerce-loop-product__link">Striped
-													Wool Lap Robe</a>
-											</h3>
-											<div class="lb-element lb-element-woocommerce-product-swap-on-hover lb-element-woocommerce-product-swap-on-hover-9084dc5655 visible-always visible-md-always visible-xl-always swap-on-hover"
-												data-hover-attach="product-hover">
-												<div
-													class="lb-element lb-element-woocommerce-product-price lb-element-woocommerce-product-price-485f9e8dfb visible-always visible-md-always visible-xl-always">
-													<span class="price"><span
-															class="woocommerce-Price-amount amount"><bdi><span
-																	class="woocommerce-Price-currencySymbol">&#36;</span>95.00</bdi></span></span>
-												</div>
-												<div
-													class="lb-element lb-element-woocommerce-product-add-to-cart lb-element-woocommerce-product-add-to-cart-7b2c999c7c visible-always visible-md-hover visible-xl-hover visible-hover--animate visible-hover--animate-fast visible-hover--fade">
-													<a href="/index_tact-mirror.html?slug=striped-wool-lap-robe"
-														data-quantity="1"
-														class="add-to-cart link-button product_type_variable add_to_cart_button"
-														data-product_id="576" data-product_sku="ELT-TXT-001"
-														aria-label="Select options for &ldquo;Striped Wool Lap Robe&rdquo;"
-														rel="nofollow"><span
-															class="link-button__content link-button__content--icon"><span
-																class="button-icon"><i
-																	class="kalium-icon-plus"></i></span><span
-																class="link-button__loading"></span></span><span
-															class="link-button__content link-button__content--text">Select
-															options</span></a>
-												</div>
-											</div>
-										</div>
-										<div
-											class="lb-element lb-element-woocommerce-product-column lb-element-woocommerce-product-column-71d730a90d d-flex justify-content-end justify-content-md-end justify-content-xl-end visible-always visible-md-always visible-xl-always col col-auto-grow col-md-auto-grow col-xl-auto-grow">
-											<div
-												class="lb-element lb-element-woocommerce-product-wishlist lb-element-woocommerce-product-wishlist-ad1269863e visible-hover visible-md-hover visible-xl-hover visible-hover--animate visible-hover--animate-fast visible-hover--fade">
-												<a href="/index_decor.html?category=?add_to_wishlist=576&amp;_wpnonce=eafaab3ca0"
-													class="add-to-wishlist link-button" data-product-id="576"
-													data-product-type="variable" data-original-product-id="576"
-													rel="nofollow" data-tooltip="Add to wishlist"
-													data-tooltip-placement="top"><span
-														class="link-button__content link-button__content--icon"><span
-															class="button-icon"><i
-																class="kalium-icon-add-to-wishlist"></i><i
-																class="kalium-icon-added-to-wishlist"></i></span><span
-															class="link-button__loading"></span></span></a>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-						</li>
-						<li
-							class="product type-product post-708 status-publish instock product_cat-vases product_tag-ceramic product_tag-japanese-design product_tag-minimalist has-post-thumbnail shipping-taxable purchasable product-type-variable">
-
-							<div
-								class="lb-element lb-element-woocommerce-product-row lb-element-woocommerce-product-row-53a2a62b8b visible-always visible-md-always visible-xl-always row">
-								<div
-									class="lb-element lb-element-woocommerce-product-column lb-element-woocommerce-product-column-fb57d1a6ea visible-always visible-md-always visible-xl-always col col-auto-grow col-md-auto-grow col-xl-auto-grow">
-									<div
-										class="lb-element lb-element-woocommerce-product-images lb-element-woocommerce-product-images-496bcb030c visible-always visible-md-always visible-xl-always">
-										<div class="image-set image-set--hover-transition-fade">
-											<div class="image-set__entry image-set__entry--hover-invisible">
-												<a href="/index_tact-mirror.html?slug=sunao-vase-petit"
-													aria-label="Sunao Vase Petit"><span
-														class="image-placeholder loop-product-image"
-														style="--k-ratio:1.000000"><span class="loader"><span
-																class="loader-el semi-circle-spin"><span></span></span></span><img
-															loading="lazy" width="1200" height="1200"
-															src="https://sites.kaliumtheme.com/elementor/furniture/wp-content/uploads/2025/05/sunao-vase-11.jpeg"
-															class="attachment-woocommerce_thumbnail size-woocommerce_thumbnail"
-															alt="" decoding="async"
-															srcset="https://sites.kaliumtheme.com/elementor/furniture/wp-content/uploads/2025/05/sunao-vase-11.jpeg 1200w, /wp-content/uploads/2025/05/sunao-vase-11-220x220.jpeg 220w, /wp-content/uploads/2025/05/sunao-vase-11-266x266.jpeg 266w"
-															sizes="(max-width: 1200px) 100vw, 1200px" /></span></a>
-											</div>
-											<div
-												class="image-set__entry image-set__entry--overlay image-set__entry--hover-visible">
-												<a href="/index_tact-mirror.html?slug=sunao-vase-petit"
-													aria-label="Sunao Vase Petit"><span
-														class="image-placeholder loop-product-image"
-														style="--k-ratio:0.800000"><span class="loader"><span
-																class="loader-el semi-circle-spin"><span></span></span></span><img
-															loading="lazy" width="600" height="750"
-															src="https://sites.kaliumtheme.com/elementor/furniture/wp-content/uploads/2025/05/sunao-vase-13-600x750.jpeg"
-															class="attachment-woocommerce_thumbnail size-woocommerce_thumbnail"
-															alt="" decoding="async"
-															srcset="https://sites.kaliumtheme.com/elementor/furniture/wp-content/uploads/2025/05/sunao-vase-13-600x750.jpeg 600w, /wp-content/uploads/2025/05/sunao-vase-13-240x300.jpeg 240w, /wp-content/uploads/2025/05/sunao-vase-13-819x1024.jpeg 819w, /wp-content/uploads/2025/05/sunao-vase-13-768x960.jpeg 768w, /wp-content/uploads/2025/05/sunao-vase-13.jpeg 960w"
-															sizes="(max-width: 600px) 100vw, 600px" /></span></a>
-											</div>
-										</div>
-									</div>
-									<div
-										class="lb-element lb-element-woocommerce-product-row lb-element-woocommerce-product-row-3068b4958c visible-always visible-md-always visible-xl-always row">
-										<div
-											class="lb-element lb-element-woocommerce-product-column lb-element-woocommerce-product-column-a715305e66 visible-always visible-md-always visible-xl-always col col-10 col-md-10 col-xl-10">
-											<h3
-												class="lb-element lb-element-woocommerce-product-title lb-element-woocommerce-product-title-6e814bb413 visible-always visible-md-always visible-xl-always link-plain">
-												<a href="/index_tact-mirror.html?slug=sunao-vase-petit"
-													class="woocommerce-LoopProduct-link woocommerce-loop-product__link">Sunao
-													Vase Petit</a>
-											</h3>
-											<div class="lb-element lb-element-woocommerce-product-swap-on-hover lb-element-woocommerce-product-swap-on-hover-9084dc5655 visible-always visible-md-always visible-xl-always swap-on-hover"
-												data-hover-attach="product-hover">
-												<div
-													class="lb-element lb-element-woocommerce-product-price lb-element-woocommerce-product-price-485f9e8dfb visible-always visible-md-always visible-xl-always">
-													<span class="price"><span
-															class="woocommerce-Price-amount amount"><bdi><span
-																	class="woocommerce-Price-currencySymbol">&#36;</span>59.00</bdi></span></span>
-												</div>
-												<div
-													class="lb-element lb-element-woocommerce-product-add-to-cart lb-element-woocommerce-product-add-to-cart-7b2c999c7c visible-always visible-md-hover visible-xl-hover visible-hover--animate visible-hover--animate-fast visible-hover--fade">
-													<a href="/index_tact-mirror.html?slug=sunao-vase-petit"
-														data-quantity="1"
-														class="add-to-cart link-button product_type_variable add_to_cart_button"
-														data-product_id="708" data-product_sku="CPH-VAS-001"
-														aria-label="Select options for &ldquo;Sunao Vase Petit&rdquo;"
-														rel="nofollow"><span
-															class="link-button__content link-button__content--icon"><span
-																class="button-icon"><i
-																	class="kalium-icon-plus"></i></span><span
-																class="link-button__loading"></span></span><span
-															class="link-button__content link-button__content--text">Select
-															options</span></a>
-												</div>
-											</div>
-										</div>
-										<div
-											class="lb-element lb-element-woocommerce-product-column lb-element-woocommerce-product-column-71d730a90d d-flex justify-content-end justify-content-md-end justify-content-xl-end visible-always visible-md-always visible-xl-always col col-auto-grow col-md-auto-grow col-xl-auto-grow">
-											<div
-												class="lb-element lb-element-woocommerce-product-wishlist lb-element-woocommerce-product-wishlist-ad1269863e visible-hover visible-md-hover visible-xl-hover visible-hover--animate visible-hover--animate-fast visible-hover--fade">
-												<a href="/index_decor.html?category=?add_to_wishlist=708&amp;_wpnonce=eafaab3ca0"
-													class="add-to-wishlist link-button" data-product-id="708"
-													data-product-type="variable" data-original-product-id="708"
-													rel="nofollow" data-tooltip="Add to wishlist"
-													data-tooltip-placement="top"><span
-														class="link-button__content link-button__content--icon"><span
-															class="button-icon"><i
-																class="kalium-icon-add-to-wishlist"></i><i
-																class="kalium-icon-added-to-wishlist"></i></span><span
-															class="link-button__loading"></span></span></a>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-						</li>
-						<li
-							class="product type-product post-602 status-publish instock product_cat-mirrors product_tag-brass product_tag-mirror product_tag-table-top product_tag-tilting has-post-thumbnail shipping-taxable purchasable product-type-simple">
-
-							<div
-								class="lb-element lb-element-woocommerce-product-row lb-element-woocommerce-product-row-53a2a62b8b visible-always visible-md-always visible-xl-always row">
-								<div
-									class="lb-element lb-element-woocommerce-product-column lb-element-woocommerce-product-column-fb57d1a6ea visible-always visible-md-always visible-xl-always col col-auto-grow col-md-auto-grow col-xl-auto-grow">
-									<div
-										class="lb-element lb-element-woocommerce-product-images lb-element-woocommerce-product-images-496bcb030c visible-always visible-md-always visible-xl-always">
-										<div class="image-set image-set--hover-transition-fade">
-											<div class="image-set__entry image-set__entry--hover-invisible">
-												<a href="/index_tact-mirror.html?slug=tilting-table-top-brass-mirror"
-													aria-label="Tilting Table-Top Brass Mirror"><span
-														class="image-placeholder loop-product-image"
-														style="--k-ratio:1.333333"><span class="loader"><span
-																class="loader-el semi-circle-spin"><span></span></span></span><img
-															loading="lazy" width="1200" height="900"
-															src="https://sites.kaliumtheme.com/elementor/furniture/wp-content/uploads/2025/05/tilting-mirror-1.jpeg"
-															class="attachment-woocommerce_thumbnail size-woocommerce_thumbnail"
-															alt="" decoding="async" /></span></a>
-											</div>
-											<div
-												class="image-set__entry image-set__entry--overlay image-set__entry--hover-visible">
-												<a href="/index_tact-mirror.html?slug=tilting-table-top-brass-mirror"
-													aria-label="Tilting Table-Top Brass Mirror"><span
-														class="image-placeholder loop-product-image"
-														style="--k-ratio:1.333333"><span class="loader"><span
-																class="loader-el semi-circle-spin"><span></span></span></span><img
-															loading="lazy" width="1200" height="900"
-															src="https://sites.kaliumtheme.com/elementor/furniture/wp-content/uploads/2025/05/tilting-mirror-5.jpeg"
-															class="attachment-woocommerce_thumbnail size-woocommerce_thumbnail"
-															alt="" decoding="async" /></span></a>
-											</div>
-										</div>
-									</div>
-									<div
-										class="lb-element lb-element-woocommerce-product-row lb-element-woocommerce-product-row-3068b4958c visible-always visible-md-always visible-xl-always row">
-										<div
-											class="lb-element lb-element-woocommerce-product-column lb-element-woocommerce-product-column-a715305e66 visible-always visible-md-always visible-xl-always col col-10 col-md-10 col-xl-10">
-											<h3
-												class="lb-element lb-element-woocommerce-product-title lb-element-woocommerce-product-title-6e814bb413 visible-always visible-md-always visible-xl-always link-plain">
-												<a href="/index_tact-mirror.html?slug=tilting-table-top-brass-mirror"
-													class="woocommerce-LoopProduct-link woocommerce-loop-product__link">Tilting
-													Table-Top Brass Mirror</a>
-											</h3>
-											<div class="lb-element lb-element-woocommerce-product-swap-on-hover lb-element-woocommerce-product-swap-on-hover-9084dc5655 visible-always visible-md-always visible-xl-always swap-on-hover"
-												data-hover-attach="product-hover">
-												<div
-													class="lb-element lb-element-woocommerce-product-price lb-element-woocommerce-product-price-485f9e8dfb visible-always visible-md-always visible-xl-always">
-													<span class="price"><span
-															class="woocommerce-Price-amount amount"><bdi><span
-																	class="woocommerce-Price-currencySymbol">&#36;</span>59.00</bdi></span></span>
-												</div>
-												<div
-													class="lb-element lb-element-woocommerce-product-add-to-cart lb-element-woocommerce-product-add-to-cart-7b2c999c7c visible-always visible-md-hover visible-xl-hover visible-hover--animate visible-hover--animate-fast visible-hover--fade">
-													<a href="/index_decor.html?category=?add-to-cart=602"
-														data-quantity="1"
-														class="add-to-cart link-button product_type_simple add_to_cart_button ajax_add_to_cart"
-														data-product_id="602" data-product_sku="AUD-MIR-002"
-														aria-label="Add to cart: &ldquo;Tilting Table-Top Brass Mirror&rdquo;"
-														rel="nofollow"><span
-															class="link-button__content link-button__content--icon"><span
-																class="button-icon"><i
-																	class="kalium-icon-plus"></i></span><span
-																class="link-button__loading"></span></span><span
-															class="link-button__content link-button__content--text">Add
-															to cart</span></a>
-												</div>
-											</div>
-										</div>
-										<div
-											class="lb-element lb-element-woocommerce-product-column lb-element-woocommerce-product-column-71d730a90d d-flex justify-content-end justify-content-md-end justify-content-xl-end visible-always visible-md-always visible-xl-always col col-auto-grow col-md-auto-grow col-xl-auto-grow">
-											<div
-												class="lb-element lb-element-woocommerce-product-wishlist lb-element-woocommerce-product-wishlist-ad1269863e visible-hover visible-md-hover visible-xl-hover visible-hover--animate visible-hover--animate-fast visible-hover--fade">
-												<a href="/index_decor.html?category=?add_to_wishlist=602&amp;_wpnonce=eafaab3ca0"
-													class="add-to-wishlist link-button" data-product-id="602"
-													data-product-type="simple" data-original-product-id="602"
-													rel="nofollow" data-tooltip="Add to wishlist"
-													data-tooltip-placement="top"><span
-														class="link-button__content link-button__content--icon"><span
-															class="button-icon"><i
-																class="kalium-icon-add-to-wishlist"></i><i
-																class="kalium-icon-added-to-wishlist"></i></span><span
-															class="link-button__loading"></span></span></a>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-						</li>
-						<li
-							class="product type-product post-677 status-publish instock product_cat-mirrors product_tag-iconic product_tag-led product_tag-wavy has-post-thumbnail shipping-taxable purchasable product-type-simple">
-
-							<div
-								class="lb-element lb-element-woocommerce-product-row lb-element-woocommerce-product-row-53a2a62b8b visible-always visible-md-always visible-xl-always row">
-								<div
-									class="lb-element lb-element-woocommerce-product-column lb-element-woocommerce-product-column-fb57d1a6ea visible-always visible-md-always visible-xl-always col col-auto-grow col-md-auto-grow col-xl-auto-grow">
-									<div
-										class="lb-element lb-element-woocommerce-product-images lb-element-woocommerce-product-images-496bcb030c visible-always visible-md-always visible-xl-always">
-										<div class="image-set image-set--hover-transition-fade">
-											<div class="image-set__entry image-set__entry--hover-invisible">
-												<a href="/index_tact-mirror.html?slug=ultrafragola-mirror"
-													aria-label="Ultrafragola Mirror"><span
-														class="image-placeholder loop-product-image"
-														style="--k-ratio:1.333333"><span class="loader"><span
-																class="loader-el semi-circle-spin"><span></span></span></span><img
-															loading="lazy" width="1200" height="900"
-															src="https://sites.kaliumtheme.com/elementor/furniture/wp-content/uploads/2025/05/ultrafragola-13.jpeg"
-															class="attachment-woocommerce_thumbnail size-woocommerce_thumbnail"
-															alt="" decoding="async" /></span></a>
-											</div>
-											<div
-												class="image-set__entry image-set__entry--overlay image-set__entry--hover-visible">
-												<a href="/index_tact-mirror.html?slug=ultrafragola-mirror"
-													aria-label="Ultrafragola Mirror"><span
-														class="image-placeholder loop-product-image"
-														style="--k-ratio:0.666667"><span class="loader"><span
-																class="loader-el semi-circle-spin"><span></span></span></span><img
-															loading="lazy" width="800" height="1200"
-															src="https://sites.kaliumtheme.com/elementor/furniture/wp-content/uploads/2025/05/ultrafragola-1.jpeg"
-															class="attachment-woocommerce_thumbnail size-woocommerce_thumbnail"
-															alt="" decoding="async" /></span></a>
-											</div>
-										</div>
-									</div>
-									<div
-										class="lb-element lb-element-woocommerce-product-row lb-element-woocommerce-product-row-3068b4958c visible-always visible-md-always visible-xl-always row">
-										<div
-											class="lb-element lb-element-woocommerce-product-column lb-element-woocommerce-product-column-a715305e66 visible-always visible-md-always visible-xl-always col col-10 col-md-10 col-xl-10">
-											<h3
-												class="lb-element lb-element-woocommerce-product-title lb-element-woocommerce-product-title-6e814bb413 visible-always visible-md-always visible-xl-always link-plain">
-												<a href="/index_tact-mirror.html?slug=ultrafragola-mirror"
-													class="woocommerce-LoopProduct-link woocommerce-loop-product__link">Ultrafragola
-													Mirror</a>
-											</h3>
-											<div class="lb-element lb-element-woocommerce-product-swap-on-hover lb-element-woocommerce-product-swap-on-hover-9084dc5655 visible-always visible-md-always visible-xl-always swap-on-hover"
-												data-hover-attach="product-hover">
-												<div
-													class="lb-element lb-element-woocommerce-product-price lb-element-woocommerce-product-price-485f9e8dfb visible-always visible-md-always visible-xl-always">
-													<span class="price"><span
-															class="woocommerce-Price-amount amount"><bdi><span
-																	class="woocommerce-Price-currencySymbol">&#36;</span>11,000.00</bdi></span></span>
-												</div>
-												<div
-													class="lb-element lb-element-woocommerce-product-add-to-cart lb-element-woocommerce-product-add-to-cart-7b2c999c7c visible-always visible-md-hover visible-xl-hover visible-hover--animate visible-hover--animate-fast visible-hover--fade">
-													<a href="/index_decor.html?category=?add-to-cart=677"
-														data-quantity="1"
-														class="add-to-cart link-button product_type_simple add_to_cart_button ajax_add_to_cart"
-														data-product_id="677" data-product_sku="POL-MIR-001"
-														aria-label="Add to cart: &ldquo;Ultrafragola Mirror&rdquo;"
-														rel="nofollow"><span
-															class="link-button__content link-button__content--icon"><span
-																class="button-icon"><i
-																	class="kalium-icon-plus"></i></span><span
-																class="link-button__loading"></span></span><span
-															class="link-button__content link-button__content--text">Add
-															to cart</span></a>
-												</div>
-											</div>
-										</div>
-										<div
-											class="lb-element lb-element-woocommerce-product-column lb-element-woocommerce-product-column-71d730a90d d-flex justify-content-end justify-content-md-end justify-content-xl-end visible-always visible-md-always visible-xl-always col col-auto-grow col-md-auto-grow col-xl-auto-grow">
-											<div
-												class="lb-element lb-element-woocommerce-product-wishlist lb-element-woocommerce-product-wishlist-ad1269863e visible-hover visible-md-hover visible-xl-hover visible-hover--animate visible-hover--animate-fast visible-hover--fade">
-												<a href="/index_decor.html?category=?add_to_wishlist=677&amp;_wpnonce=eafaab3ca0"
-													class="add-to-wishlist link-button" data-product-id="677"
-													data-product-type="simple" data-original-product-id="677"
-													rel="nofollow" data-tooltip="Add to wishlist"
-													data-tooltip-placement="top"><span
-														class="link-button__content link-button__content--icon"><span
-															class="button-icon"><i
-																class="kalium-icon-add-to-wishlist"></i><i
-																class="kalium-icon-added-to-wishlist"></i></span><span
-															class="link-button__loading"></span></span></a>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-						</li>
-						<li
-							class="product type-product post-709 status-publish last instock product_cat-textiles product_tag-fringed product_tag-graphic-pattern product_tag-reversible has-post-thumbnail shipping-taxable purchasable product-type-variable">
-
-							<div
-								class="lb-element lb-element-woocommerce-product-row lb-element-woocommerce-product-row-53a2a62b8b visible-always visible-md-always visible-xl-always row">
-								<div
-									class="lb-element lb-element-woocommerce-product-column lb-element-woocommerce-product-column-fb57d1a6ea visible-always visible-md-always visible-xl-always col col-auto-grow col-md-auto-grow col-xl-auto-grow">
-									<div
-										class="lb-element lb-element-woocommerce-product-images lb-element-woocommerce-product-images-496bcb030c visible-always visible-md-always visible-xl-always">
-										<div class="image-set image-set--hover-transition-fade">
-											<div class="image-set__entry image-set__entry--hover-invisible">
-												<a href="/index_tact-mirror.html?slug=untitled-throw"
-													aria-label="Untitled Throw"><span
-														class="image-placeholder loop-product-image"
-														style="--k-ratio:0.750000"><span class="loader"><span
-																class="loader-el semi-circle-spin"><span></span></span></span><img
-															loading="lazy" width="900" height="1200"
-															src="https://sites.kaliumtheme.com/elementor/furniture/wp-content/uploads/2025/05/untitled-throw-19.jpg"
-															class="attachment-woocommerce_thumbnail size-woocommerce_thumbnail"
-															alt="" decoding="async" /></span></a>
-											</div>
-											<div
-												class="image-set__entry image-set__entry--overlay image-set__entry--hover-visible">
-												<a href="/index_tact-mirror.html?slug=untitled-throw"
-													aria-label="Untitled Throw"><span
-														class="image-placeholder loop-product-image"
-														style="--k-ratio:0.756667"><span class="loader"><span
-																class="loader-el semi-circle-spin"><span></span></span></span><img
-															loading="lazy" width="908" height="1200"
-															src="https://sites.kaliumtheme.com/elementor/furniture/wp-content/uploads/2025/05/untitled-throw-10.jpg"
-															class="attachment-woocommerce_thumbnail size-woocommerce_thumbnail"
-															alt="" decoding="async" /></span></a>
-											</div>
-										</div>
-									</div>
-									<div
-										class="lb-element lb-element-woocommerce-product-row lb-element-woocommerce-product-row-3068b4958c visible-always visible-md-always visible-xl-always row">
-										<div
-											class="lb-element lb-element-woocommerce-product-column lb-element-woocommerce-product-column-a715305e66 visible-always visible-md-always visible-xl-always col col-10 col-md-10 col-xl-10">
-											<h3
-												class="lb-element lb-element-woocommerce-product-title lb-element-woocommerce-product-title-6e814bb413 visible-always visible-md-always visible-xl-always link-plain">
-												<a href="/index_tact-mirror.html?slug=untitled-throw"
-													class="woocommerce-LoopProduct-link woocommerce-loop-product__link">Untitled
-													Throw</a>
-											</h3>
-											<div class="lb-element lb-element-woocommerce-product-swap-on-hover lb-element-woocommerce-product-swap-on-hover-9084dc5655 visible-always visible-md-always visible-xl-always swap-on-hover"
-												data-hover-attach="product-hover">
-												<div
-													class="lb-element lb-element-woocommerce-product-price lb-element-woocommerce-product-price-485f9e8dfb visible-always visible-md-always visible-xl-always">
-													<span class="price"><span
-															class="woocommerce-Price-amount amount"><bdi><span
-																	class="woocommerce-Price-currencySymbol">&#36;</span>110.00</bdi></span></span>
-												</div>
-												<div
-													class="lb-element lb-element-woocommerce-product-add-to-cart lb-element-woocommerce-product-add-to-cart-7b2c999c7c visible-always visible-md-hover visible-xl-hover visible-hover--animate visible-hover--animate-fast visible-hover--fade">
-													<a href="/index_tact-mirror.html?slug=untitled-throw"
-														data-quantity="1"
-														class="add-to-cart link-button product_type_variable add_to_cart_button"
-														data-product_id="709" data-product_sku="TRD-TXT-001"
-														aria-label="Select options for &ldquo;Untitled Throw&rdquo;"
-														rel="nofollow"><span
-															class="link-button__content link-button__content--icon"><span
-																class="button-icon"><i
-																	class="kalium-icon-plus"></i></span><span
-																class="link-button__loading"></span></span><span
-															class="link-button__content link-button__content--text">Select
-															options</span></a>
-												</div>
-											</div>
-										</div>
-										<div
-											class="lb-element lb-element-woocommerce-product-column lb-element-woocommerce-product-column-71d730a90d d-flex justify-content-end justify-content-md-end justify-content-xl-end visible-always visible-md-always visible-xl-always col col-auto-grow col-md-auto-grow col-xl-auto-grow">
-											<div
-												class="lb-element lb-element-woocommerce-product-wishlist lb-element-woocommerce-product-wishlist-ad1269863e visible-hover visible-md-hover visible-xl-hover visible-hover--animate visible-hover--animate-fast visible-hover--fade">
-												<a href="/index_decor.html?category=?add_to_wishlist=709&amp;_wpnonce=eafaab3ca0"
-													class="add-to-wishlist link-button" data-product-id="709"
-													data-product-type="variable" data-original-product-id="709"
-													rel="nofollow" data-tooltip="Add to wishlist"
-													data-tooltip-placement="top"><span
-														class="link-button__content link-button__content--icon"><span
-															class="button-icon"><i
-																class="kalium-icon-add-to-wishlist"></i><i
-																class="kalium-icon-added-to-wishlist"></i></span><span
-															class="link-button__loading"></span></span></a>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-						</li>
 					</ul>
 					<nav class="pagination link-plain link-text" role="navigation">
 
@@ -4395,6 +3230,23 @@
 						</div>
 					</nav>
 				</main>
+				<section id="specifications-section" class="specifications-section">
+					<div class="specs-container">
+						<h2 class="specs-title">Specification</h2>
+						<div id="specs-items-container" class="specs-items">
+							<p class="specs-placeholder">Select a category to see specifications</p>
+						</div>
+					</div>
+				</section>
+				<section id="faq-section" class="faq-section">
+					<div class="faq-container">
+						<h2 class="faq-title">Frequently Asked Questions</h2>
+						<div id="faq-items-container" class="faq-items">
+							<p class="faq-placeholder">Select a category to see frequently asked questions.</p>
+						</div>
+					</div>
+				</section>
+
 			</div>
 			<aside class="sidebar shop-sidebar">
 				<div class="off-canvas-shop-filters-header">
@@ -5734,6 +4586,402 @@
 		/* <![CDATA[ */
 		var wpforms_settings = { "val_required": "This field is required.", "val_email": "Please enter a valid email address.", "val_email_suggestion": "Did you mean {suggestion}?", "val_email_suggestion_title": "Click to accept this suggestion.", "val_email_restricted": "This email address is not allowed.", "val_number": "Please enter a valid number.", "val_number_positive": "Please enter a valid positive number.", "val_minimum_price": "Amount entered is less than the required minimum.", "val_confirm": "Field values do not match.", "val_checklimit": "You have exceeded the number of allowed selections: {#}.", "val_limit_characters": "{count} of {limit} max characters.", "val_limit_words": "{count} of {limit} max words.", "val_min": "Please enter a value greater than or equal to {0}.", "val_max": "Please enter a value less than or equal to {0}.", "val_recaptcha_fail_msg": "Google reCAPTCHA verification failed, please try again later.", "val_turnstile_fail_msg": "Cloudflare Turnstile verification failed, please try again later.", "val_inputmask_incomplete": "Please fill out the field in required format.", "uuid_cookie": "", "locale": "en", "country": "", "country_list_label": "Country list", "wpforms_plugin_url": "https:\/\/sites.kaliumtheme.com\/elementor\/furniture\/wp-content\/plugins\/wpforms-lite\/", "gdpr": "1", "ajaxurl": "https:\/\/sites.kaliumtheme.com\/elementor\/furniture\/wp-admin\/admin-ajax.php", "mailcheck_enabled": "1", "mailcheck_domains": [], "mailcheck_toplevel_domains": ["dev"], "is_ssl": "1", "currency_code": "USD", "currency_thousands": ",", "currency_decimals": "2", "currency_decimal": ".", "currency_symbol": "$", "currency_symbol_pos": "left", "val_requiredpayment": "Payment is required.", "val_creditcard": "Please enter a valid credit card number.", "css_vars": ["field-border-radius", "field-border-style", "field-border-size", "field-background-color", "field-border-color", "field-text-color", "field-menu-color", "label-color", "label-sublabel-color", "label-error-color", "button-border-radius", "button-border-style", "button-border-size", "button-background-color", "button-border-color", "button-text-color", "page-break-color", "background-image", "background-position", "background-repeat", "background-size", "background-width", "background-height", "background-color", "background-url", "container-padding", "container-border-style", "container-border-width", "container-border-color", "container-border-radius", "field-size-input-height", "field-size-input-spacing", "field-size-font-size", "field-size-line-height", "field-size-padding-h", "field-size-checkbox-size", "field-size-sublabel-spacing", "field-size-icon-size", "label-size-font-size", "label-size-line-height", "label-size-sublabel-font-size", "label-size-sublabel-line-height", "button-size-font-size", "button-size-height", "button-size-padding-h", "button-size-margin-top", "container-shadow-size-box-shadow"], "isModernMarkupEnabled": "1", "formErrorMessagePrefix": "Form error message", "errorMessagePrefix": "Error message", "submitBtnDisabled": "Submit button is disabled during form submission.", "readOnlyDisallowedFields": ["captcha", "content", "divider", "hidden", "html", "entry-preview", "pagebreak", "payment-total", "gdpr-checkbox"], "error_updating_token": "Error updating token. Please try again or contact support if the issue persists.", "network_error": "Network error or server is unreachable. Check your connection or try again later.", "token_cache_lifetime": "86400", "hn_data": { "1803": 1, "1887": 1 }, "address_field": { "list_countries_without_states": ["GB", "DE", "CH", "NL"] } }
 		/* ]]> */
+	</script>
+	<script>
+		function getCurrentCategory() {
+			const params = new URLSearchParams(window.location.search);
+			return params.get('category') || null;
+		}
+		async function fetchCategoryData(categorySlug) {
+			try {
+				const response = await fetch(`http://localhost:3000/api/categories/${categorySlug}`);
+				if (!response.ok) {
+					throw new Error('Failed to fetch category data');
+				}
+				return await response.json();
+			} catch (error) {
+				console.error('Error fetching category data:', error);
+				return null;
+			}
+		}
+		function renderSpecifications(buyingGuidance) {
+			const container = document.getElementById('specs-items-container');
+			if (!container) return;
+
+			if (!buyingGuidance || buyingGuidance.length === 0) {
+				container.innerHTML = '<p class="specs-placeholder">No specifications available for this category.</p>';
+				return;
+			}
+
+			let html = '';
+			buyingGuidance.forEach((item, index) => {
+				const title = item.specification || item.question || item.title || 'Specification';
+				const content = item.detail || item.answer || item.content || item.description || '';
+				
+				html += `
+					<div class="specs-item">
+						<div class="specs-item-label">${title}</div>
+						<div class="specs-item-value">${content}</div>
+					</div>
+				`;
+			});
+
+			container.innerHTML = html;
+		}
+		function renderFAQs(faqs) {
+			const container = document.getElementById('faq-items-container');
+			if (!container) return;
+
+			if (!faqs || faqs.length === 0) {
+				container.innerHTML = '<p class="faq-placeholder">No frequently asked questions for this category.</p>';
+				return;
+			}
+
+			let html = '';
+			faqs.forEach((item, index) => {
+				html += `
+					<div class="faq-item">
+						<h3 class="faq-item-question">${item.question || 'Question'}</h3>
+						<div class="faq-item-answer">${item.answer || ''}</div>
+					</div>
+				`;
+			});
+
+			container.innerHTML = html;
+		}
+		function getSlugFromUrl() {
+			const path = window.location.pathname;
+			console.log('[URL] Current path:', path);
+			const match = path.match(/\/index_decor\/category\/([^\/]+)/);
+			const slug = match ? match[1] : null;
+			console.log('[URL] Extracted slug:', slug);
+			return slug;
+		}
+		async function fetchBrowseData(slug) {
+			try {
+				console.log('[API] Fetching browse data for slug:', slug);
+				const response = await fetch(`/api/browse/${slug}`);
+				console.log('[API] Response status:', response.status);
+				if (!response.ok) throw new Error('Not found');
+				const result = await response.json();
+				console.log('[API] Browse data received:', result);
+				return result;
+			} catch (error) {
+				console.error('Error fetching browse data:', error);
+				return null;
+			}
+		}
+		function renderCategoryBanner(browseData) {
+			if (!browseData || !browseData.data) return;
+			
+			const titleEl = document.getElementById('dynamic-category-title');
+			const descEl = document.getElementById('dynamic-category-description');
+			const imgEl = document.querySelector('.category-image img');
+			
+			const dataObj = browseData.type === 'category' ? browseData.data.category : browseData.data.subcategory;
+			
+			if (titleEl) titleEl.textContent = dataObj.name || '';
+			if (descEl) descEl.textContent = dataObj.description || '';
+			
+			if (imgEl && dataObj.images && dataObj.images.length > 0) {
+				imgEl.src = dataObj.images[0].src || imgEl.src;
+				imgEl.alt = dataObj.name || 'Category';
+			}
+		}
+		function renderSubcategoriesSlider(browseData) {
+			const section = document.getElementById('subcategories-horizontal-section');
+			const slider = document.getElementById('subcategories-horizontal-slider');
+			
+			if (!browseData || browseData.type !== 'category' || !browseData.data.category.subcategories || browseData.data.category.subcategories.length === 0) {
+				if (section) section.style.display = 'none';
+				return;
+			}
+
+			if (section) section.style.display = 'block';
+			if (slider) slider.innerHTML = '';
+
+			browseData.data.category.subcategories.forEach(subcategory => {
+				const card = document.createElement('div');
+				card.className = 'subcategory-card';
+				
+				const imageUrl = subcategory.images && subcategory.images.length > 0 
+					? subcategory.images[0].src 
+					: 'https://via.placeholder.com/140?text=No+Image';
+
+				card.innerHTML = `
+					<img src="${imageUrl}" alt="${subcategory.name}" class="subcategory-card-image" />
+					<div class="subcategory-card-title">${subcategory.name}</div>
+				`;
+
+				card.addEventListener('click', () => {
+					
+					window.location.href = `/index_decor/category/${subcategory.slug}`;
+				});
+
+				if (slider) slider.appendChild(card);
+			});
+		}
+
+		function renderProductsGrid(browseData) {
+			const grid = document.getElementById('dynamic-product-grid');
+			const resultCount = document.querySelector('.woocommerce-result-count');
+			
+			if (!grid || !browseData || !browseData.data || !browseData.data.products) {
+				return;
+			}
+			
+			const products = browseData.data.products;
+			grid.innerHTML = '';
+			grid.className = 'products grid columns-4';
+			
+			if (products.length === 0) {
+				grid.innerHTML = '<li style="grid-column: 1 / -1; text-align: center; padding: 2em;">No products found</li>';
+				if (resultCount) resultCount.textContent = 'Showing 0 products';
+				return;
+			}
+			
+			if (resultCount) {
+				resultCount.textContent = `Showing 1–${Math.min(15, products.length)} of ${products.length} results`;
+			}
+			
+			const style = document.createElement('style');
+			style.textContent = `
+				#dynamic-product-grid.columns-4 {
+					display: grid;
+					grid-template-columns: repeat(4, 1fr);
+					gap: 20px;
+					list-style: none;
+					padding: 0;
+					margin: 0;
+				}
+				
+				#dynamic-product-grid.columns-4 li {
+					display: flex;
+					flex-direction: column;
+					background: transparent;
+					border-radius: 0;
+					overflow: visible;
+					cursor: pointer;
+					transition: transform 0.3s ease;
+				}
+				
+				#dynamic-product-grid.columns-4 li:hover {
+				}
+				
+				#dynamic-product-grid.columns-4 .product-wrapper {
+					display: flex;
+					flex-direction: column;
+					height: 100%;
+					padding: 0;
+				}
+				
+				#dynamic-product-grid.columns-4 .product-image-wrapper {
+					width: 100%;
+					height: 250px;
+					overflow: hidden;
+					border-radius: 0;
+					margin-bottom: 16px;
+					background: #f9f9f9;
+					cursor: pointer;
+					position: relative;
+				}
+				
+				#dynamic-product-grid.columns-4 .product-image-wrapper img {
+					width: 100%;
+					height: 100%;
+					object-fit: cover;
+					transition: opacity 0.4s ease, transform 0.4s ease;
+					opacity: 1;
+				}
+				
+				#dynamic-product-grid.columns-4 .product-image-wrapper img.primary-image {
+					position: absolute;
+					top: 0;
+					left: 0;
+				}
+				
+				#dynamic-product-grid.columns-4 .product-image-wrapper img.secondary-image {
+					opacity: 0;
+					position: absolute;
+					top: 0;
+					left: 0;
+				}
+				
+				#dynamic-product-grid.columns-4 li:hover .product-image-wrapper img.primary-image {
+					opacity: 0;
+				}
+				
+				#dynamic-product-grid.columns-4 li:hover .product-image-wrapper img.secondary-image {
+					opacity: 1;
+				}
+				
+				#dynamic-product-grid.columns-4 .woocommerce-loop-product-title {
+					font-size: 0.95em;
+					font-weight: 500;
+					color: #1a1a1a;
+					margin: 0 0 8px 0;
+					flex-grow: 1;
+					line-height: 1.5;
+					text-transform: capitalize;
+					cursor: pointer;
+				}
+				
+				#dynamic-product-grid.columns-4 .price-and-cart {
+					display: flex;
+					justify-content: space-between;
+					align-items: center;
+					min-height: 40px;
+				}
+				
+				#dynamic-product-grid.columns-4 .price {
+					font-size: 1.2em;
+					font-weight: 700;
+					color: #000;
+					letter-spacing: -0.5px;
+					flex: 1;
+					transition: opacity 0.3s ease;
+				}
+				
+				#dynamic-product-grid.columns-4 .add-to-cart-btn {
+					opacity: 0;
+					font-size: 0.85em;
+					font-weight: 600;
+					color: #666;
+					text-transform: capitalize;
+					cursor: pointer;
+					transition: opacity 0.3s ease, color 0.3s ease;
+					background: none;
+					border: none;
+					padding: 0;
+					margin: 0;
+					text-decoration: underline;
+					white-space: nowrap;
+					margin-left: 8px;
+				}
+				
+				#dynamic-product-grid.columns-4 li:hover .add-to-cart-btn {
+					opacity: 1;
+					color: #000;
+				}
+				
+				@media (max-width: 1024px) {
+					#dynamic-product-grid.columns-4 {
+						grid-template-columns: repeat(3, 1fr);
+					}
+				}
+				
+				@media (max-width: 768px) {
+					#dynamic-product-grid.columns-4 {
+						grid-template-columns: repeat(2, 1fr);
+					}
+				}
+				
+				@media (max-width: 480px) {
+					#dynamic-product-grid.columns-4 {
+						grid-template-columns: 1fr;
+					}
+				}
+			`;
+			if (!document.querySelector('style[data-product-grid]')) {
+				style.setAttribute('data-product-grid', 'true');
+				document.head.appendChild(style);
+			}
+			products.forEach((product, index) => {
+				const li = document.createElement('li');
+				li.className = 'product type-product status-publish instock has-post-thumbnail shipping-taxable purchasable product-type-simple';
+				if (index === 0) li.classList.add('first');
+				if (index === products.length - 1) li.classList.add('last');
+				
+				const productImage = product.images && product.images.length > 0 
+					? product.images[0].src 
+					: 'https://via.placeholder.com/300x400?text=No+Image';
+				
+				const secondaryImage = product.images && product.images.length > 1 
+					? product.images[1].src 
+					: productImage;
+				
+				const productPrice = product.price || 'Contact for price';
+				const priceHTML = typeof productPrice === 'number' 
+					? `<span class="woocommerce-Price-amount amount"><span class="woocommerce-Price-currencySymbol">$</span>${productPrice.toFixed(2)}</span>` 
+					: productPrice;
+
+				const productUrl = `/product/${product.slug}`;
+				
+				li.innerHTML = `
+					<div class="product-wrapper" onclick="window.location.href='${productUrl}'">
+						<div class="product-image-wrapper">
+							<img src="${productImage}" alt="${product.name || 'Product'}" loading="lazy" class="primary-image" />
+							<img src="${secondaryImage}" alt="${product.name || 'Product'}" loading="lazy" class="secondary-image" />
+						</div>
+						<h2 class="woocommerce-loop-product-title">${product.name || 'Unnamed Product'}</h2>
+						<div class="price-and-cart">
+							<span class="price">${priceHTML}</span>
+							<button class="add-to-cart-btn" onclick="event.stopPropagation(); alert('Added to cart!');">Add to cart</button>
+						</div>
+					</div>
+				`;
+				
+				grid.appendChild(li);
+			});
+		}
+		async function initializeSections() {
+			console.log('[Init] Starting initialization...');
+			const slug = getSlugFromUrl();
+			
+			if (slug) {
+				console.log('[Init] Slug found:', slug);
+				const browseData = await fetchBrowseData(slug);
+				console.log('[Init] Browse data result:', browseData);
+				
+				if (browseData && browseData.success) {
+					console.log('[Init] Rendering components...');
+					renderCategoryBanner(browseData);
+					renderSubcategoriesSlider(browseData);
+					renderProductsGrid(browseData);
+					
+					const categoryData = browseData.data.category || browseData.data.subcategory;
+					console.log('[Init] Category data:', categoryData);
+					
+					const specsSection = document.getElementById('specifications-section');
+					let specs = categoryData?.buyingGuidance || categoryData?.descriptionStructured?.buyingGuidance || [];
+					
+					console.log('[Init] Specs from API:', specs);
+					
+					if (specsSection) {
+						if (specs && specs.length > 0) {
+							specsSection.style.display = 'block';
+							renderSpecifications(specs);
+							console.log('[Init] Specifications rendered with', specs.length, 'items');
+						} else {
+							specsSection.style.display = 'none';
+							console.log('[Init] No specifications data available');
+						}
+					}
+					
+					const faqSection = document.getElementById('faq-section');
+					const faqs = categoryData?.faqs || [];
+					
+					console.log('[Init] FAQs from API:', faqs);
+					
+					if (faqSection) {
+						if (faqs && faqs.length > 0) {
+							faqSection.style.display = 'block';
+							renderFAQs(faqs);
+							console.log('[Init] FAQs rendered with', faqs.length, 'items');
+						} else {
+							faqSection.style.display = 'none';
+							console.log('[Init] No FAQ data available');
+						}
+					}
+				} else {
+					console.warn('[Init] Browse data failed or missing success flag');
+				}
+			} else {
+				console.log('[Init] No slug found in URL');
+			}
+		}
+
+		document.addEventListener('DOMContentLoaded', initializeSections);
 	</script>
 	<!-- Dynamic Category Data - Loaded from REST API -->
 	<script src="/api-client.js"></script>

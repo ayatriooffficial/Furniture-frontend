@@ -8,31 +8,275 @@
       * {
         box-sizing: border-box;
       }
-
       body {
         font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
           "Helvetica Neue", Arial, sans-serif;
-        padding: 24px 16px;
-        background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+        padding: 0;
+        margin: 0;
+        background: #f5f7fa;
         color: #1e293b;
         min-height: 100vh;
-        line-height: 1.6;
+        line-height: 1.4;
+        font-size: 12px;
+      }
+      .container {
+        display: grid;
+        grid-template-columns: 1fr 280px;
+        gap: 12px;
+        max-width: 100%;
+        padding: 8px;
+        background: #f5f7fa;
+        min-height: 100vh;
+      }
+      @media (max-width: 768px) {
+        .container {
+          grid-template-columns: 1fr;
+          padding: 16px;
+        }
       }
 
-      .container {
-        max-width: 1200px;
-        margin: 0 auto;
-        background: #ffffff;
-        padding: 48px;
-        border-radius: 16px;
-        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15), 0 0 1px rgba(0, 0, 0, 0.1);
-        animation: fadeInUp 0.6s ease-out;
+      .form-card {
+        background: white;
+        border-radius: 8px;
+        padding: 0;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+      }
+      .form-header {
+        padding: 12px 14px;
+        border-bottom: 1px solid #e2e8f0;
+      }
+      .form-content {
+        padding: 12px 14px;
+      }
+      .progress-container {
+        width: 100%;
+        background: white;
+        border-radius: 8px;
+        padding: 16px 14px;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        margin-bottom: 12px;
+      }
+
+      .progress-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 12px;
+      }
+
+      .progress-header h3 {
+        margin: 0;
+        font-size: 12px;
+        font-weight: 700;
+        color: #1e293b;
+        text-transform: uppercase;
+        letter-spacing: 0.3px;
+      }
+
+      .progress-percentage {
+        font-size: 14px;
+        font-weight: 700;
+        background: linear-gradient(135deg, #fbbf24, #34d399);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+      .sidebar-progress-container {
+        width: 100%;
+        margin-bottom: 8px;
+      }
+      .sidebar-progress-bar-wrapper {
+        position: relative;
+        width: 100%;
+        height: 20px;
+        background: #f3f4f6;
+        border-radius: 10px;
+        overflow: hidden;
+        border: 1px solid #e5e7eb;
+        box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.05);
+      }
+
+      .sidebar-progress-bar-fill {
+        height: 100%;
+        width: 0%;
+        background: #3b82f6;
+        border-radius: 9px;
+        transition: width 0.3s ease;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+      }
+
+      .sidebar-progress-text {
+        position: absolute;
+        font-size: 10px;
+        font-weight: 700;
+        color: #1e293b;
+        text-shadow: 0 1px 1px rgba(255, 255, 255, 0.8);
+        z-index: 10;
+        pointer-events: none;
+      }
+
+      .sidebar-progress-info {
+        width: 100%;
+      }
+
+      .sidebar-progress-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+        padding: 3px 8px;
+        background: #fef3c7;
+        color: #92400e;
+        border-radius: 3px;
+        font-size: 10px;
+        font-weight: 600;
+      }
+
+      .sidebar-progress-badge.complete {
+        background: #d1fae5;
+        color: #065f46;
+      }
+
+      .progress-bar-wrapper {
+        position: relative;
+        width: 100%;
+        height: 28px;
+        background: #f3f4f6;
+        border-radius: 14px;
+        overflow: hidden;
+        border: 2px solid #e5e7eb;
+        box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.05);
+      }
+
+      .progress-bar-fill {
+        height: 100%;
+        width: 0%;
+        background: linear-gradient(90deg, #9d97db);
+        background-size: 200% 100%;
+        animation: slideGradient 3s ease-in-out infinite;
+        border-radius: 12px;
+        transition: width 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+      }
+
+      @keyframes slideGradient {
+        0% {
+          background-position: 0% center;
+        }
+        50% {
+          background-position: 100% center;
+        }
+        100% {
+          background-position: 0% center;
+        }
+      }
+
+      .progress-text {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 13px;
+        font-weight: 700;
+        color: #1e293b;
+        text-shadow: 0 1px 2px rgba(255, 255, 255, 0.8);
+        z-index: 10;
+        pointer-events: none;
+      }
+
+      .progress-details {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 10px;
+        font-size: 11px;
+        color: #64748b;
+      }
+
+      .progress-field-summary {
+        display: flex;
+        gap: 12px;
+        align-items: center;
+      }
+
+      .progress-status-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 4px 10px;
+        background: #fef3c7;
+        color: #92400e;
+        border-radius: 4px;
+        font-size: 11px;
+        font-weight: 600;
+      }
+
+      .progress-status-badge.complete {
+        background: #d1fae5;
+        color: #065f46;
+      }
+
+      .progress-milestone {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        margin-left: 8px;
+        padding: 4px 8px;
+        background: #e0e7ff;
+        color: #4f46e5;
+        border-radius: 3px;
+        font-size: 10px;
+        font-weight: 600;
+      }
+
+      .sidebar {
+        height: fit-content;
+        position: sticky;
+        top: 24px;
+      }
+      .sidebar-card {
+        background: white;
+        border-radius: 4px;
+        padding: 10px;
+        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+        margin-bottom: 8px;
+      }
+      .sidebar-card h3 {
+        margin: 0 0 8px 0;
+        font-size: 10px;
+        font-weight: 700;
+        color: #1e293b;
+        text-transform: uppercase;
+        letter-spacing: 0.3px;
+      }
+      .sidebar-item {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        padding: 3px 0;
+        font-size: 10px;
+        color: #64748b;
+      }
+      .sidebar-badge {
+        display: inline-block;
+        padding: 4px 12px;
+        background: #fef3c7;
+        color: #92400e;
+        border-radius: 4px;
+        font-size: 12px;
+        font-weight: 600;
       }
 
       @keyframes fadeInUp {
         from {
           opacity: 0;
-          transform: translateY(30px);
+          transform: translateY(20px);
         }
         to {
           opacity: 1;
@@ -41,374 +285,450 @@
       }
 
       h1 {
-        margin: 0 0 12px;
-        font-size: 36px;
-        font-weight: 800;
-        letter-spacing: -1px;
-        color: #0f172a;
+        color: #1e293b;
+        margin: 0 0 3px 0;
+        font-size: 20px;
+        font-weight: 700;
       }
-
       .subtitle {
         color: #64748b;
-        font-size: 16px;
-        margin-bottom: 40px;
-        display: block;
-        font-weight: 400;
+        font-size: 11px;
+        margin: 0;
       }
 
       .form-section {
-        margin-bottom: 40px;
-        padding-bottom: 40px;
+        margin-bottom: 12px;
+        padding-bottom: 12px;
         border-bottom: 1px solid #e2e8f0;
       }
-
       .form-section:last-of-type {
+        margin-bottom: 0;
+        padding-bottom: 0;
         border-bottom: none;
       }
 
       .form-section h2 {
-        font-size: 18px;
+        font-size: 12px;
         font-weight: 700;
-        margin: 0 0 24px;
-        text-transform: uppercase;
-        letter-spacing: 1px;
-        color: #0f172a;
+        color: #1e293b;
+        margin: 0 0 10px;
         display: flex;
         align-items: center;
-        gap: 12px;
+        gap: 6px;
       }
-
       .form-section h2::before {
         content: "";
         display: inline-block;
         width: 4px;
-        height: 24px;
-        background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+        height: 20px;
         border-radius: 2px;
       }
 
       label {
         display: block;
-        margin: 20px 0 10px;
+        margin-bottom: 3px;
         font-weight: 600;
-        font-size: 14px;
+        font-size: 10px;
         text-transform: uppercase;
-        letter-spacing: 0.5px;
-        color: #1e293b;
+        letter-spacing: 0.3px;
+        color: #334155;
         transition: color 0.2s ease;
       }
-
       label.required::after {
         content: " *";
         color: #ef4444;
         font-weight: 700;
       }
-
       input[type="text"],
       input[type="number"],
       input[type="email"],
       textarea,
       select {
         width: 100%;
-        padding: 14px 16px;
-        border: 2px solid #e2e8f0;
-        border-radius: 10px;
+        padding: 5px 8px;
+        border: 1px solid #cbd5e1;
+        border-radius: 3px;
         font-family: inherit;
-        font-size: 15px;
+        font-size: 11px;
         color: #1e293b;
         background: #f8fafc;
-        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        transition: all 0.2s;
       }
-
-      input[type="text"]::placeholder,
-      input[type="number"]::placeholder,
-      input[type="email"]::placeholder,
+      input::placeholder,
       textarea::placeholder {
-        color: #94a3b8;
+        color: #9ca3af;
       }
-
-      input[type="text"]:focus,
-      input[type="number"]:focus,
-      input[type="email"]:focus,
+      input:focus,
       textarea:focus,
       select:focus {
         outline: none;
-        border-color: #3b82f6;
-        background: #ffffff;
-        box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.1),
-          inset 0 1px 2px rgba(0, 0, 0, 0.05);
-        transform: translateY(-2px);
+        border-color: #667eea;
+        background: white;
+        box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
       }
-
-      input[type="text"]:hover:not(:focus),
-      input[type="number"]:hover:not(:focus),
-      input[type="email"]:hover:not(:focus),
+      input:hover:not(:focus),
       textarea:hover:not(:focus),
       select:hover:not(:focus) {
         border-color: #cbd5e1;
-        background: #ffffff;
       }
 
       textarea {
-        min-height: 140px;
+        min-height: 50px;
         resize: vertical;
-        font-family: inherit;
       }
 
       .row {
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-        gap: 24px;
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+        gap: 8px;
         margin-bottom: 0;
       }
-
       .row > * {
         min-width: 0;
       }
-
       .col {
         flex: 1;
       }
-
       .col.small {
         grid-column: span 1;
       }
-
       .col.full {
         grid-column: 1 / -1;
       }
 
       .muted {
-        color: #64748b;
-        font-size: 13px;
+        color: #6b7280;
+        font-size: 9px;
         display: block;
-        margin-top: 6px;
-        font-weight: 400;
+        margin-top: 1px;
       }
-
       .btn {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        padding: 14px 32px;
-        background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
-        color: #fff;
-        border-radius: 10px;
-        border: 2px solid #3b82f6;
-        cursor: pointer;
-        font-weight: 700;
-        font-size: 14px;
-        text-transform: uppercase;
-        letter-spacing: 0.5px;
-        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         position: relative;
-        overflow: hidden;
+        padding: 6px 12px;
+        border: none;
+        border-radius: 3px;
+        cursor: pointer;
+        font-size: 10px;
+        font-weight: 600;
+        background: #f97316;
+        color: white;
+        transition: all 0.2s ease;
       }
-
-      .btn::before {
-        content: "";
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        width: 0;
-        height: 0;
-        border-radius: 50%;
-        background: rgba(255, 255, 255, 0.25);
-        transform: translate(-50%, -50%);
-        transition: width 0.6s, height 0.6s;
-      }
-
-      .btn:hover::before {
-        width: 300px;
-        height: 300px;
-      }
-
       .btn:hover {
-        transform: translateY(-3px);
-        box-shadow: 0 16px 32px rgba(59, 130, 246, 0.3);
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(249, 115, 22, 0.3);
       }
-
       .btn:active {
         transform: translateY(-1px);
       }
 
       .btn.secondary {
         background: transparent;
-        color: #3b82f6;
-        border-color: #bfdbfe;
+        color: #667eea;
+        border: 1px solid #cbd5e1;
       }
-
       .btn.secondary:hover {
-        background: #eff6ff;
-        border-color: #3b82f6;
+        background: #f8fafc;
+        border-color: #667eea;
+      }
+      .chip-container {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-top: 10px;
+        margin-bottom: 10px;
+        min-height: 32px;
+        align-items: center;
       }
 
-      .btn.secondary:hover::before {
-        background: rgba(59, 130, 246, 0.05);
+      .chip {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 6px 12px;
+        background: linear-gradient(135deg, #e0e7ff, #f3e8ff);
+        border: 1px solid #c7d2fe;
+        border-radius: 20px;
+        font-size: 12px;
+        font-weight: 500;
+        color: #4f46e5;
+        animation: chipPop 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+        transition: all 0.2s ease;
+        cursor: pointer;
+      }
+
+      .chip:hover {
+        background: linear-gradient(135deg, #c7d2fe, #e9d5ff);
+        transform: scale(1.05);
+        box-shadow: 0 2px 8px rgba(79, 70, 229, 0.15);
+      }
+
+      .chip .chip-remove {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 18px;
+        height: 18px;
+        background: rgba(79, 70, 229, 0.15);
+        border: none;
+        border-radius: 50%;
+        color: #4f46e5;
+        cursor: pointer;
+        font-size: 14px;
+        padding: 0;
+        transition: all 0.2s;
+        line-height: 1;
+        margin-left: 4px;
+      }
+
+      .chip .chip-remove:hover {
+        background: #ef4444;
+        color: white;
+        transform: scale(1.1);
+      }
+
+      @keyframes chipPop {
+        0% {
+          opacity: 0;
+          transform: scale(0.8);
+        }
+        100% {
+          opacity: 1;
+          transform: scale(1);
+        }
+      }
+
+      .chip-options {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-top: 10px;
+        margin-bottom: 10px;
+      }
+
+      .chip-option {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 4px;
+        padding: 6px 12px;
+        background: #f8fafc;
+        border: 1px solid #cbd5e1;
+        border-radius: 20px;
+        font-size: 12px;
+        font-weight: 500;
+        color: #64748b;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        user-select: none;
+      }
+
+      .chip-option:hover {
+        background: #f1f5f9;
+        border-color: #667eea;
+      }
+
+      .chip-option.selected {
+        background: linear-gradient(135deg, #e0e7ff, #f3e8ff);
+        border-color: #c7d2fe;
+        color: #4f46e5;
+        font-weight: 600;
+      }
+
+      .chip-add-btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 24px;
+        height: 24px;
+        background: #4f46e5;
+        color: white;
+        border: none;
+        border-radius: 50%;
+        cursor: pointer;
+        font-size: 16px;
+        font-weight: bold;
+        transition: all 0.2s;
+        padding: 0;
+        margin-right: 2px;
+      }
+
+      .chip-add-btn:hover {
+        background: #4338ca;
+        transform: scale(1.1);
       }
 
       .list-section {
-        margin-top: 16px;
+        margin-top: 10px;
       }
-
       .list-item {
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-        gap: 12px;
+        grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+        gap: 6px;
         align-items: flex-end;
-        margin-top: 14px;
-        padding: 18px;
-        background: #f8fafc;
-        border-radius: 10px;
-        border: 2px solid #e2e8f0;
+        margin-top: 4px;
+        padding: 0;
+        background: transparent;
+        border-radius: 3px;
+        border: none;
         animation: slideInLeft 0.3s ease-out;
         transition: all 0.2s ease;
       }
-
       @keyframes slideInLeft {
         from {
           opacity: 0;
-          transform: translateX(-20px);
+          transform: translateX(-15px);
         }
         to {
           opacity: 1;
           transform: translateX(0);
         }
       }
-
       .list-item:hover {
-        border-color: #3b82f6;
-        background: #ffffff;
-        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.06);
+        border-color: transparent;
+        background: transparent;
+        box-shadow: none;
       }
-
       .list-item input {
         margin: 0;
-        padding: 11px 14px;
-        font-size: 14px;
-        border: 2px solid #e2e8f0;
-        border-radius: 8px;
-        background: #ffffff;
+        padding: 5px 8px;
+        font-size: 11px;
+        border: 1px solid #cbd5e1;
+        border-radius: 3px;
+        background: #f8fafc;
+        color: #1e293b;
+        font-family: inherit;
+        transition: all 0.2s;
       }
-
       .list-item input:focus {
-        border-color: #3b82f6;
-        box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+        border-color: #cbd5e1;
+        background: white;
+        box-shadow: none;
       }
-
       .list-item .btn {
-        padding: 10px 16px;
-        font-size: 13px;
-        min-width: 100px;
-        flex-shrink: 0;
-        align-self: flex-end;
+        padding: 8px 12px;
+        font-size: 12px;
+        min-width: 80px;
       }
 
       .notice {
-        padding: 18px 20px;
-        border-radius: 10px;
-        margin-top: 20px;
-        font-size: 15px;
+        padding: 12px 14px;
+        border-radius: 6px;
+        margin-top: 12px;
+        font-size: 12px;
         font-weight: 500;
-        border-left: 5px solid transparent;
+        border-left: 3px solid transparent;
         animation: slideDown 0.4s ease-out;
         display: flex;
         align-items: center;
-        gap: 14px;
+        gap: 10px;
       }
-
       @keyframes slideDown {
         from {
           opacity: 0;
-          transform: translateY(-10px);
+          transform: translateY(-8px);
         }
         to {
           opacity: 1;
           transform: translateY(0);
         }
       }
-
       .notice.success {
         background: #f0fdf4;
         color: #166534;
         border-left-color: #22c55e;
       }
-
       .notice.success::before {
         content: "✓";
         display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        width: 24px;
-        height: 24px;
+        width: 20px;
+        height: 20px;
         background: #22c55e;
         color: white;
         border-radius: 50%;
+        align-items: center;
+        justify-content: center;
         font-weight: bold;
-        font-size: 14px;
-        flex-shrink: 0;
+        font-size: 12px;
       }
-
       .notice.error {
         background: #fef2f2;
         color: #991b1b;
         border-left-color: #ef4444;
       }
-
       .notice.error::before {
         content: "✕";
         display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        width: 24px;
-        height: 24px;
+        width: 20px;
+        height: 20px;
         background: #ef4444;
         color: white;
         border-radius: 50%;
+        align-items: center;
+        justify-content: center;
         font-weight: bold;
-        font-size: 14px;
-        flex-shrink: 0;
+        font-size: 12px;
       }
 
-      .notice:is(.success, .error)::before {
-        flex-shrink: 0;
+      .message {
+        padding: 10px 12px;
+        border-radius: 6px;
+        background: #fef2f2;
+        color: #991b1b;
+        border: 1px solid #fecaca;
+        display: none;
+        margin-top: 10px;
+        font-weight: 600;
+        font-size: 12px;
+      }
+      .message.success {
+        background: #f0fdf4;
+        color: #166534;
+        border-color: #bbf7d0;
+      }
+      .message.show {
+        animation: fadeInUp 260ms ease both;
+        display: block;
+      }
+      #productLoading {
+        display: none;
+        margin-bottom: 10px;
+        color: #6b7280;
+        font-size: 12px;
       }
 
       .actions {
-        margin-top: 40px;
+        margin-top: 8px;
         display: flex;
-        gap: 16px;
+        gap: 6px;
         justify-content: flex-start;
       }
-
       .actions .btn {
-        min-width: 180px;
+        min-width: 140px;
       }
-
       .add-btn {
-        margin-top: 16px;
+        margin-top: 10px;
         width: auto;
       }
 
       hr {
-        margin: 32px 0;
+        margin: 18px 0;
         border: none;
-        border-top: 2px solid #e2e8f0;
+        border-top: 1px solid #e5e7eb;
       }
 
       h3 {
-        font-size: 16px;
+        font-size: 12px;
         font-weight: 700;
-        margin: 28px 0 18px;
+        margin: 16px 0 10px;
         text-transform: uppercase;
-        letter-spacing: 0.5px;
-        color: #0f172a;
+        letter-spacing: 0.3px;
+        color: #1f2937;
       }
 
       .loading {
         animation: pulse 1.5s ease-in-out infinite;
       }
-
       @keyframes pulse {
         0%,
         100% {
@@ -421,305 +741,709 @@
 
       @media (max-width: 768px) {
         .container {
-          padding: 32px 24px;
+          padding: 10px;
         }
-
         h1 {
-          font-size: 28px;
+          font-size: 20px;
         }
-
         .row {
-          grid-template-columns: 1fr;
-          gap: 16px;
-        }
-
-        .col,
-        .col.small {
-          grid-column: span 1;
-        }
-
-        .list-item {
           grid-template-columns: 1fr;
           gap: 10px;
         }
-
+        .list-item {
+          grid-template-columns: 1fr;
+          gap: 8px;
+        }
         .list-item input,
         .list-item .btn {
           width: 100%;
         }
-
         .actions {
           flex-direction: column;
         }
-
         .actions .btn {
           width: 100%;
+        }
+      }
+      .top-nav {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 10px 16px;
+        border-radius: 6px;
+        margin-bottom: 12px;
+        background: rgba(0, 0, 0, 0.04);
+      }
+      .side-nav {
+        display: none;
+        position: fixed;
+        left: 0;
+        top: 0;
+        height: 100vh;
+        width: 200px;
+        background: white;
+        box-shadow: 1px 0 3px rgba(0, 0, 0, 0.06);
+        padding: 16px 10px;
+        z-index: 60;
+        flex-direction: column;
+        gap: 8px;
+      }
+      .side-nav .brand {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        margin-bottom: 10px;
+      }
+      .side-nav .nav-links {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+      }
+      .side-nav .nav-links a {
+        color: #374151;
+        text-decoration: none;
+        padding: 8px 10px;
+        border-radius: 5px;
+        font-weight: 600;
+        font-size: 12px;
+      }
+      .side-nav .nav-links a.active {
+        background: #fff7ed;
+        color: #b45309;
+        border-left: 3px solid #f97316;
+      }
+      .side-nav .nav-links a:hover {
+        background: #f3f4f6;
+      }
+
+      @media (min-width: 768px) {
+        .top-nav {
+          display: none;
+        }
+        .side-nav {
+          display: flex;
+        }
+        .container {
+          padding-left: 220px;
+        }
+      }
+      @media (max-width: 767px) {
+        .side-nav {
+          display: none;
+        }
+      }
+
+      .top-nav .brand {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        color: white;
+        text-decoration: none;
+      }
+      .top-nav .brand img {
+        height: 40px;
+        width: 40px;
+        object-fit: cover;
+        border-radius: 5px;
+      }
+      .top-nav .nav-links {
+        display: flex;
+        gap: 10px;
+      }
+      .top-nav .nav-links a {
+        color: #1f2937;
+        text-decoration: none;
+        padding: 6px 10px;
+        border-radius: 5px;
+        font-weight: 600;
+        font-size: 12px;
+      }
+      .top-nav .nav-links a:hover {
+        background: rgba(249, 115, 22, 0.08);
+      }
+      .top-nav .actions {
+        display: flex;
+        gap: 6px;
+      }
+      @media (max-width: 880px) {
+        .top-nav {
+          flex-direction: column;
+          align-items: stretch;
+        }
+        .top-nav .nav-links {
+          flex-wrap: wrap;
+        }
+      }
+      .hamburger {
+        display: none;
+        flex-direction: column;
+        background: none;
+        border: none;
+        cursor: pointer;
+        gap: 5px;
+        padding: 8px;
+      }
+      .hamburger span {
+        width: 25px;
+        height: 3px;
+        background: #1f2937;
+        border-radius: 2px;
+        transition: all 0.3s ease;
+      }
+      .hamburger.active span:nth-child(1) {
+        transform: rotate(45deg) translate(10px, 10px);
+      }
+      .hamburger.active span:nth-child(2) {
+        opacity: 0;
+      }
+      .hamburger.active span:nth-child(3) {
+        transform: rotate(-45deg) translate(8px, -8px);
+      }
+
+      .mobile-nav-overlay {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.3);
+        z-index: 98;
+      }
+      .mobile-nav-overlay.active {
+        display: block;
+      }
+
+      .mobile-nav {
+        display: none;
+        position: fixed;
+        right: -280px;
+        top: 0;
+        width: 280px;
+        height: 100vh;
+        background: white;
+        box-shadow: -2px 0 8px rgba(0, 0, 0, 0.15);
+        flex-direction: column;
+        z-index: 99;
+        transition: right 0.3s ease;
+      }
+      .mobile-nav.active {
+        display: flex;
+        right: 0;
+      }
+
+      .mobile-nav .close-btn {
+        align-self: flex-end;
+        background: none;
+        border: none;
+        font-size: 28px;
+        cursor: pointer;
+        padding: 12px 16px;
+        color: #1f2937;
+      }
+
+      .mobile-nav .nav-links {
+        display: flex;
+        flex-direction: column;
+        gap: 0;
+        flex: 1;
+        padding: 16px 0;
+      }
+
+      .mobile-nav .nav-links a {
+        color: #1f2937;
+        text-decoration: none;
+        padding: 12px 20px;
+        border-left: 3px solid transparent;
+        font-weight: 600;
+        font-size: 14px;
+      }
+
+      .mobile-nav .nav-links a.active {
+        background: #fff7ed;
+        color: #b45309;
+        border-left-color: #f97316;
+      }
+
+      .mobile-nav .nav-links a:hover {
+        background: #f3f4f6;
+      }
+
+      @media (max-width: 768px) {
+        .hamburger {
+          display: flex;
         }
       }
     </style>
   </head>
   <body>
+    <!-- Left side navigation (desktop) -->
+    <nav class="side-nav" aria-label="Primary">
+      <a class="brand" href="create_product.html">
+        <strong style="color: #1f2937">Furniture Admin</strong>
+      </a>
+      <div class="nav-links" role="menubar">
+        <a role="menuitem" href="category.html">Categories</a>
+        <a role="menuitem" href="subcategory.html">Subcategories</a>
+        <a role="menuitem" href="create_product.html" class="active"
+          >Products</a
+        >
+      </div>
+    </nav>
+
+    <header>
+      <nav class="top-nav" role="navigation" aria-label="Admin navigation">
+        <button class="hamburger" id="hamburgerBtn">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </nav>
+      <div class="mobile-nav-overlay" id="mobileNavOverlay"></div>
+      <nav class="mobile-nav" id="mobileNav">
+        <button class="close-btn" id="closeNavBtn">&times;</button>
+        <div class="nav-links">
+          <a href="category.html">Categories</a>
+          <a href="subcategory.html">Subcategories</a>
+          <a href="create_product.html" class="active">Products</a>
+        </div>
+      </nav>
+    </header>
     <div class="container">
-      <h1>Create Product</h1>
-      <span class="subtitle"
-        >Add a new product to your catalog with pricing, details, reviews, and
-        FAQs.</span
-      >
+      <div class="form-card">
+        <div class="form-header">
+          <h1>Create Product</h1>
+          <p class="subtitle">
+            Add a new product to your catalog with pricing, details, reviews,
+            and FAQs.
+          </p>
+        </div>
+        <div class="form-content">
+          <form id="product-form">
+            <div class="form-section">
+              <h2>Basic Information</h2>
+              <div class="row">
+                <div class="col">
+                  <label for="name" class="required">Product Name</label>
+                  <input
+                    id="name"
+                    name="name"
+                    type="text"
+                    placeholder="Enter product name"
+                    required
+                  />
+                </div>
+              </div>
+              <input type="hidden" id="slug" name="slug" value="" />
 
-      <form id="product-form">
-        <div class="form-section">
-          <h2>Basic Information</h2>
-          <div class="row">
-            <div class="col">
-              <label for="name" class="required">Product Name</label>
-              <input
-                id="name"
-                name="name"
-                placeholder="Enter product name"
-                required
-              />
-            </div>
-            <div class="col small">
-              <label for="slug">URL Slug</label>
-              <input id="slug" name="slug" placeholder="auto-generated" />
-            </div>
-          </div>
+              <div class="row">
+                <div class="col">
+                  <label for="category">Category</label>
+                  <select id="category" name="category">
+                    <option value="">-- Select Category --</option>
+                  </select>
+                </div>
+                <div class="col">
+                  <label for="subcategorySlug" class="required"
+                    >Subcategory</label
+                  >
+                  <select id="subcategorySlug" name="subcategorySlug" required>
+                    <option value="">-- Select Subcategory --</option>
+                  </select>
+                </div>
+              </div>
 
-          <div class="row">
-            <div class="col small">
-              <label for="price" class="required">Price</label>
-              <input
-                id="price"
-                name="price"
-                type="number"
-                step="0.01"
-                placeholder="0.00"
-                required
-              />
-            </div>
-            <div class="col small">
-              <label for="originalPrice">Original Price</label>
-              <input
-                id="originalPrice"
-                name="originalPrice"
-                type="number"
-                step="0.01"
-                placeholder="0.00"
-              />
-            </div>
-            <div class="col small">
-              <label for="articleNumber">Article Number</label>
-              <input
-                id="articleNumber"
-                name="articleNumber"
-                placeholder="e.g. ARM-001"
-              />
-            </div>
-            <div class="col small">
-              <label for="isActive">Status</label>
-              <select id="isActive" name="isActive">
-                <option value="true">Active</option>
-                <option value="false">Inactive</option>
-              </select>
-            </div>
-          </div>
+              <div class="row">
+                <div class="col small">
+                  <label for="originalPrice">Original Price</label>
+                  <input
+                    id="originalPrice"
+                    name="originalPrice"
+                    type="number"
+                    step="0.01"
+                    placeholder="0.00"
+                  />
+                </div>
+                <div class="col small">
+                  <label for="discountPercentage">Discount %</label>
+                  <select id="discountPercentage" name="discountPercentage">
+                    <option value="">-- Select Discount --</option>
+                    <option value="5">5%</option>
+                    <option value="10">10%</option>
+                    <option value="15">15%</option>
+                    <option value="20">20%</option>
+                    <option value="25">25%</option>
+                    <option value="30">30%</option>
+                    <option value="35">35%</option>
+                    <option value="40">40%</option>
+                  </select>
+                </div>
+                <div class="col small">
+                  <label for="price" class="required">Offer Price</label>
+                  <input
+                    id="price"
+                    name="price"
+                    type="number"
+                    step="0.01"
+                    placeholder="0.00"
+                    required
+                    readonly
+                  />
+                </div>
+                <div class="col small">
+                  <label for="articleNumber">Article Number</label>
+                  <input
+                    id="articleNumber"
+                    name="articleNumber"
+                    type="text"
+                    placeholder="e.g. ARM-001"
+                  />
+                </div>
+                <div class="col small">
+                  <label for="isActive">Status</label>
+                  <select id="isActive" name="isActive">
+                    <option value="true">Active</option>
+                    <option value="false">Inactive</option>
+                  </select>
+                </div>
+              </div>
 
-          <div class="row">
-            <div class="col">
-              <label for="features" class="required">Features</label>
-              <input
-                id="features"
-                name="features"
-                placeholder="e.g. solid wood, hand-finished, eco-friendly"
-              />
-              <span class="muted"
-                >Comma-separated list of key product features</span
+              <div class="row">
+                <div class="col full">
+                  <label for="headerDescription">Header Description</label>
+                  <textarea
+                    id="headerDescription"
+                    name="headerDescription"
+                    placeholder="Short intro below H1 on product page"
+                  ></textarea>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col full">
+                  <label for="description" class="required">Description</label>
+                  <textarea
+                    id="description"
+                    name="description"
+                    required
+                    placeholder="Detailed product description..."
+                  ></textarea>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-section">
+              <h2>SEO & Meta Information</h2>
+              <div class="row">
+                <div class="col full">
+                  <label for="metaTitle">Meta Title</label>
+                  <input
+                    id="metaTitle"
+                    name="metaTitle"
+                    type="text"
+                    placeholder="SEO title (50-60 chars recommended)"
+                  />
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col full">
+                  <label for="metaDescription">Meta Description</label>
+                  <textarea
+                    id="metaDescription"
+                    name="metaDescription"
+                    type="text"
+                    placeholder="SEO description (150-160 chars)"
+                  ></textarea>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col">
+                  <label for="h1Tag">H1 Tag</label>
+                  <input
+                    id="h1Tag"
+                    name="h1Tag"
+                    type="text"
+                    placeholder="Main heading for the product"
+                  />
+                </div>
+              </div>
+            </div>
+
+            <div class="form-section">
+              <h2>Product Details</h2>
+
+              <div class="row">
+                <div class="col">
+                  <label for="finish">Finish</label>
+                  <input
+                    id="finish"
+                    name="finish"
+                    type="text"
+                    placeholder="e.g. Matte oak legs"
+                  />
+                </div>
+                <div class="col">
+                  <label for="designer" type="text">Designer</label>
+                  <input id="designer" name="designer" type="text" />
+                </div>
+              </div>
+
+              <div
+                style="
+                  margin-top: 12px;
+                  padding-top: 12px;
+                  border-top: 1px solid #e2e8f0;
+                "
               >
-            </div>
-          </div>
+                <label
+                  style="
+                    display: block;
+                    margin-bottom: 10px;
+                    font-weight: 600;
+                    font-size: 12px;
+                    color: #334155;
+                    text-transform: uppercase;
+                    letter-spacing: 0.3px;
+                  "
+                  >Features <span style="color: #ef4444">*</span></label
+                >
+                <p style="font-size: 11px; color: #64748b; margin-bottom: 8px">
+                  Auto-loaded from selected subcategory - Click to select
+                  multiple
+                </p>
+                <div class="chip-container" id="selected-features"></div>
+                <div
+                  class="chip-options"
+                  id="features-options"
+                  style="
+                    display: flex;
+                    flex-wrap: wrap;
+                    gap: 8px;
+                    padding: 8px 0;
+                    min-height: 30px;
+                  "
+                ></div>
+              </div>
 
-          <div class="row">
-            <div class="col full">
-              <label for="description" class="required">Description</label>
-              <textarea
-                id="description"
-                name="description"
-                required
-                placeholder="Detailed product description..."
-              ></textarea>
-            </div>
-          </div>
-
-          <div class="row">
-            <div class="col full">
-              <label for="headerDescription">Header Description</label>
-              <textarea
-                id="headerDescription"
-                name="headerDescription"
-                placeholder="Short intro below H1 on product page"
-              ></textarea>
-            </div>
-          </div>
-        </div>
-
-        <div class="form-section">
-          <h2>SEO & Meta Information</h2>
-          <div class="row">
-            <div class="col full">
-              <label for="metaTitle">Meta Title</label>
-              <input
-                id="metaTitle"
-                name="metaTitle"
-                placeholder="SEO title (50-60 chars recommended)"
-              />
-            </div>
-          </div>
-
-          <div class="row">
-            <div class="col full">
-              <label for="metaDescription">Meta Description</label>
-              <textarea
-                id="metaDescription"
-                name="metaDescription"
-                placeholder="SEO description (150-160 chars)"
-              ></textarea>
-            </div>
-          </div>
-
-          <div class="row">
-            <div class="col">
-              <label for="h1Tag">H1 Tag</label>
-              <input
-                id="h1Tag"
-                name="h1Tag"
-                placeholder="Main heading for the product"
-              />
-            </div>
-          </div>
-        </div>
-
-        <div class="form-section">
-          <h2>Product Details</h2>
-
-          <div class="row">
-            <div class="col">
-              <label for="dimensions">Dimensions</label>
-              <input
-                id="dimensions"
-                name="dimensions"
-                placeholder="e.g. 120 × 80 × 40 cm"
-              />
-            </div>
-            <div class="col">
-              <label for="materials">Materials</label>
-              <input
-                id="materials"
-                name="materials"
-                placeholder="e.g. oak, walnut, leather"
-              />
-            </div>
-            <div class="col">
-              <label for="finish">Finish</label>
-              <input
-                id="finish"
-                name="finish"
-                placeholder="e.g. Matte oak legs"
-              />
-            </div>
-          </div>
-
-          <div class="row">
-            <div class="col">
-              <label for="designer">Designer</label>
-              <input id="designer" name="designer" />
-            </div>
-            <div class="col">
-              <label for="countryOfOrigin">Country of Origin</label>
-              <input id="countryOfOrigin" name="countryOfOrigin" />
-            </div>
-            <div class="col">
-              <label for="importerPackerMarketer"
-                >Importer / Packer / Marketer</label
+              <div
+                style="
+                  margin-top: 12px;
+                  padding-top: 12px;
+                  border-top: 1px solid #e2e8f0;
+                "
               >
-              <input
-                id="importerPackerMarketer"
-                name="importerPackerMarketer"
-                placeholder="e.g. Furnistør Inc."
-              />
-            </div>
-          </div>
+                <label
+                  style="
+                    display: block;
+                    margin-bottom: 10px;
+                    font-weight: 600;
+                    font-size: 12px;
+                    color: #334155;
+                    text-transform: uppercase;
+                    letter-spacing: 0.3px;
+                  "
+                  >Available Colors <span style="color: #ef4444">*</span></label
+                >
+                <p style="font-size: 11px; color: #64748b; margin-bottom: 8px">
+                  Auto-loaded from selected subcategory - Click to select
+                  multiple
+                </p>
+                <div class="chip-container" id="selected-colors"></div>
+                <div
+                  class="chip-options"
+                  id="colors-options"
+                  style="
+                    display: flex;
+                    flex-wrap: wrap;
+                    gap: 8px;
+                    padding: 8px 0;
+                    min-height: 30px;
+                  "
+                ></div>
+              </div>
 
-          <div class="row">
-            <div class="col">
-              <label for="colors">Colors</label>
-              <input
-                id="colors"
-                name="colors"
-                placeholder="e.g. oak, walnut, black, white"
-              />
-              <span class="muted">Comma-separated color options</span>
-            </div>
-            <div class="col">
-              <label for="category">Category</label>
-              <input
-                id="category"
-                name="category"
-                placeholder="Category ID or slug"
-              />
-            </div>
-            <div class="col">
-              <label for="subcategorySlug" class="required"
-                >Subcategory Slug</label
+              <div
+                style="
+                  margin-top: 12px;
+                  padding-top: 12px;
+                  border-top: 1px solid #e2e8f0;
+                "
               >
-              <input
-                id="subcategorySlug"
-                name="subcategorySlug"
-                placeholder="e.g. armchairs"
-                required
-              />
+                <label
+                  style="
+                    display: block;
+                    margin-bottom: 10px;
+                    font-weight: 600;
+                    font-size: 12px;
+                    color: #334155;
+                    text-transform: uppercase;
+                    letter-spacing: 0.3px;
+                  "
+                  >Materials <span style="color: #ef4444">*</span></label
+                >
+                <p style="font-size: 11px; color: #64748b; margin-bottom: 8px">
+                  Auto-loaded from selected subcategory - Click to select
+                  multiple
+                </p>
+                <div class="chip-container" id="selected-materials"></div>
+                <div
+                  class="chip-options"
+                  id="materials-options"
+                  style="
+                    display: flex;
+                    flex-wrap: wrap;
+                    gap: 8px;
+                    padding: 8px 0;
+                    min-height: 30px;
+                  "
+                ></div>
+              </div>
+            </div>
+
+            <div class="form-section">
+              <h2>Product Images</h2>
+              <div class="list-section" id="images-list"></div>
+              <button
+                type="button"
+                id="add-image"
+                class="btn secondary add-btn"
+              >
+                + Add Image
+              </button>
+            </div>
+
+            <div class="form-section">
+              <h2>Customer Reviews</h2>
+              <div class="list-section" id="reviews-list"></div>
+              <button
+                type="button"
+                id="add-review"
+                class="btn secondary add-btn"
+              >
+                + Add Review
+              </button>
+            </div>
+
+            <div class="form-section">
+              <h2>Frequently Asked Questions</h2>
+              <div class="list-section" id="faq-list"></div>
+              <button type="button" id="add-faq" class="btn secondary add-btn">
+                + Add FAQ
+              </button>
+            </div>
+
+            <div class="actions">
+              <button type="submit" class="btn" id="submit-btn">
+                Create Product
+              </button>
+              <button type="button" id="reset" class="btn secondary">
+                Clear Form
+              </button>
+            </div>
+
+            <div
+              id="productLoading"
+              class="notice"
+              style="
+                display: none;
+                margin-top: 12px;
+                background: #e0e7ff;
+                color: #4f46e5;
+                border-left-color: #4f46e5;
+              "
+            >
+              ⏳ Processing your product...
+            </div>
+            <div
+              id="productMessage"
+              class="notice"
+              style="display: none; margin-top: 12px"
+            ></div>
+            <div id="result"></div>
+          </form>
+        </div>
+      </div>
+      <div class="sidebar">
+        <div class="sidebar-card">
+          <h3>Status</h3>
+          <div class="sidebar-progress-container">
+            <div class="sidebar-progress-bar-wrapper">
+              <div class="sidebar-progress-bar-fill">
+                <span class="sidebar-progress-text">0%</span>
+              </div>
+            </div>
+            <div class="sidebar-progress-info">
+              <div
+                style="
+                  display: flex;
+                  align-items: center;
+                  gap: 6px;
+                  margin-top: 8px;
+                "
+              >
+                <span
+                  class="sidebar-progress-badge"
+                  id="sidebar-progress-status"
+                  >Draft</span
+                >
+                <span
+                  style="font-size: 10px; color: #64748b"
+                  id="sidebar-progress-label"
+                  >0 of 0 fields</span
+                >
+              </div>
             </div>
           </div>
+          <div class="sidebar-item" style="margin-top: 12px">
+            <span style="color: #334155; font-size: 11px"
+              >Fill required fields to publish</span
+            >
+          </div>
         </div>
-
-        <div class="form-section">
-          <h2>Product Images</h2>
-          <div class="list-section" id="images-list"></div>
-          <button type="button" id="add-image" class="btn secondary add-btn">
-            + Add Image
-          </button>
+        <div class="sidebar-card">
+          <h3>Quick Info</h3>
+          <div class="sidebar-item">
+            <span> Product Type: Simple</span>
+          </div>
+          <div class="sidebar-item">
+            <span> Auto-generated Slug</span>
+          </div>
+          <div class="sidebar-item">
+            <span> Price: Will be updated</span>
+          </div>
         </div>
-
-        <div class="form-section">
-          <h2>Customer Reviews</h2>
-          <div class="list-section" id="reviews-list"></div>
-          <button type="button" id="add-review" class="btn secondary add-btn">
-            + Add Review
-          </button>
+        <div class="sidebar-card">
+          <h3>Image Formats</h3>
+          <div class="sidebar-item">
+            <span style="color: #64748b; font-size: 12px; line-height: 1.6">
+              Upload only <strong>AVIF</strong> or
+              <strong>WebP</strong> format images for optimal performance and
+              faster loading times.
+            </span>
+          </div>
+          <div
+            class="sidebar-item"
+            style="
+              margin-top: 12px;
+              padding: 8px;
+              background: #fef3c7;
+              border-radius: 4px;
+              border-left: 3px solid #f59e0b;
+              color: #92400e;
+              font-size: 12px;
+            "
+          >
+            Other formats (PNG, JPG) will be rejected during upload.
+          </div>
         </div>
-
-        <div class="form-section">
-          <h2>Frequently Asked Questions</h2>
-          <div class="list-section" id="faq-list"></div>
-          <button type="button" id="add-faq" class="btn secondary add-btn">
-            + Add FAQ
-          </button>
-        </div>
-
-        <div class="actions">
-          <button type="submit" class="btn" id="submit-btn">
-            Create Product
-          </button>
-          <button type="button" id="reset" class="btn secondary">
-            Clear Form
-          </button>
-        </div>
-
-        <div id="result"></div>
-      </form>
+      </div>
     </div>
 
     <script>
-      // Basic dynamic list helpers
+  
+      const API_BASE_URL = "http://localhost:5000/api";
       const reviewsList = document.getElementById("reviews-list");
       const faqList = document.getElementById("faq-list");
       const imagesList = document.getElementById("images-list");
@@ -727,6 +1451,511 @@
       const addFaqBtn = document.getElementById("add-faq");
       const addImageBtn = document.getElementById("add-image");
       const submitBtn = document.getElementById("submit-btn");
+      const selectedFeatures = new Set();
+      const selectedColors = new Set();
+      const selectedMaterials = new Set();
+      async function loadCategoriesIntoSelect() {
+        console.log("loadCategoriesIntoSelect started");
+        try {
+          const apiUrl = `${API_BASE_URL}/categories`;
+          console.log("Fetching from:", apiUrl);
+
+          const res = await fetch(apiUrl);
+          console.log(" Categories response status:", res.status);
+
+          if (!res.ok) {
+            const errorText = await res.text();
+            console.error("Error fetching categories:", errorText);
+            throw new Error(`Failed to load categories: ${res.status}`);
+          }
+
+          const json = await res.json();
+          console.log("Categories response:", json);
+
+          if (json.success && json.data && Array.isArray(json.data)) {
+            const sel = document.getElementById("category");
+            while (sel.options.length > 1) {
+              sel.remove(1);
+            }
+            console.log("Found", json.data.length, "categories");
+
+            json.data.forEach((cat) => {
+              console.log("Adding category:", cat.name, "id:", cat._id);
+              const opt = document.createElement("option");
+              opt.value = cat._id;
+              opt.textContent = cat.name;
+              sel.appendChild(opt);
+            });
+            if (json.data.length > 0) {
+              const firstCatId = json.data[0]._id;
+              console.log(
+                "Auto-loading subcategories for first category:",
+                firstCatId
+              );
+              sel.value = firstCatId;
+              const event = new Event("change", { bubbles: true });
+              sel.dispatchEvent(event);
+            }
+          } else {
+            console.warn(" No categories found or invalid response");
+          }
+        } catch (err) {
+          console.error(" Error loading categories:", err);
+        }
+      }
+      async function loadSubcategoriesByCategory(categoryId) {
+        console.log(
+          " loadSubcategoriesByCategory called with categoryId:",
+          categoryId
+        );
+        const subcategorySelect = document.getElementById("subcategorySlug");
+        subcategorySelect.innerHTML =
+          '<option value="">-- Select Subcategory --</option>';
+
+        if (!categoryId || !categoryId.trim()) {
+          console.warn(" No category ID provided");
+          document.getElementById("features-options").innerHTML = "";
+          document.getElementById("colors-options").innerHTML = "";
+          selectedFeatures.clear();
+          selectedColors.clear();
+          renderSelectedFeatures();
+          renderSelectedColors();
+          return;
+        }
+
+        try {
+          const apiUrl = `${API_BASE_URL}/subcategories?category=${encodeURIComponent(
+            categoryId
+          )}`;
+          console.log("Fetching subcategories from:", apiUrl);
+          console.log(" Category ID:", categoryId);
+
+          const res = await fetch(apiUrl);
+          console.log("Subcategories response status:", res.status);
+
+          if (!res.ok) {
+            const errorText = await res.text();
+            console.error(" API Error Response:", errorText);
+            throw new Error(`API responded with status ${res.status}`);
+          }
+
+          const json = await res.json();
+          console.log("Subcategories response:", json);
+
+          if (json.success && json.data && Array.isArray(json.data)) {
+            console.log("Found", json.data.length, "subcategories");
+            json.data.forEach((subcat) => {
+              console.log(
+                "   Adding subcategory:",
+                subcat.name,
+                "slug:",
+                subcat.slug
+              );
+              const opt = document.createElement("option");
+              opt.value = subcat.slug;
+              opt.textContent = subcat.name;
+              subcategorySelect.appendChild(opt);
+            });
+            if (json.data.length > 0) {
+              const firstSubcatSlug = json.data[0].slug;
+              console.log(
+                "Auto-loading features for first subcategory:",
+                firstSubcatSlug
+              );
+              subcategorySelect.value = firstSubcatSlug;
+              // Trigger change event to load features
+              const event = new Event("change", { bubbles: true });
+              subcategorySelect.dispatchEvent(event);
+            }
+          } else {
+            console.warn(" No subcategories found or invalid response");
+          }
+        } catch (err) {
+          console.error(" Error loading subcategories:", err);
+        }
+      }
+      function renderSelectedFeatures() {
+        const container = document.getElementById("selected-features");
+        container.innerHTML = "";
+        selectedFeatures.forEach((feature) => {
+          const chip = document.createElement("div");
+          chip.className = "chip";
+          chip.innerHTML = `
+            ${feature}
+            <button type="button" class="chip-remove">×</button>
+          `;
+          chip.querySelector(".chip-remove").addEventListener("click", (e) => {
+            e.preventDefault();
+            selectedFeatures.delete(feature);
+            renderSelectedFeatures();
+            updateProgressBar();
+          });
+          container.appendChild(chip);
+        });
+      }
+      function renderSelectedColors() {
+        const container = document.getElementById("selected-colors");
+        container.innerHTML = "";
+        selectedColors.forEach((color) => {
+          const chip = document.createElement("div");
+          chip.className = "chip";
+          chip.innerHTML = `
+            ${color}
+            <button type="button" class="chip-remove">×</button>
+          `;
+          chip.querySelector(".chip-remove").addEventListener("click", (e) => {
+            e.preventDefault();
+            selectedColors.delete(color);
+            renderSelectedColors();
+            updateFeatureOptions();
+            updateColorOptions();
+            updateProgressBar();
+          });
+          container.appendChild(chip);
+        });
+      }
+      function renderSelectedMaterials() {
+        const container = document.getElementById("selected-materials");
+        container.innerHTML = "";
+        selectedMaterials.forEach((material) => {
+          const chip = document.createElement("div");
+          chip.className = "chip";
+          chip.innerHTML = `
+            ${material}
+            <button type="button" class="chip-remove">×</button>
+          `;
+          chip.querySelector(".chip-remove").addEventListener("click", (e) => {
+            e.preventDefault();
+            selectedMaterials.delete(material);
+            renderSelectedMaterials();
+            updateMaterialOptions();
+            updateProgressBar();
+          });
+          container.appendChild(chip);
+        });
+      }
+      function updateFeatureOptions() {
+        const optionsContainer = document.getElementById("features-options");
+        const options = optionsContainer.querySelectorAll(".chip-option");
+        options.forEach((option) => {
+          if (selectedFeatures.has(option.textContent.trim())) {
+            option.classList.add("selected");
+          } else {
+            option.classList.remove("selected");
+          }
+        });
+      }
+
+      function updateColorOptions() {
+        const optionsContainer = document.getElementById("colors-options");
+        const options = optionsContainer.querySelectorAll(".chip-option");
+        options.forEach((option) => {
+          // Extract just the color name (remove the color box display)
+          const colorName = option.textContent.trim();
+          if (selectedColors.has(colorName)) {
+            option.classList.add("selected");
+          } else {
+            option.classList.remove("selected");
+          }
+        });
+      }
+      function updateMaterialOptions() {
+        const optionsContainer = document.getElementById("materials-options");
+        const options = optionsContainer.querySelectorAll(".chip-option");
+        options.forEach((option) => {
+          const materialName = option.textContent.trim();
+          if (selectedMaterials.has(materialName)) {
+            option.classList.add("selected");
+          } else {
+            option.classList.remove("selected");
+          }
+        });
+      }
+
+      async function loadSubcategoryFeatures(subcategorySlug) {
+        console.log(
+          " loadSubcategoryFeatures called with slug:",
+          subcategorySlug
+        );
+
+        // Get DOM elements
+        const featuresOptionsContainer =
+          document.getElementById("features-options");
+        const colorsOptionsContainer =
+          document.getElementById("colors-options");
+        const materialsOptionsContainer =
+          document.getElementById("materials-options");
+
+        // Show loading state
+        if (featuresOptionsContainer) {
+          featuresOptionsContainer.innerHTML =
+            '<p style="color: #667eea; font-size: 11px;">⏳ Loading features...</p>';
+        }
+        if (colorsOptionsContainer) {
+          colorsOptionsContainer.innerHTML =
+            '<p style="color: #667eea; font-size: 11px;">⏳ Loading colors...</p>';
+        }
+        if (materialsOptionsContainer) {
+          materialsOptionsContainer.innerHTML =
+            '<p style="color: #667eea; font-size: 11px;">⏳ Loading materials...</p>';
+        }
+
+        if (!subcategorySlug || !subcategorySlug.trim()) {
+          console.warn(" No subcategory slug provided");
+          if (featuresOptionsContainer) {
+            featuresOptionsContainer.innerHTML = "";
+          }
+          if (colorsOptionsContainer) {
+            colorsOptionsContainer.innerHTML = "";
+          }
+          if (materialsOptionsContainer) {
+            materialsOptionsContainer.innerHTML = "";
+          }
+          selectedFeatures.clear();
+          selectedColors.clear();
+          selectedMaterials.clear();
+          renderSelectedFeatures();
+          renderSelectedColors();
+          renderSelectedMaterials();
+          return;
+        }
+
+        try {
+          const apiUrl = `${API_BASE_URL}/subcategories/${encodeURIComponent(
+            subcategorySlug
+          )}`;
+          console.log(" Fetching from:", apiUrl);
+          console.log("   Subcategory Slug:", subcategorySlug);
+
+          const res = await fetch(apiUrl);
+          console.log(" Response status:", res.status);
+
+          if (!res.ok) {
+            const errorText = await res.text();
+            console.error("API Error Response:", errorText);
+            console.error(" Status:", res.status);
+            throw new Error(`API responded with status ${res.status}`);
+          }
+
+          const json = await res.json();
+          console.log("API Response received:", json);
+
+          if (json.success && json.data) {
+            console.log(" Subcategory Data:", json.data);
+            console.log(" Features:", json.data.features);
+            console.log("Colors:", json.data.colors);
+            console.log(" Materials:", json.data.materials);
+            if (featuresOptionsContainer) {
+              featuresOptionsContainer.innerHTML = "";
+
+              if (
+                json.data.features &&
+                Array.isArray(json.data.features) &&
+                json.data.features.length > 0
+              ) {
+                console.log(
+                  " Creating",
+                  json.data.features.length,
+                  "feature options"
+                );
+                json.data.features.forEach((feature) => {
+                  console.log(" Adding feature option:", feature);
+                  const option = document.createElement("button");
+                  option.type = "button";
+                  option.className = "chip-option";
+                  option.textContent = feature;
+                  option.addEventListener("click", (e) => {
+                    e.preventDefault();
+                    console.log(" Feature clicked:", feature);
+                    if (selectedFeatures.has(feature)) {
+                      selectedFeatures.delete(feature);
+                      console.log(" Feature removed:", feature);
+                    } else {
+                      selectedFeatures.add(feature);
+                      console.log(" Feature added:", feature);
+                    }
+                    renderSelectedFeatures();
+                    updateFeatureOptions();
+                    updateProgressBar();
+                  });
+                  featuresOptionsContainer.appendChild(option);
+                });
+                console.log(" All feature options created");
+              } else {
+                featuresOptionsContainer.innerHTML =
+                  '<p style="color: #9ca3af; font-size: 11px;">No features available</p>';
+                console.warn(" No features found or empty array");
+              }
+            }
+
+              if (colorsOptionsContainer) {
+              colorsOptionsContainer.innerHTML = "";
+
+              if (
+                json.data.colors &&
+                Array.isArray(json.data.colors) &&
+                json.data.colors.length > 0
+              ) {
+                console.log(
+                  "Creating",
+                  json.data.colors.length,
+                  "color options"
+                );
+                json.data.colors.forEach((colorStr) => {
+                  const colorName = colorStr.split("#")[0] || colorStr;
+
+                  console.log(" Adding color option:", colorName);
+
+                  const option = document.createElement("button");
+                  option.type = "button";
+                  option.className = "chip-option";
+                  option.textContent = colorName;
+
+                  option.addEventListener("click", (e) => {
+                    e.preventDefault();
+                    console.log(" Color clicked:", colorName);
+                    if (selectedColors.has(colorName)) {
+                      selectedColors.delete(colorName);
+                      console.log(" Color removed:", colorName);
+                    } else {
+                      selectedColors.add(colorName);
+                      console.log(" Color added:", colorName);
+                    }
+                    renderSelectedColors();
+                    updateColorOptions();
+                    updateProgressBar();
+                  });
+                  colorsOptionsContainer.appendChild(option);
+                });
+                console.log(" All color options created");
+              } else {
+                colorsOptionsContainer.innerHTML =
+                  '<p style="color: #9ca3af; font-size: 11px;">No colors available</p>';
+                console.warn(" No colors found or empty array");
+              }
+            }
+
+            if (materialsOptionsContainer) {
+              materialsOptionsContainer.innerHTML = "";
+
+              if (
+                json.data.materials &&
+                Array.isArray(json.data.materials) &&
+                json.data.materials.length > 0
+              ) {
+                console.log(
+                  " Creating",
+                  json.data.materials.length,
+                  "material options"
+                );
+                json.data.materials.forEach((material) => {
+                  console.log(" Adding material option:", material);
+
+                  const option = document.createElement("button");
+                  option.type = "button";
+                  option.className = "chip-option";
+                  option.textContent = material;
+
+                  option.addEventListener("click", (e) => {
+                    e.preventDefault();
+                    console.log(" Material clicked:", material);
+                    if (selectedMaterials.has(material)) {
+                      selectedMaterials.delete(material);
+                      console.log(" Material removed:", material);
+                    } else {
+                      selectedMaterials.add(material);
+                      console.log(" Material added:", material);
+                    }
+                    renderSelectedMaterials();
+                    updateMaterialOptions();
+                    updateProgressBar();
+                  });
+                  materialsOptionsContainer.appendChild(option);
+                });
+                console.log("All material options created");
+              } else {
+                materialsOptionsContainer.innerHTML =
+                  '<p style="color: #9ca3af; font-size: 11px;">No materials available</p>';
+                console.warn(" No materials found or empty array");
+              }
+            }
+          } else {
+            console.error("API response not successful or no data:", json);
+            if (featuresOptionsContainer) {
+              featuresOptionsContainer.innerHTML =
+                '<p style="color: #ef4444; font-size: 11px;"> Failed to load features</p>';
+            }
+            if (colorsOptionsContainer) {
+              colorsOptionsContainer.innerHTML =
+                '<p style="color: #ef4444; font-size: 11px;"> Failed to load colors</p>';
+            }
+            if (materialsOptionsContainer) {
+              materialsOptionsContainer.innerHTML =
+                '<p style="color: #ef4444; font-size: 11px;"> Failed to load materials</p>';
+            }
+            selectedFeatures.clear();
+            selectedColors.clear();
+            selectedMaterials.clear();
+            renderSelectedFeatures();
+            renderSelectedColors();
+            renderSelectedMaterials();
+          }
+        } catch (err) {
+          console.error(" Error loading subcategory features:", err);
+          if (featuresOptionsContainer) {
+            featuresOptionsContainer.innerHTML =
+              '<p style="color: #ef4444; font-size: 11px;"> Error: ' +
+              err.message +
+              "</p>";
+          }
+          if (colorsOptionsContainer) {
+            colorsOptionsContainer.innerHTML =
+              '<p style="color: #ef4444; font-size: 11px;"> Error: ' +
+              err.message +
+              "</p>";
+          }
+          if (materialsOptionsContainer) {
+            materialsOptionsContainer.innerHTML =
+              '<p style="color: #ef4444; font-size: 11px;"> Error: ' +
+              err.message +
+              "</p>";
+          }
+          selectedFeatures.clear();
+          selectedColors.clear();
+          selectedMaterials.clear();
+          renderSelectedFeatures();
+          renderSelectedColors();
+          renderSelectedMaterials();
+        }
+      }
+      function updateImageButtonState() {
+        const currentImages = document.querySelectorAll(
+          "#images-list .list-item"
+        ).length;
+        addImageBtn.disabled = currentImages >= 4;
+      }
+
+      function setupPriceCalculation() {
+        const originalPriceInput = document.getElementById("originalPrice");
+        const discountSelect = document.getElementById("discountPercentage");
+        const offerPriceInput = document.getElementById("price");
+
+        function calculateOfferPrice() {
+          const originalPrice = parseFloat(originalPriceInput.value) || 0;
+          const discountPercent = parseFloat(discountSelect.value) || 0;
+
+          if (originalPrice > 0 && discountPercent > 0) {
+            const discountAmount = (originalPrice * discountPercent) / 100;
+            const offerPrice = originalPrice - discountAmount;
+            offerPriceInput.value = offerPrice.toFixed(2);
+          } else {
+            offerPriceInput.value = "";
+          }
+        }
+
+        originalPriceInput.addEventListener("input", calculateOfferPrice);
+        discountSelect.addEventListener("change", calculateOfferPrice);
+      }
 
       function createReviewRow() {
         const wrap = document.createElement("div");
@@ -765,16 +1994,54 @@
         const wrap = document.createElement("div");
         wrap.className = "list-item";
         wrap.innerHTML = `
-        <input placeholder="Image src URL" class="img-src">
-        <input placeholder="Thumbnail URL" class="img-thumb">
-        <input placeholder="Alt text" class="img-alt">
-        <button type="button" class="btn secondary remove">Remove</button>
+        <div style="display:flex;gap:12px;align-items:center;flex-wrap:wrap;width:100%">
+          <input type="file" accept=".avif,.webp,image/avif,image/webp" class="img-file" style="flex:1;min-width:200px;">
+          <img class="img-preview" src="" alt="preview" style="display:none;max-width:70px;border-radius:6px;border:1px solid #e2e8f0;" />
+          <div style="display:flex;gap:8px">
+            <button type="button" class="btn secondary remove">Remove</button>
+          </div>
+        </div>
       `;
+
+        const fileInput = wrap.querySelector(".img-file");
+        const previewImg = wrap.querySelector(".img-preview");
+        fileInput.addEventListener("change", () => {
+          const file = fileInput.files[0];
+          if (!file) {
+            previewImg.style.display = "none";
+            previewImg.src = "";
+            return;
+          }
+
+          const allowedMime = ["image/avif", "image/webp"];
+          const ext = (file.name || "").split(".").pop().toLowerCase();
+          if (
+            !allowedMime.includes(file.type) &&
+            !["avif", "webp"].includes(ext)
+          ) {
+            alert(" Only AVIF and WebP formats are allowed.");
+            fileInput.value = "";
+            previewImg.style.display = "none";
+            return;
+          }
+          try {
+            const url = URL.createObjectURL(file);
+            previewImg.src = url;
+            previewImg.style.display = "block";
+          } catch (err) {
+            previewImg.style.display = "none";
+          }
+        });
+
         wrap.querySelector(".remove").addEventListener("click", (e) => {
           e.preventDefault();
           wrap.style.animation = "slideInLeft 0.3s ease-out reverse";
-          setTimeout(() => wrap.remove(), 300);
+          setTimeout(() => {
+            wrap.remove();
+            updateImageButtonState();
+          }, 300);
         });
+
         imagesList.appendChild(wrap);
       }
 
@@ -788,83 +2055,144 @@
       });
       addImageBtn.addEventListener("click", (e) => {
         e.preventDefault();
+        const currentImages = document.querySelectorAll(
+          "#images-list .list-item"
+        ).length;
+        if (currentImages >= 4) {
+          alert("Maximum 4 images allowed per product.");
+          return;
+        }
         createImageRow();
+        updateImageButtonState();
       });
 
       // Start with one FAQ row and one image row for convenience
       createFaqRow();
       createImageRow();
+      updateImageButtonState();
 
       document
         .getElementById("product-form")
         .addEventListener("submit", async (e) => {
           e.preventDefault();
           const resultEl = document.getElementById("result");
+          const messageDiv = document.getElementById("productMessage");
+          const loadingDiv = document.getElementById("productLoading");
+                    if (messageDiv) {
+            messageDiv.style.display = "none";
+            messageDiv.textContent = "";
+            messageDiv.className = "notice";
+          }
+          if (loadingDiv) loadingDiv.style.display = "none";
           resultEl.innerHTML = "";
           submitBtn.disabled = true;
           submitBtn.classList.add("loading");
 
           const form = e.target;
+          const categoryValue = form.category?.value?.trim();
+          const subcategoryValue = form.subcategorySlug?.value?.trim();
+
+          if (!categoryValue || !subcategoryValue) {
+            submitBtn.disabled = false;
+            submitBtn.classList.remove("loading");
+            if (messageDiv) {
+              messageDiv.className = "notice error";
+              messageDiv.textContent =
+                "Please select both category and subcategory";
+              messageDiv.style.display = "block";
+            }
+            return;
+          }
 
           // Auto-generate slug from name if not provided
+          const existingSlug = form.slug?.value?.trim() || "";
           const slug =
-            form.slug.value.trim() ||
-            form.name.value
+            existingSlug ||
+            (form.name?.value || "")
               .toLowerCase()
               .replace(/[^a-z0-9]+/g, "-")
               .replace(/(^-|-$)/g, "");
 
           const data = {
-            name: form.name.value.trim(),
+            name: form.name?.value?.trim() || "",
             slug: slug,
-            price: form.price.value ? Number(form.price.value) : undefined,
-            originalPrice: form.originalPrice.value
+            price: form.price?.value ? Number(form.price.value) : undefined,
+            originalPrice: form.originalPrice?.value
               ? Number(form.originalPrice.value)
               : undefined,
-            articleNumber: form.articleNumber.value.trim() || undefined,
+            articleNumber: form.articleNumber?.value?.trim() || undefined,
             h1Tag: form.h1Tag?.value.trim() || undefined,
             headerDescription:
               form.headerDescription?.value.trim() || undefined,
-            features: form.features.value
-              ? form.features.value
-                  .split(",")
-                  .map((s) => s.trim())
-                  .filter(Boolean)
-              : [],
-            description: form.description.value.trim(),
-            metaTitle: form.metaTitle.value.trim() || undefined,
-            metaDescription: form.metaDescription.value.trim() || undefined,
-            dimensions: form.dimensions.value.trim() || undefined,
-            materials: form.materials.value.trim() || undefined,
-            finish: form.finish?.value.trim() || undefined,
-            designer: form.designer.value.trim() || undefined,
-            countryOfOrigin: form.countryOfOrigin.value.trim() || undefined,
-            importerPackerMarketer:
-              form.importerPackerMarketer?.value.trim() || undefined,
-            colors: form.colors.value
-              ? form.colors.value
-                  .split(",")
-                  .map((s) => s.trim())
-                  .filter(Boolean)
-              : [],
-            category: form.category.value.trim() || undefined,
-            subcategorySlug: form.subcategorySlug.value.trim(),
-            isActive: form.isActive.value === "true",
+            description: form.description?.value?.trim() || "",
+            metaTitle: form.metaTitle?.value?.trim() || undefined,
+            metaDescription: form.metaDescription?.value?.trim() || undefined,
+            materials: form.materials?.value?.trim() || undefined,
+            finish: form.finish?.value?.trim() || undefined,
+            designer: form.designer?.value?.trim() || undefined,
+            category: form.category?.value?.trim() || undefined,
+            subcategorySlug: form.subcategorySlug?.value?.trim() || "",
+            isActive: form.isActive?.value === "true",
           };
 
-          // Collect structured images
-          data.images = [];
-          document
-            .querySelectorAll("#images-list .list-item")
-            .forEach((row) => {
-              const src = row.querySelector(".img-src").value.trim();
-              if (!src) return;
-              data.images.push({
-                src,
-                thumb: row.querySelector(".img-thumb").value.trim() || src,
-                alt: row.querySelector(".img-alt").value.trim() || data.name,
+          // Collect features from selected chips
+          const features = Array.from(selectedFeatures);
+          if (features.length) data.features = features;
+
+          // Collect colors from selected chips
+          const colors = Array.from(selectedColors);
+          if (colors.length) data.colors = colors;
+
+          // Collect materials from selected chips
+          const materials = Array.from(selectedMaterials);
+          if (materials.length) data.materials = materials;
+
+          // Upload images first before creating product
+          const uploadedImages = [];
+          const imageRows = document.querySelectorAll(
+            "#images-list .list-item"
+          );
+
+          for (const row of imageRows) {
+            const fileInput = row.querySelector(".img-file");
+            const file = fileInput?.files[0];
+            if (!file) continue;
+
+            try {
+              const fd = new FormData();
+              fd.append("image", file);
+              const uploadRes = await fetch("/api/products/upload", {
+                method: "POST",
+                body: fd,
               });
-            });
+              if (!uploadRes.ok) {
+                const err = await uploadRes
+                  .json()
+                  .catch(() => ({ error: uploadRes.statusText }));
+                throw new Error(err.error || uploadRes.statusText);
+              }
+              const uploadJson = await uploadRes.json();
+              if (uploadJson.url) {
+                uploadedImages.push({
+                  src: uploadJson.url,
+                  thumb: uploadJson.url,
+                  alt: data.name,
+                });
+              }
+            } catch (err) {
+              console.error("Image upload failed", err);
+              submitBtn.disabled = false;
+              submitBtn.classList.remove("loading");
+              if (messageDiv) {
+                messageDiv.className = "notice error";
+                messageDiv.textContent = `Failed to upload image: ${err.message}`;
+                messageDiv.style.display = "block";
+              }
+              return;
+            }
+          }
+
+          data.images = uploadedImages;
 
           // Collect reviews
           const reviews = [];
@@ -902,22 +2230,30 @@
             validationErrors.push("Description is required");
           if (!data.features || data.features.length === 0)
             validationErrors.push("At least one feature is required");
+          if (!data.materials || data.materials.length === 0)
+            validationErrors.push("At least one material is required");
           if (!data.subcategorySlug)
             validationErrors.push("Subcategory slug is required");
 
           if (validationErrors.length > 0) {
-            resultEl.innerHTML =
-              '<div class="notice error"><strong>Validation Error:</strong> ' +
-              validationErrors.join(", ") +
-              "</div>";
+            const msg = "Validation Error: " + validationErrors.join(", ");
+            if (messageDiv) {
+              messageDiv.className = "notice error";
+              messageDiv.textContent = msg;
+              messageDiv.style.display = "block";
+            } else {
+              resultEl.innerHTML =
+                '<div class="notice error"><strong>Validation Error:</strong> ' +
+                validationErrors.join(", ") +
+                "</div>";
+            }
             submitBtn.disabled = false;
             submitBtn.classList.remove("loading");
             return;
           }
 
           try {
-            resultEl.innerHTML =
-              '<div class="notice">Processing your request...</div>';
+            if (loadingDiv) loadingDiv.style.display = "block";
             const res = await fetch("/api/products", {
               method: "POST",
               headers: { "Content-Type": "application/json" },
@@ -934,24 +2270,45 @@
             const created = await res.json();
             const productId =
               created._id || created.id || created.slug || "new product";
-            resultEl.innerHTML = `<div class="notice success"><strong>Success!</strong> Product created: ${productId}</div>`;
-
-            // Reset after 2 seconds
+            const successText = `Product created successfully: ${productId}`;
+            if (messageDiv) {
+              messageDiv.className = "notice success";
+              messageDiv.textContent = successText;
+              messageDiv.style.display = "block";
+            } else {
+              resultEl.innerHTML = `<div class="notice success"><strong>Success!</strong> Product created: ${productId}</div>`;
+            }
             setTimeout(() => {
               form.reset();
               reviewsList.innerHTML = "";
               faqList.innerHTML = "";
               imagesList.innerHTML = "";
+              selectedFeatures.clear();
+              selectedColors.clear();
+              selectedMaterials.clear();
+              renderSelectedFeatures();
+              renderSelectedColors();
+              renderSelectedMaterials();
               createFaqRow();
               createImageRow();
+              updateImageButtonState();
+              messageDiv.style.display = "none";
             }, 1500);
           } catch (err) {
             console.error("Create product error", err);
-            resultEl.innerHTML =
-              '<div class="notice error"><strong>Error:</strong> ' +
-              (err.message || err) +
-              "</div>";
+            const errText = `Error: ${err.message || err}`;
+            if (messageDiv) {
+              messageDiv.className = "notice error";
+              messageDiv.textContent = errText;
+              messageDiv.style.display = "block";
+            } else {
+              resultEl.innerHTML =
+                '<div class="notice error"><strong>Error:</strong> ' +
+                (err.message || err) +
+                "</div>";
+            }
           } finally {
+            loadingDiv.style.display = "none";
             submitBtn.disabled = false;
             submitBtn.classList.remove("loading");
           }
@@ -963,9 +2320,236 @@
         reviewsList.innerHTML = "";
         faqList.innerHTML = "";
         imagesList.innerHTML = "";
+        selectedFeatures.clear();
+        selectedColors.clear();
+        selectedMaterials.clear();
+        renderSelectedFeatures();
+        renderSelectedColors();
+        renderSelectedMaterials();
         createFaqRow();
         createImageRow();
+        updateImageButtonState();
         document.getElementById("result").innerHTML = "";
+      });
+      const requiredFields = [
+        "name",
+        "price",
+        "description",
+        "subcategorySlug",
+      ];
+      const progressContributingFields = [
+        "originalPrice",
+        "discountPercentage",
+        "articleNumber",
+        "isActive",
+        "headerDescription",
+        "metaTitle",
+        "metaDescription",
+        "h1Tag",
+        "materials",
+        "finish",
+        "designer",
+        "colors",
+        "category",
+      ];
+      const allProgressFields = [
+        ...requiredFields,
+        ...progressContributingFields,
+      ];
+      const dynamicFieldGroups = {
+        features: {
+          minCount: 1,
+          weight: 1,
+          getCount: () => selectedFeatures.size,
+        },
+        colors: {
+          minCount: 1,
+          weight: 1,
+          getCount: () => selectedColors.size,
+        },
+        materials: {
+          minCount: 1,
+          weight: 1,
+          getCount: () => selectedMaterials.size,
+        },
+        images: {
+          selector: "#images-list .list-item[data-image-url]",
+          minCount: 1,
+          weight: 1.5,
+        },
+        reviews: {
+          selector: "#reviews-list .list-item",
+          minCount: 0,
+          weight: 0.5,
+        },
+        faq: {
+          selector: "#faq-list .list-item",
+          minCount: 0,
+          weight: 0.5,
+        },
+      };
+      function updateProgressBar() {
+        const form = document.getElementById("product-form");
+        let filledCount = 0;
+        requiredFields.forEach((fieldName) => {
+          const field = form.elements[fieldName];
+          if (field) {
+            const value = field.value.trim();
+            if (
+              value &&
+              !(fieldName === "price" && value === "0") &&
+              !(fieldName === "discountPercentage" && value === "")
+            ) {
+              filledCount++;
+            }
+          }
+        });
+        progressContributingFields.forEach((fieldName) => {
+          const field = form.elements[fieldName];
+          if (field) {
+            const value = field.value.trim();
+            if (
+              value &&
+              !(fieldName === "discountPercentage" && value === "") &&
+              !(fieldName === "isActive" && value === "true")
+            ) {
+              filledCount++;
+            }
+          }
+        });
+        let dynamicCount = 0;
+        Object.values(dynamicFieldGroups).forEach((group) => {
+          let count = 0;
+          if (group.getCount) {
+            count = group.getCount();
+          } else {
+            const elements = document.querySelectorAll(group.selector);
+            count = elements.length;
+          }
+          dynamicCount += Math.min(
+            count,
+            group.minCount > 0 ? group.minCount : 5
+          );
+        });
+        filledCount += dynamicCount;
+
+        const totalFields =
+          allProgressFields.length +
+          Object.values(dynamicFieldGroups).reduce((sum, g) => sum + 5, 0); 
+        const percentage = Math.min(
+          100,
+          Math.round((filledCount / totalFields) * 100)
+        );
+        const progressBar = document.querySelector(
+          ".sidebar-progress-bar-fill"
+        );
+        const progressText = document.querySelector(".sidebar-progress-text");
+        const statusBadge = document.getElementById("sidebar-progress-status");
+        const progressLabel = document.getElementById("sidebar-progress-label");
+
+        progressBar.style.width = percentage + "%";
+        progressText.textContent = percentage + "%";
+        progressLabel.textContent =
+          filledCount + " of " + totalFields + " fields";
+        if (percentage === 100) {
+          statusBadge.textContent = "✓ Complete";
+          statusBadge.className = "sidebar-progress-badge complete";
+        } else if (percentage >= 75) {
+          statusBadge.textContent = "Almost There";
+          statusBadge.className = "sidebar-progress-badge";
+        } else if (percentage >= 50) {
+          statusBadge.textContent = "Halfway";
+          statusBadge.className = "sidebar-progress-badge";
+        } else if (percentage >= 25) {
+          statusBadge.textContent = "Started";
+          statusBadge.className = "sidebar-progress-badge";
+        } else {
+          statusBadge.textContent = "Draft";
+          statusBadge.className = "sidebar-progress-badge";
+        }
+      }
+      function setupProgressTracking() {
+        const form = document.getElementById("product-form");
+        allProgressFields.forEach((fieldName) => {
+          const field = form.elements[fieldName];
+          if (field) {
+            field.addEventListener("input", updateProgressBar);
+            field.addEventListener("change", updateProgressBar);
+          }
+        });
+
+        updateProgressBar();
+      }
+      document.addEventListener("DOMContentLoaded", () => {
+        console.log("DOMContentLoaded event fired");
+        loadCategoriesIntoSelect();
+        setupPriceCalculation();
+        setupProgressTracking();
+
+        const categorySelect = document.getElementById("category");
+        if (categorySelect) {
+          categorySelect.addEventListener("change", (e) => {
+            console.log(" Category changed to:", e.target.value);
+            loadSubcategoriesByCategory(e.target.value);
+            updateProgressBar();
+          });
+        }
+
+        const subcategorySlugInput = document.getElementById("subcategorySlug");
+        if (subcategorySlugInput) {
+          subcategorySlugInput.addEventListener("change", (e) => {
+            console.log(" Subcategory changed to:", e.target.value);
+            loadSubcategoryFeatures(e.target.value);
+            updateProgressBar();
+          });
+        }
+      });
+      const originalCreateReviewRow = createReviewRow;
+      createReviewRow = function () {
+        originalCreateReviewRow();
+        updateProgressBar();
+      };
+
+      const originalCreateFaqRow = createFaqRow;
+      createFaqRow = function () {
+        originalCreateFaqRow();
+        updateProgressBar();
+      };
+
+      const originalCreateImageRow = createImageRow;
+      createImageRow = function () {
+        originalCreateImageRow();
+        updateProgressBar();
+      };
+
+      // Hamburger Menu Logic
+      const hamburgerBtn = document.getElementById("hamburgerBtn");
+      const closeNavBtn = document.getElementById("closeNavBtn");
+      const mobileNav = document.getElementById("mobileNav");
+      const mobileNavOverlay = document.getElementById("mobileNavOverlay");
+      const navLinks = document.querySelectorAll(".mobile-nav .nav-links a");
+
+      hamburgerBtn.addEventListener("click", () => {
+        hamburgerBtn.classList.toggle("active");
+        mobileNav.classList.toggle("active");
+        mobileNavOverlay.classList.toggle("active");
+      });
+      closeNavBtn.addEventListener("click", () => {
+        hamburgerBtn.classList.remove("active");
+        mobileNav.classList.remove("active");
+        mobileNavOverlay.classList.remove("active");
+      });
+      mobileNavOverlay.addEventListener("click", () => {
+        hamburgerBtn.classList.remove("active");
+        mobileNav.classList.remove("active");
+        mobileNavOverlay.classList.remove("active");
+      });
+      navLinks.forEach((link) => {
+        link.addEventListener("click", () => {
+          hamburgerBtn.classList.remove("active");
+          mobileNav.classList.remove("active");
+          mobileNavOverlay.classList.remove("active");
+        });
       });
     </script>
   </body>
